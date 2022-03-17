@@ -764,7 +764,7 @@ Feature: build 'apps' with CLI
   Scenario: io.openshift.build.commit.ref displays correctly in build reference on imagestreamtag if building from git branch reference
     Given I have a project
     When I run the :new_app client command with:
-      | app_repo | quay.io/openshifttest/ruby-27:multiarch~https://github.com/openshift/ruby-hello-world#config |
+      | app_repo | quay.io/pravin_dsilva/ruby-27:multiarch~https://github.com/openshift/ruby-hello-world#config |
     Then the step should succeed
     Given the "ruby-hello-world-1" build was created
     And the "ruby-hello-world-1" build completed
@@ -942,7 +942,7 @@ Feature: build 'apps' with CLI
     Then the step should succeed
     #Insert cm and secret to bc with empty destination - succeed
     When I run the :new_build client command with:
-      | app_repo         | quay.io/openshifttest/ruby-27:multiarch~https://github.com/openshift/ruby-hello-world |
+      | app_repo         | quay.io/pravin_dsilva/ruby-27:multiarch~https://github.com/openshift/ruby-hello-world |
       | build_config_map | cmtest1:.                                                                                   |
       | build_config_map | cmtest2:./newdir                                                                            |
       | strategy         | docker                                                                                      |
@@ -974,7 +974,7 @@ Feature: build 'apps' with CLI
     Then the step should succeed
     #Add a configmaps with a multi-level dirs - succeed
     When I run the :new_build client command with:
-      | app_repo         | quay.io/openshifttest/ruby-27:multiarch~https://github.com/openshift/ruby-hello-world |
+      | app_repo         | quay.io/pravin_dsilva/ruby-27:multiarch~https://github.com/openshift/ruby-hello-world |
       | build_config_map | cmtest1:./newdir1/newdir2/newdir3                                                           |
       | strategy         | docker                                                                                      |
     Then the step should succeed

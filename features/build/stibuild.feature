@@ -53,7 +53,7 @@ Feature: stibuild.feature
   Scenario: STI build with dockerImage with specified tag
     Given I have a project
     When I run the :new_app client command with:
-      | docker_image | quay.io/openshifttest/ruby-27:multiarch   |
+      | docker_image | quay.io/pravin_dsilva/ruby-27:multiarch   |
       | app_repo     | https://github.com/sclorg/ruby-ex   |
     Then the step should succeed
     And the "ruby-ex-1" build completes

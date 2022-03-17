@@ -68,13 +68,13 @@ Feature: buildlogic.feature
     Given I have a project
     When I run the :new_build client command with:
       | app_repo | https://github.com/openshift/ruby-hello-world   |
-      | D        | FROM quay.io/openshifttest/ruby-27:multiarch\nRUN echo ok |
+      | D        | FROM quay.io/pravin_dsilva/ruby-27:multiarch\nRUN echo ok |
     Then the step should succeed
     When I get project buildconfigs as YAML
     Then the step should succeed
     Then the output should match:
       | dockerfile   |
-      | FROM quay.io/openshifttest/ruby-27:multiarch   |
+      | FROM quay.io/pravin_dsilva/ruby-27:multiarch   |
       | RUN echo ok  |
       | uri: https://github.com/openshift/ruby-hello-world |
       | type: [Gg]it |
