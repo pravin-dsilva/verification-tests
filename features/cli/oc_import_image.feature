@@ -120,7 +120,7 @@ Feature: oc import-image related feature
     Given I have a project
     When I run the :tag client command with:
       | source_type | docker                                                |
-      | source      | quay.io/openshifttest/deployment-example:v1-multiarch |
+      | source      | quay.io/pravin_dsilva/deployment-example:v1-multiarch |
       | dest        | deployment-example:latest                             |
     Then the step should succeed
     And the "deployment-example" image stream becomes ready
@@ -154,7 +154,7 @@ Feature: oc import-image related feature
     Then the step should succeed
     When I run the :tag client command with:
       | source_type      | docker                                                |
-      | source           | quay.io/openshifttest/deployment-example:v1-multiarch |
+      | source           | quay.io/pravin_dsilva/deployment-example:v1-multiarch |
       | dest             | deployment-example:latest                             |
       | reference_policy | local                                                 |
     Then the step should succeed

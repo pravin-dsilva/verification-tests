@@ -7,7 +7,7 @@ metadata:
   annotations:
     pod.alpha.kubernetes.io/init-containers: '[{
 	    "name": "wait",
-	    "image": "quay.io/openshifttest/base-alpine@sha256:0b379877aba876774e0043ea5ba41b0c574825ab910d32b43c05926fab4eea22",
+	    "image": "quay.io/pravin_dsilva/base-alpine@sha256:03ce32161870cba7e8bcca9bf015cb62ffea830196ecb1ba9838a7a1dd5bb426",
 	    "command": ["/bin/sh", "-c", "sleep 30"],
 	    "readinessProbe": {
 		    "tcpSocket": {
@@ -17,7 +17,7 @@ metadata:
     }]'
 spec:
   containers:
-    - image: "quay.io/openshifttest/hello-openshift@sha256:1e70b596c05f46425c39add70bf749177d78c1e98b2893df4e5ae3883c2ffb5e"
+    - image: " quay.io/pravin_dsilva/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2"
       imagePullPolicy: IfNotPresent
       name: hello-pod
       ports:

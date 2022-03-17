@@ -37,7 +37,7 @@ Feature: dockerbuild.feature
   Scenario: Docker build with dockerImage with specified tag
     Given I have a project
     When I run the :new_app client command with:
-      | docker_image | quay.io/openshifttest/ruby-27:multiarch |
+      | docker_image | quay.io/pravin_dsilva/ruby-27:multiarch |
       | app_repo     | http://github.com/openshift/ruby-hello-world  |
       | strategy     | docker                                        |
     Then the step should succeed
@@ -101,7 +101,7 @@ Feature: dockerbuild.feature
     Given I have a project
     When I run the :new_build client command with:
       | code         | http://github.com/openshift/ruby-hello-world.git |
-      | docker_image | quay.io/openshifttest/ruby-27:multiarch          |
+      | docker_image | quay.io/pravin_dsilva/ruby-27:multiarch          |
       | strategy     | docker                                           |
       | build_arg    | ARG=VALUE                                        |
     Then the step should succeed
@@ -168,7 +168,7 @@ Feature: dockerbuild.feature
       | from_literal | password=redhat    |
     Then the step should succeed
     When I run the :new_build client command with:
-      | D | FROM quay.io/openshifttest/base-alpine:multiarch\nRUN ls -l /var/run/secret/sourcesecret |
+      | D | FROM quay.io/pravin_dsilva/base-alpine:multiarch\nRUN ls -l /var/run/secret/sourcesecret |
     Then the step should succeed
     Then the "base-alpine" image stream was created
     And the "base-alpine-1" build was created
@@ -207,7 +207,7 @@ Feature: dockerbuild.feature
       | from_literal | value=bar |
     Then the step should succeed
     When I run the :new_build client command with:
-      | D | FROM quay.io/openshifttest/base-alpine:multiarch\nRUN ls -l /var/run/secret/config |
+      | D | FROM quay.io/pravin_dsilva/base-alpine:multiarch\nRUN ls -l /var/run/secret/config |
     Then the step should succeed
     Then the "base-alpine" image stream was created
     And the "base-alpine-1" build was created
@@ -247,7 +247,7 @@ Feature: dockerbuild.feature
       | from_literal | password=redhat    |
     Then the step should succeed
     When I run the :new_build client command with:
-      | D | FROM quay.io/openshifttest/base-alpine:multiarch\nRUN ls -l /var/run/secret/secret-1\nRUN ls -l /var/run/secret/secret-2 |
+      | D | FROM quay.io/pravin_dsilva/base-alpine:multiarch\nRUN ls -l /var/run/secret/secret-1\nRUN ls -l /var/run/secret/secret-2 |
     Then the step should succeed
     Then the "base-alpine" image stream was created
     And the "base-alpine-1" build was created
@@ -288,7 +288,7 @@ Feature: dockerbuild.feature
       | from_literal | password=redhat    |
     Then the step should succeed
     When I run the :new_build client command with:
-      | D | FROM quay.io/openshifttest/base-alpine:multiarch\nRUN ls -l /var/run/secret/secret-1|
+      | D | FROM quay.io/pravin_dsilva/base-alpine:multiarch\nRUN ls -l /var/run/secret/secret-1|
     Then the step should succeed
     Then the "base-alpine" image stream was created
     And the "base-alpine-1" build was created
@@ -330,7 +330,7 @@ Feature: dockerbuild.feature
       | from_literal | value=bar  |
     Then the step should succeed
     When I run the :new_build client command with:
-      | D | FROM quay.io/openshifttest/base-alpine:multiarch\nRUN ls -l /var/run/secret |
+      | D | FROM quay.io/pravin_dsilva/base-alpine:multiarch\nRUN ls -l /var/run/secret |
     Then the step should succeed
     Then the "base-alpine" image stream was created
     And the "base-alpine-1" build was created

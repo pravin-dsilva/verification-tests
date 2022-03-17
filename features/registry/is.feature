@@ -11,7 +11,7 @@ Feature: Testing imagestream
     And master CA is added to the "skopeo" dc
     When I run the :tag client command with:
       | source_type | docker                                      |
-      | source      | quay.io/openshifttest/base-alpine:multiarch |
+      | source      | quay.io/pravin_dsilva/base-alpine:multiarch |
       | dest        | myis13895:latest                            |
     Then the step should succeed
     When I run the :policy_add_role_to_user client command with:
@@ -149,7 +149,7 @@ Feature: Testing imagestream
     Given certification for default image registry is stored to the :reg_crt_name clipboard
 
     When I run the :new_app client command with:
-      | app_repo | quay.io/openshifttest/ruby-27@sha256:cdb6a13032184468b1e0607f36cfb8834c97dbeffeeff800e9e6834323bed8fc~https://github.com/sclorg/ruby-ex.git |
+      | app_repo | quay.io/pravin_dsilva/ruby-27@sha256:c3ab340964ea4e42b592efb6b480312fa2b78988b59823b2f0afb5283a764f72~https://github.com/sclorg/ruby-ex.git |
     Then the step should succeed
     Given the "ruby-27" image stream was created 
     Given the "ruby-27" image stream becomes ready 

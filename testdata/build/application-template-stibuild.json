@@ -400,7 +400,7 @@
             "containers": [
               {
                 "name": "ruby-helloworld-database",
-                "image": "quay.io/openshifttest/mysql@sha256:7a6a500fbdc89871973f1f2fe1e64ebb2548dea06df2cb1b3a2989236a26289e",
+                "image": "quay.io/pravin_dsilva/mysql@sha256:02d07ba99c85d1d229a888be8c39bf962f87830e286e31ab13e8167a5e4a6890",
                 "ports": [
                   {
                     "containerPort": 3306,

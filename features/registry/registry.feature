@@ -21,7 +21,7 @@ Feature: Testing registry
     Then the step should succeed
 
     When I run the :import_image client command with:
-      | from       | quay.io/openshifttest/base-alpine:multiarch |
+      | from       | quay.io/pravin_dsilva/base-alpine:multiarch |
       | confirm    | true                                        |
       | image_name | mystream                                    |
     Then the step should succeed
@@ -73,8 +73,8 @@ Feature: Testing registry
     Given I have a project
     Given docker config for default image registry is stored to the :dockercfg_file clipboard
     Then I run the :image_mirror client command with:
-      | source_image | quay.io/openshifttest/base-alpine:multiarch=<%= cb.integrated_reg_ip %>/<%= project.name %>/myimage1:v1        |
-      | dest_image   | quay.io/openshifttest/alpine:multiarch=<%= cb.integrated_reg_ip %>/<%= project.name %>/myimage2:v1 |
+      | source_image | quay.io/pravin_dsilva/base-alpine:multiarch=<%= cb.integrated_reg_ip %>/<%= project.name %>/myimage1:v1        |
+      | dest_image   | quay.io/pravin_dsilva/alpine:multiarch=<%= cb.integrated_reg_ip %>/<%= project.name %>/myimage2:v1 |
       | a            | <%= cb.dockercfg_file %>                                                                                |
       | insecure     | true                                                                                                    |
     And the step should succeed
@@ -192,7 +192,7 @@ Feature: Testing registry
     Given I have a project
     Given docker config for default image registry is stored to the :dockercfg_file clipboard
     Then I run the :image_mirror client command with:
-      | source_image | quay.io/openshifttest/base-alpine:multiarch                |
+      | source_image | quay.io/pravin_dsilva/base-alpine:multiarch                |
       | dest_image   | <%= cb.integrated_reg_ip %>/<%= project.name %>/myimage:v1 |
       | a            | <%= cb.dockercfg_file %>                                   |
       | insecure     | true                                                       |

@@ -11,7 +11,7 @@ Feature: buildlogic.feature
   Scenario: Build with specified Dockerfile via new-build -D
     Given I have a project
     When I run the :new_build client command with:
-      | D    | FROM quay.io/openshifttest/base-alpine@sha256:0b379877aba876774e0043ea5ba41b0c574825ab910d32b43c05926fab4eea22\nRUN echo "hello" |
+      | D    | FROM quay.io/pravin_dsilva/base-alpine@sha256:03ce32161870cba7e8bcca9bf015cb62ffea830196ecb1ba9838a7a1dd5bb426\nRUN echo "hello" |
       | to   | myappis |
       | name | myapp   |
     Then the step should succeed
@@ -68,13 +68,13 @@ Feature: buildlogic.feature
     Given I have a project
     When I run the :new_build client command with:
       | app_repo | https://github.com/openshift/ruby-hello-world   |
-      | D        | FROM quay.io/openshifttest/ruby-27:multiarch\nRUN echo ok |
+      | D        | FROM quay.io/pravin_dsilva/ruby-27:multiarch\nRUN echo ok |
     Then the step should succeed
     When I get project buildconfigs as YAML
     Then the step should succeed
     Then the output should match:
       | dockerfile   |
-      | FROM quay.io/openshifttest/ruby-27:multiarch   |
+      | FROM quay.io/pravin_dsilva/ruby-27:multiarch   |
       | RUN echo ok  |
       | uri: https://github.com/openshift/ruby-hello-world |
       | type: [Gg]it |

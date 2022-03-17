@@ -61,7 +61,7 @@ Feature: basic verification for upgrade oc client testing
     When I run the :new_project client command with:
       | project_name | workloads-upgrade |
     When I run the :new_app client command with:
-      | docker_image | quay.io/openshifttest/hello-openshift@sha256:eb47fdebd0f2cc0c130228ca972f15eb2858b425a3df15f10f7bb519f60f0c96 |
+      | docker_image | quay.io/pravin_dsilva/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2 |
     Then the step should succeed
 
   # @author yinzhou@redhat.com
