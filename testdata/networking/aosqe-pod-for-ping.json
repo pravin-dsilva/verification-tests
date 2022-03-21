@@ -10,7 +10,7 @@
   "spec": {
       "containers": [{
         "name": "hello-pod",
-        "image": "quay.io/openshifttest/hello-sdn@sha256:2af5b5ec480f05fda7e9b278023ba04724a3dd53a296afcd8c13f220dec52197",
+        "image": " quay.io/pravin_dsilva/hello-sdn@sha256:76311a85e621e4e54f257c409f20b7092b917fb844092f835363cca9b368f691",
         "resources":{
           "limits":{
             "memory":"340Mi"
