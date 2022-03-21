@@ -397,7 +397,7 @@ Feature: deployment related features
   Scenario: A/B Deployment
     Given I have a project
     When I run the :new_app client command with:
-      | docker_image | quay.io/openshifttest/deployment-example@sha256:9e0a0cd621fcb46b3439cb8979a0467dfaadb934215e8544193741aae2454668 |
+      | docker_image | quay.io/pravin_dsilva/deployment-example@sha256:2de5e0f06112c0bff497ed53049f9486b32bd36c1f4176c0ffd1251b71115adc |
       | name         | ab-example-a                                                                                                     |
       | l            | ab-example=true                                                                                                  |
       | env          | SUBTITLE=shardA                                                                                                  |
@@ -412,7 +412,7 @@ Feature: deployment related features
     Then I wait for a web server to become available via the "ab-example" route
     And the output should contain "shardA"
     When I run the :new_app client command with:
-      | docker_image | quay.io/openshifttest/deployment-example@sha256:9e0a0cd621fcb46b3439cb8979a0467dfaadb934215e8544193741aae2454668 |
+      | docker_image | quay.io/pravin_dsilva/deployment-example@sha256:2de5e0f06112c0bff497ed53049f9486b32bd36c1f4176c0ffd1251b71115adc |
       | name         | ab-example-b                                                                                                     |
       | l            | ab-example=true                                                                                                  |
       | env          | SUBTITLE=shardB                                                                                                  |
@@ -460,11 +460,11 @@ Feature: deployment related features
   Scenario: Blue-Green Deployment
     Given I have a project
     When I run the :new_app client command with:
-      | docker_image | quay.io/openshifttest/deployment-example:v1-multiarch |
+      | docker_image | quay.io/pravin_dsilva/deployment-example:v1-multiarch |
       | name         | bluegreen-example-old                       |
     Then the step should succeed
     When I run the :new_app client command with:
-      | docker_image | quay.io/openshifttest/deployment-example:v2-multiarch |
+      | docker_image | quay.io/pravin_dsilva/deployment-example:v2-multiarch |
       | name         | bluegreen-example-new                       |
     Then the step should succeed
     #When I expose the "bluegreen-example-old" service
@@ -761,7 +761,7 @@ Feature: deployment related features
   Scenario: Scale up when deployment running
     Given I have a project
     When I run the :create_deploymentconfig client command with:
-      | image | quay.io/openshifttest/deployment-example@sha256:9e0a0cd621fcb46b3439cb8979a0467dfaadb934215e8544193741aae2454668 |
+      | image | quay.io/pravin_dsilva/deployment-example@sha256:2de5e0f06112c0bff497ed53049f9486b32bd36c1f4176c0ffd1251b71115adc |
       | name  | deployment-example                                                                                               |
     Then the step should succeed
     And I wait until the status of deployment "deployment-example" becomes :complete
@@ -955,7 +955,7 @@ Feature: deployment related features
     Given the master version >= "4.5"
     Given I have a project
     When I run the :new_app client command with:
-      | docker_image         | quay.io/openshifttest/deployment-example:v1-multiarch |
+      | docker_image         | quay.io/pravin_dsilva/deployment-example:v1-multiarch |
       | name                 | ab-example-a                                          |
       | as_deployment_config | true                                                  |
       | l                    | ab-example=true                                       |
@@ -971,7 +971,7 @@ Feature: deployment related features
     Then I wait for a web server to become available via the "ab-example" route
     And the output should contain "shardA"
     When I run the :new_app client command with:
-      | docker_image         | quay.io/openshifttest/deployment-example:v1-multiarch |
+      | docker_image         | quay.io/pravin_dsilva/deployment-example:v1-multiarch |
       | name                 | ab-example-b                                          |
       | as_deployment_config | true                                                  |
       | l                    | ab-example=true                                       |
