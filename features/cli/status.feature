@@ -17,7 +17,7 @@ Feature: Check status via oc status, wait etc
     When I run the :status client command
     Then the step should succeed
     Then the output should match:
-      | rc/<%= cb.stdrc_name %> runs quay.io/openshifttest/base-alpine:multiarch |
+      | rc/<%= cb.stdrc_name %> runs quay.io/pravin_dsilva/base-alpine:multiarch |
       | rc/<%= cb.stdrc_name %> created                                          |
       | \\d warning.*oc status.* to see details                                  |
     When I run the :status client command with:
