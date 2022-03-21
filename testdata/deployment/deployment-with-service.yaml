@@ -48,7 +48,7 @@ items:
           deploymentconfig: hello-openshift
       spec:
         containers:
-        - image: quay.io/pravin_dsilva/hello-openshift@sha256:1637411f99aad529f4507d57c238357e7add7fbb5e9b2e4dac6b478a9c20c4bf
+        - image:  quay.io/pravin_dsilva/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2
           name: hello-openshift
           ports:
           - containerPort: 8080
