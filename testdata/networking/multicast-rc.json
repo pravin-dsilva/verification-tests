@@ -18,7 +18,7 @@
 	    "spec": {
 		"containers": [
 		    {
-			"image": "quay.io/openshifttest/mcast-pod@sha256:7cccaa51ca2da1dba019ca2817674d0f35762e6dd099187184ff73e01f8764e4",
+			"image": "quay.io/pravin_dsilva/mcast-pod@sha256:089efeb5b0d004cf2eb19bd69a3669b360805452c63e0b7f1aa7633dffd75f35",
 			"name": "mcast-pod"
 		    }
 		]
