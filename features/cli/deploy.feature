@@ -314,7 +314,7 @@ Feature: deployment related features
   Scenario: Rollback via CLI when previous version failed
     Given I have a project
     When I run the :create_deploymentconfig client command with:
-      | image | quay.io/openshifttest/hello-openshift@sha256:eb47fdebd0f2cc0c130228ca972f15eb2858b425a3df15f10f7bb519f60f0c96 |
+      | image | quay.io/pravin_dsilva/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2 |
       | name  | mydc                  |
     Then the step should succeed
     And I wait until the status of deployment "mydc" becomes :complete
