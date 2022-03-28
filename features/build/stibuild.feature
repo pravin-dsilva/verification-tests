@@ -60,7 +60,7 @@ Feature: stibuild.feature
     When I run the :patch client command with:
       | resource      | buildconfig                                                                                                                                      |
       | resource_name | ruby-ex                                                                                                                                          |
-      | p             | {"spec": {"strategy": {"sourceStrategy": {"from": {"kind": "DockerImage","name": "quay.io/openshifttest/ruby-27@sha256:cdb6a13032184468b1e0607f36cfb8834c97dbeffeeff800e9e6834323bed8fc"}}},"type": "Source"}} |
+      | p             | {"spec": {"strategy": {"sourceStrategy": {"from": {"kind": "DockerImage","name": "quay.io/pravin_dsilva/ruby-27@sha256:c3ab340964ea4e42b592efb6b480312fa2b78988b59823b2f0afb5283a764f72"}}},"type": "Source"}} |
     Then the step should succeed
     When I run the :start_build client command with:
       | buildconfig | ruby-ex |
