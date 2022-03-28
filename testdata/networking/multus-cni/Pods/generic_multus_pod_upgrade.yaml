@@ -18,4 +18,4 @@ items:
       spec:
         containers:
         - name: test-pod
-          image: " quay.io/pravin_dsilva/hello-sdn@sha256:76311a85e621e4e54f257c409f20b7092b917fb844092f835363cca9b368f691"
+          image: "quay.io/pravin_dsilva/hello-sdn@sha256:76311a85e621e4e54f257c409f20b7092b917fb844092f835363cca9b368f691"
