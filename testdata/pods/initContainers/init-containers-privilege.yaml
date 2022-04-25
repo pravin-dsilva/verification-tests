@@ -7,7 +7,7 @@ metadata:
   annotations:
     pod.alpha.kubernetes.io/init-containers: '[{
 	    "name": "wait",
-	    "image": "quay.io/pravin_dsilva/base-alpine@sha256:03ce32161870cba7e8bcca9bf015cb62ffea830196ecb1ba9838a7a1dd5bb426",
+	    "image": "quay.io/pdsilva1/base-alpine@sha256:03ce32161870cba7e8bcca9bf015cb62ffea830196ecb1ba9838a7a1dd5bb426",
 	    "command": ["/bin/sh", "-c", "sleep 60"],
 	    "securityContext": {
 	        "privileged": true
@@ -15,7 +15,7 @@ metadata:
     }]'
 spec:
   containers:
-    - image: " quay.io/pravin_dsilva/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2"
+    - image: " quay.io/pdsilva1/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2"
       imagePullPolicy: IfNotPresent
       name: hello-pod
       ports:

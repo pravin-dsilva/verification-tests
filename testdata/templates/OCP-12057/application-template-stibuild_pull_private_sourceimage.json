@@ -136,7 +136,7 @@
             {
               "from": {
                 "kind": "DockerImage",
-                "name": "quay.io/pravin_dsilva/ruby-27@sha256:c3ab340964ea4e42b592efb6b480312fa2b78988b59823b2f0afb5283a764f72"
+                "name": "quay.io/pdsilva1/ruby-27@sha256:c3ab340964ea4e42b592efb6b480312fa2b78988b59823b2f0afb5283a764f72"
               },
               "pullSecret": { "name": "pull" },
               "paths": [
@@ -416,7 +416,7 @@
             "containers": [
               {
                 "name": "ruby-helloworld-database",
-                "image": "quay.io/pravin_dsilva/mysql@sha256:02d07ba99c85d1d229a888be8c39bf962f87830e286e31ab13e8167a5e4a6890",
+                "image": "quay.io/pdsilva1/mysql@sha256:02d07ba99c85d1d229a888be8c39bf962f87830e286e31ab13e8167a5e4a6890",
                 "ports": [
                   {
                     "containerPort": 3306,

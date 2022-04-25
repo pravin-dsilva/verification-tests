@@ -77,7 +77,7 @@
                                 "value": "yes"
                             }
                         ],
-                        "image": "quay.io/pravin_dsilva/mysql@sha256:02d07ba99c85d1d229a888be8c39bf962f87830e286e31ab13e8167a5e4a6890",
+                        "image": "quay.io/pdsilva1/mysql@sha256:02d07ba99c85d1d229a888be8c39bf962f87830e286e31ab13e8167a5e4a6890",
                         "imagePullPolicy": "Always",
                         "name": "test-stop-failed-deployment",
                         "ports": [

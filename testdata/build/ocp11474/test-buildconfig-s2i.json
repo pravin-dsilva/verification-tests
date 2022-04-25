@@ -41,7 +41,7 @@
       "sourceStrategy": {
         "from": {
           "kind": "DockerImage",
-          "name": "quay.io/pravin_dsilva/ruby-27@sha256:c3ab340964ea4e42b592efb6b480312fa2b78988b59823b2f0afb5283a764f72"
+          "name": "quay.io/pdsilva1/ruby-27@sha256:c3ab340964ea4e42b592efb6b480312fa2b78988b59823b2f0afb5283a764f72"
         },
         "pullSecret": {"name" : "pull"}
       }

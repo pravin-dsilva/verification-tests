@@ -288,7 +288,7 @@ Feature: ONLY ONLINE Imagestreams related scripts in this file
       | copy                                                        |
       | --dcreds                                                    |
       | <%= user.name %>:<%= user.cached_tokens.first %>            |
-      | docker://quay.io/pravin_dsilva/base-alpine:multiarch        |
+      | docker://quay.io/pdsilva1/base-alpine:multiarch        |
       | docker://<%= cb.registry_route %>/<%= project.name %>/<tag> |
     Then the step should succeed
     When I run the :get client command with:

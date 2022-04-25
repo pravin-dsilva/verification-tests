@@ -6,7 +6,7 @@ metadata:
   name: hello-pod
 spec:
   containers:
-    - image: "quay.io/pravin_dsilva/hello-openshift:multiarch"
+    - image: "quay.io/pdsilva1/hello-openshift:multiarch"
       imagePullPolicy: IfNotPresent
       name: hello-pod
       ports:

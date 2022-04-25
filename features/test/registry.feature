@@ -43,8 +43,8 @@ Feature: registry related test scenario
     And I add the insecure registry to docker config on the node
     And I log into auth registry on the node
     When I docker push on the node to the registry the following images:
-      | quay.io/pravin_dsilva/base-alpine@sha256:03ce32161870cba7e8bcca9bf015cb62ffea830196ecb1ba9838a7a1dd5bb426     | busybox:latest |
-      | quay.io/pravin_dsilva/ruby-27@sha256:c3ab340964ea4e42b592efb6b480312fa2b78988b59823b2f0afb5283a764f72 | test/centos7   |
+      | quay.io/pdsilva1/base-alpine@sha256:03ce32161870cba7e8bcca9bf015cb62ffea830196ecb1ba9838a7a1dd5bb426     | busybox:latest |
+      | quay.io/pdsilva1/ruby-27@sha256:c3ab340964ea4e42b592efb6b480312fa2b78988b59823b2f0afb5283a764f72 | test/centos7   |
     Then the step should succeed
 
   @admin
@@ -56,7 +56,7 @@ Feature: registry related test scenario
     And I add the insecure registry to docker config on the node
     And I log into auth registry on the node
     When I docker push on the node to the registry the following images:
-      | quay.io/pravin_dsilva/base-alpine@sha256:03ce32161870cba7e8bcca9bf015cb62ffea830196ecb1ba9838a7a1dd5bb426 | busybox:latest |
+      | quay.io/pdsilva1/base-alpine@sha256:03ce32161870cba7e8bcca9bf015cb62ffea830196ecb1ba9838a7a1dd5bb426 | busybox:latest |
     Then the step should succeed
 
   @admin
@@ -67,8 +67,8 @@ Feature: registry related test scenario
     And I have a registry with htpasswd authentication enabled in my project
     And I add the insecure registry to docker config on the node
     When I docker push on the node to the registry the following images:
-      | quay.io/pravin_dsilva/base-alpine@sha256:03ce32161870cba7e8bcca9bf015cb62ffea830196ecb1ba9838a7a1dd5bb426     | busybox:latest |
-      | quay.io/pravin_dsilva/ruby-27@sha256:c3ab340964ea4e42b592efb6b480312fa2b78988b59823b2f0afb5283a764f72 | test/centos7   |
+      | quay.io/pdsilva1/base-alpine@sha256:03ce32161870cba7e8bcca9bf015cb62ffea830196ecb1ba9838a7a1dd5bb426     | busybox:latest |
+      | quay.io/pdsilva1/ruby-27@sha256:c3ab340964ea4e42b592efb6b480312fa2b78988b59823b2f0afb5283a764f72 | test/centos7   |
     Then the step should fail
 
   Scenario: Obtain registry ip by creating a build in the project
