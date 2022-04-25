@@ -13,7 +13,7 @@ Feature: oc patch/apply related scenarios
     Given I have a project
     And I run the :create_deploymentconfig client command with:
       | name  | hello                                               |
-      | image | quay.io/pravin_dsilva/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2 |
+      | image | quay.io/pdsilva1/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2 |
     Then the step should succeed
     When I run the :patch client command with:
       | resource      | dc              |

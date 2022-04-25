@@ -6,7 +6,7 @@ metadata:
     pod.alpha.kubernetes.io/init-containers: '[
         {
             "name": "install",
-            "image": " quay.io/pravin_dsilva/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2",
+            "image": " quay.io/pdsilva1/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2",
             "command": ["/bin/sh", "-c","echo hello init-containers > /work-dir/hello.txt"],
             "volumeMounts": [
                 {
@@ -18,7 +18,7 @@ metadata:
     ]'
 spec:
   containers:
-    - image: " quay.io/pravin_dsilva/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2"
+    - image: " quay.io/pdsilva1/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2"
       imagePullPolicy: IfNotPresent
       name: hello-pod
       command: ["/bin/sh", "-c", "while true; do cat /tmp/hello.txt; sleep 5; done"]

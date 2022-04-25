@@ -7,7 +7,7 @@
   "spec": {
       "containers": [{
         "name": "iperf-server",
-        "image": "quay.io/pravin_dsilva/mcast-pod@sha256:089efeb5b0d004cf2eb19bd69a3669b360805452c63e0b7f1aa7633dffd75f35",
+        "image": "quay.io/pdsilva1/mcast-pod@sha256:089efeb5b0d004cf2eb19bd69a3669b360805452c63e0b7f1aa7633dffd75f35",
     	"command": [
 	      "iperf3"
     	],

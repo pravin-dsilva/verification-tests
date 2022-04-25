@@ -46,7 +46,7 @@
                 "containers": [
                     {
                         "name": "hello-openshift",
-                        "image": "quay.io/pravin_dsilva/hello-openshift:multiarch",
+                        "image": "quay.io/pdsilva1/hello-openshift:multiarch",
                         "ports": [
                             {
                                 "containerPort": 8080,

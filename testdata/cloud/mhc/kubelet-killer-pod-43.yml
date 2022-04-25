@@ -11,7 +11,7 @@ spec:
     - pkill
     - -STOP
     - hyperkube
-    image: quay.io/pravin_dsilva/base-alpine@sha256:03ce32161870cba7e8bcca9bf015cb62ffea830196ecb1ba9838a7a1dd5bb426
+    image: quay.io/pdsilva1/base-alpine@sha256:03ce32161870cba7e8bcca9bf015cb62ffea830196ecb1ba9838a7a1dd5bb426
     imagePullPolicy: Always
     name: kubelet-killer
     securityContext:
