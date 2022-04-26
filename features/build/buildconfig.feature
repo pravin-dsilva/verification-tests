@@ -27,7 +27,7 @@ Feature: buildconfig.feature
   Scenario: Rebuild image when the underlying image changed for Docker build
     Given I have a project
     When I run the :new_build client command with:
-      | D    | FROM quay.io/pdsilva1/base-alpine@sha256:03ce32161870cba7e8bcca9bf015cb62ffea830196ecb1ba9838a7a1dd5bb426\nRUN echo "hello" |
+      | D    | FROM quay.io/pdsilva1/base-alpine@sha256:\nRUN echo "hello" |
       | to   | centos  |
       | name | mybuild |
     Then the step should succeed
