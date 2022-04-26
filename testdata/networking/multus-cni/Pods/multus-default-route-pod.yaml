@@ -11,4 +11,4 @@ spec:
   containers:
   - name: multus-default-route-pod
     command: ["/bin/bash", "-c", "trap 'kill $(jobs -p); exit 0' TERM ; sleep 2000000000000 & wait"]
-    image:  quay.io/pdsilva1/hello-sdn@sha256:76311a85e621e4e54f257c409f20b7092b917fb844092f835363cca9b368f691
+    image:  quay.io/pdsilva1/hello-sdn@sha256:69c21a16084946f58deb75ae99a324d222001d6339e72ebbc6d80d48fd726413
