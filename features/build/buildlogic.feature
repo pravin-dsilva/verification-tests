@@ -11,7 +11,7 @@ Feature: buildlogic.feature
   Scenario: Build with specified Dockerfile via new-build -D
     Given I have a project
     When I run the :new_build client command with:
-      | D    | FROM quay.io/pdsilva1/base-alpine@sha256:03ce32161870cba7e8bcca9bf015cb62ffea830196ecb1ba9838a7a1dd5bb426\nRUN echo "hello" |
+      | D    | FROM quay.io/pdsilva1/base-alpine@sha256:8238b14dad7eccb59074ab808c0ef3fb69d76517cccec368fbd6c8b9cbf4ad10\nRUN echo "hello" |
       | to   | myappis |
       | name | myapp   |
     Then the step should succeed

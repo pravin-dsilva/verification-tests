@@ -7,7 +7,7 @@ metadata:
   annotations:
     pod.alpha.kubernetes.io/init-containers: '[{
 	    "name": "wait",
-	    "image": "quay.io/pdsilva1/base-alpine@sha256:03ce32161870cba7e8bcca9bf015cb62ffea830196ecb1ba9838a7a1dd5bb426",
+	    "image": "quay.io/pdsilva1/base-alpine@sha256:8238b14dad7eccb59074ab808c0ef3fb69d76517cccec368fbd6c8b9cbf4ad10",
 	    "command": ["/bin/sh", "-c", "sleep 60"],
 	    "securityContext": {
 	        "privileged": true

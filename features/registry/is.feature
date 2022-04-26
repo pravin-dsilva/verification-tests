@@ -149,7 +149,7 @@ Feature: Testing imagestream
     Given certification for default image registry is stored to the :reg_crt_name clipboard
 
     When I run the :new_app client command with:
-      | app_repo | quay.io/pdsilva1/ruby-27@sha256:c3ab340964ea4e42b592efb6b480312fa2b78988b59823b2f0afb5283a764f72~https://github.com/sclorg/ruby-ex.git |
+      | app_repo | quay.io/pdsilva1/ruby-27@sha256:428eb3c18da3f5cefd4e980a1f77c02d6ba9db59b93f6257905168a961af77a6~https://github.com/sclorg/ruby-ex.git |
     Then the step should succeed
     Given the "ruby-27" image stream was created 
     Given the "ruby-27" image stream becomes ready 

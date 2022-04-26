@@ -16,7 +16,7 @@ items:
       spec:
         containers:
         - name: sctpserver
-          image: "quay.io/pdsilva1/hello-sdn@sha256:76311a85e621e4e54f257c409f20b7092b917fb844092f835363cca9b368f691"
+          image: "quay.io/pdsilva1/hello-sdn@sha256:69c21a16084946f58deb75ae99a324d222001d6339e72ebbc6d80d48fd726413"
           ports:
           - containerPort: 30102
             name: sctpserver
