@@ -1,0 +1,2621 @@
+Using the default, devel and _devel profiles...
+Feature: dockerbuild.feature
+
+  [90m# @author wzheng@redhat.com[0m
+  [90m# @case_id OCP-12115[0m
+  [36m@smoke[0m [36m@4.11[0m [36m@4.10[0m [36m@4.9[0m [36m@4.8[0m [36m@4.7[0m [36m@4.6[0m [36m@vsphere-ipi[0m [36m@openstack-ipi[0m [36m@gcp-ipi[0m [36m@baremetal-ipi[0m [36m@azure-ipi[0m [36m@aws-ipi[0m [36m@vsphere-upi[0m [36m@openstack-upi[0m [36m@gcp-upi[0m [36m@baremetal-upi[0m [36m@azure-upi[0m [36m@aws-upi[0m [36m@upgrade-sanity[0m [36m@singlenode[0m [36m@connected[0m
+  Scenario: Docker build with both SourceURI and context dir              [90m# features/build/dockerbuild.feature:11[0m
+waiting for operation up to 3600 seconds..
+      [36m[33m[07:39:38] INFO> === Before Scenario: Docker build with both SourceURI and context dir ===[0m[0m
+      [36m[33m[07:39:39] INFO> Shell Commands: mkdir -v -p '/root/workdir/pravin-ga-bastion-0-rootx'[0m[0m
+      [36m[0m[0m
+      [36m[33m[07:39:40] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:39:40] INFO> === End Before Scenario: Docker build with both SourceURI and context dir ===[0m[0m
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+    [32mGiven I have a project[90m                                                # features/step_definitions/project.rb:7[0m[0m
+      [36m[33m[07:39:40] INFO> HTTP GET https://console-openshift-console.apps.pravin-ga.redhat.com[0m[0m
+      [36m[33m[07:39:41] INFO> HTTP GET took 0.097 sec: 200 OK | text/html 3297 bytes[0m[0m
+      [36m[33m[07:39:41] INFO> HTTP GET https://api.pravin-ga.redhat.com:6443/.well-known/oauth-authorization-server[0m[0m
+      [36m[33m[07:39:41] INFO> HTTP GET took 0.020 sec: 200 OK | application/json 600 bytes[0m[0m
+      [36m[33m[07:39:41] INFO> HTTP GET user3@https://oauth-openshift.apps.pravin-ga.redhat.com/oauth/authorize[0m[0m
+      [36m[33m[07:39:41] INFO> HTTP GET took 0.234 sec: 302 Found[0m[0m
+      [36m[33m[07:39:41] INFO> HTTP GET https://api.pravin-ga.redhat.com:6443/apis/user.openshift.io/v1/users/~[0m[0m
+      [36m[33m[07:39:41] INFO> HTTP GET took 0.029 sec: 200 OK | application/json 490 bytes[0m[0m
+      [36m[33m[07:39:41] INFO> cleaning-up user user3 projects[0m[0m
+      [36m[33m[07:39:41] INFO> Shell Commands: rm  -f -- /root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m[0m[0m
+      [36m[33m[07:39:41] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:39:42] INFO> Shell Commands: oc version -o yaml --client --kubeconfig=/tmp/kubeconfig20220404-918913-eevb07[0m[0m
+      [36mclientVersion:[0m
+      [36m  buildDate: "2022-03-09T05:15:57Z"[0m
+      [36m  compiler: gc[0m
+      [36m  gitCommit: f93da179fe606775f8249fed96e0b9903d9188ed[0m
+      [36m  gitTreeState: clean[0m
+      [36m  gitVersion: 4.10.0-202203081809.p0.gf93da17.assembly.stream-f93da17[0m
+      [36m  goVersion: go1.17.5[0m
+      [36m  major: ""[0m
+      [36m  minor: ""[0m
+      [36m  platform: linux/ppc64le[0m
+      [36mreleaseClientVersion: 4.10.4[0m[0m
+      [36m[33m[07:39:43] INFO> Exit Status: 0[0m[0m
+      [36mLogged into "https://api.pravin-ga.redhat.com:6443" as "user3" using the token provided.[0m
+      [36m[0m
+      [36mYou have one project on this server: "h8mjz"[0m
+      [36m[0m
+      [36mUsing project "h8mjz".[0m[0m
+      [36m[33m[07:39:44] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:39:45] INFO> Shell Commands: oc delete projects --all --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mproject.project.openshift.io "h8mjz" deleted[0m[0m
+      [36m[33m[07:39:51] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:39:51] INFO> waiting up to 30 seconds for user clean-up to take place[0m[0m
+      [36m[33m[07:39:53] INFO> Shell Commands: oc new-project 5bsxi --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mNow using project "5bsxi" on server "https://api.pravin-ga.redhat.com:6443".[0m
+      [36m[0m
+      [36mYou can add applications to this project with the 'new-app' command. For example, try:[0m
+      [36m[0m
+      [36m    oc new-app rails-postgresql-example[0m
+      [36m[0m
+      [36mto build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:[0m
+      [36m[0m
+      [36m    kubectl create deployment hello-node --image=k8s.gcr.io/e2e-test-images/agnhost:2.33 -- /agnhost serve-hostname[0m[0m
+      [36m[33m[07:39:54] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:39:55] INFO> oc get projects 5bsxi --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m[33m[07:39:55] INFO> After 1 iterations and 1 seconds:[0m
+      [36mapiVersion: project.openshift.io/v1[0m
+      [36mkind: Project[0m
+      [36mmetadata:[0m
+      [36m  annotations:[0m
+      [36m    openshift.io/description: ""[0m
+      [36m    openshift.io/display-name: ""[0m
+      [36m    openshift.io/requester: user3[0m
+      [36m    openshift.io/sa.scc.mcs: s0:c27,c4[0m
+      [36m    openshift.io/sa.scc.supplemental-groups: 1000710000/10000[0m
+      [36m    openshift.io/sa.scc.uid-range: 1000710000/10000[0m
+      [36m  creationTimestamp: "2022-04-04T07:39:53Z"[0m
+      [36m  labels:[0m
+      [36m    kubernetes.io/metadata.name: 5bsxi[0m
+      [36m  name: 5bsxi[0m
+      [36m  resourceVersion: "11781919"[0m
+      [36m  uid: 04a2c0f6-83de-43a0-a3a7-e641705466b3[0m
+      [36mspec:[0m
+      [36m  finalizers:[0m
+      [36m  - kubernetes[0m
+      [36mstatus:[0m
+      [36m  phase: Active[0m[0m
+cp /root/pravin/verification-tests/testdata/build/ruby20rhel7-context-docker.json ruby20rhel7-context-docker.json
+    [32mGiven I obtain test data [32m[1mfile[0m[0m[32m "[32m[1mbuild/ruby20rhel7-context-docker.json[0m[0m[32m"[90m # features/step_definitions/file.rb:1[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mcreate[0m[0m[32m client command with:[90m                           # features/step_definitions/cli.rb:13[0m[0m
+      [32m| f | ruby20rhel7-context-docker.json |[0m
+      [36m[33m[07:39:55] INFO> Shell Commands: oc create -f ruby20rhel7-context-docker.json --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mtemplate.template.openshift.io/ruby-helloworld-sample created[0m
+      [36m[0m
+      [36mSTDERR:[0m
+      [36mW0404 03:39:55.639625  919029 shim_kubectl.go:58] Using non-groupfied API resources is deprecated and will be removed in a future release, update apiVersion to "template.openshift.io/v1" for your resource[0m[0m
+      [36m[33m[07:39:56] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                          # features/step_definitions/common.rb:4[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mnew_app[0m[0m[32m client command with:[90m                          # features/step_definitions/cli.rb:13[0m[0m
+      [32m| template | ruby-helloworld-sample |[0m
+      [36m[33m[07:39:56] INFO> Shell Commands: oc new-app --template=ruby-helloworld-sample --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m--> Deploying template "5bsxi/ruby-helloworld-sample" to project 5bsxi[0m
+      [36m[0m
+      [36m     ruby-helloworld-sample[0m
+      [36m     ---------[0m
+      [36m     This example shows how to create a simple ruby application in openshift origin v3[0m
+      [36m[0m
+      [36m     * With parameters:[0m
+      [36m        * ADMIN_USERNAME=adminNRO # generated[0m
+      [36m        * ADMIN_PASSWORD=DDYRBhCs # generated[0m
+      [36m        * MYSQL_USER=userKYN # generated[0m
+      [36m        * MYSQL_PASSWORD=ofmq1okc # generated[0m
+      [36m        * MYSQL_DATABASE=root[0m
+      [36m[0m
+      [36m--> Creating resources ...[0m
+      [36m    service "frontend" created[0m
+      [36m    route.route.openshift.io "route-edge" created[0m
+      [36m    imagestream.image.openshift.io "origin-ruby20-sample" created[0m
+      [36m    imagestream.image.openshift.io "ruby-22-rhel7" created[0m
+      [36m    buildconfig.build.openshift.io "ruby20-sample-build" created[0m
+      [36m    deploymentconfig.apps.openshift.io "frontend" created[0m
+      [36m    service "database" created[0m
+      [36m    deploymentconfig.apps.openshift.io "database" created[0m
+      [36m--> Success[0m
+      [36m    Access your application via route 'route-edge-5bsxi.apps.pravin-ga.redhat.com' [0m
+      [36m    Build scheduled, use 'oc logs -f buildconfig/ruby20-sample-build' to track its progress.[0m
+      [36m    Run 'oc status' to view your app.[0m[0m
+      [36m[33m[07:39:57] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                          # features/step_definitions/common.rb:4[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mAnd the "[32m[1mruby20-sample-build-1[0m[0m[32m" build was created[90m                     # features/step_definitions/build.rb:1[0m[0m
+      [36m[33m[07:39:58] INFO> oc get builds ruby20-sample-build-1 --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig --namespace=5bsxi[0m[0m
+      [36m[33m[07:39:58] INFO> After 1 iterations and 1 seconds:[0m
+      [36mapiVersion: build.openshift.io/v1[0m
+      [36mkind: Build[0m
+      [36mmetadata:[0m
+      [36m  annotations:[0m
+      [36m    openshift.io/build-config.name: ruby20-sample-build[0m
+      [36m    openshift.io/build.number: "1"[0m
+      [36m    openshift.io/build.pod-name: ruby20-sample-build-1-build[0m
+      [36m  creationTimestamp: "2022-04-04T07:39:57Z"[0m
+      [36m  generation: 2[0m
+      [36m  labels:[0m
+      [36m    app: ruby-helloworld-sample[0m
+      [36m    app.kubernetes.io/component: ruby-helloworld-sample[0m
+      [36m    app.kubernetes.io/instance: ruby-helloworld-sample[0m
+      [36m    buildconfig: ruby20-sample-build[0m
+      [36m    name: ruby20-sample-build[0m
+      [36m    openshift.io/build-config.name: ruby20-sample-build[0m
+      [36m    openshift.io/build.start-policy: Serial[0m
+      [36m    template: application-template-dockerbuild[0m
+      [36m  name: ruby20-sample-build-1[0m
+      [36m  namespace: 5bsxi[0m
+      [36m  ownerReferences:[0m
+      [36m  - apiVersion: build.openshift.io/v1[0m
+      [36m    controller: true[0m
+      [36m    kind: BuildConfig[0m
+      [36m    name: ruby20-sample-build[0m
+      [36m    uid: ebd2e154-24df-4b32-a38b-2be575e61ffe[0m
+      [36m  resourceVersion: "11782010"[0m
+      [36m  uid: 605c794a-025f-48bb-9c41-0953b9ba4e83[0m
+      [36mspec:[0m
+      [36m  nodeSelector: null[0m
+      [36m  output:[0m
+      [36m    pushSecret:[0m
+      [36m      name: builder-dockercfg-jkcp2[0m
+      [36m    to:[0m
+      [36m      kind: ImageStreamTag[0m
+      [36m      name: origin-ruby20-sample:latest[0m
+      [36m  postCommit: {}[0m
+      [36m  resources: {}[0m
+      [36m  serviceAccount: builder[0m
+      [36m  source:[0m
+      [36m    contextDir: test[0m
+      [36m    git:[0m
+      [36m      uri: https://github.com/openshift-qe/ruby-hello-world-context-dir[0m
+      [36m    type: Git[0m
+      [36m  strategy:[0m
+      [36m    dockerStrategy:[0m
+      [36m      env:[0m
+      [36m      - name: EXAMPLE[0m
+      [36m        value: sample-app[0m
+      [36m      from:[0m
+      [36m        kind: DockerImage[0m
+      [36m        name: quay.io/pravin_dsilva/ruby-27:multiarch[0m
+      [36m    type: Docker[0m
+      [36m  triggeredBy:[0m
+      [36m  - message: Build configuration change[0m
+      [36mstatus:[0m
+      [36m  conditions:[0m
+      [36m  - lastTransitionTime: "2022-04-04T07:39:57Z"[0m
+      [36m    lastUpdateTime: "2022-04-04T07:39:57Z"[0m
+      [36m    status: "False"[0m
+      [36m    type: New[0m
+      [36m  - lastTransitionTime: "2022-04-04T07:39:57Z"[0m
+      [36m    lastUpdateTime: "2022-04-04T07:39:57Z"[0m
+      [36m    status: "True"[0m
+      [36m    type: Pending[0m
+      [36m  config:[0m
+      [36m    kind: BuildConfig[0m
+      [36m    name: ruby20-sample-build[0m
+      [36m    namespace: 5bsxi[0m
+      [36m  output: {}[0m
+      [36m  outputDockerImageReference: image-registry.openshift-image-registry.svc:5000/5bsxi/origin-ruby20-sample:latest[0m
+      [36m  phase: Pending[0m[0m
+waiting for operation up to 900 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+    [32mAnd the "[32m[1mruby20-sample-build-1[0m[0m[32m" build completed[90m                       # features/step_definitions/build.rb:21[0m[0m
+      [36m[33m[07:39:59] INFO> [0m[0m
+      [36m[33m[07:41:22] INFO> After 42 iterations and 83 seconds:[0m
+      [36mmatched status for builds ruby20-sample-build-1: 'complete' while expecting '[:complete]'[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mdescribe[0m[0m[32m client command with:[90m                         # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource | buildconfig         |[0m
+      [32m| name     | ruby20-sample-build |[0m
+      [36m[33m[07:41:22] INFO> Shell Commands: oc describe buildconfig ruby20-sample-build --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mName:		ruby20-sample-build[0m
+      [36mNamespace:	5bsxi[0m
+      [36mCreated:	About a minute ago[0m
+      [36mLabels:		app=ruby-helloworld-sample[0m
+      [36m		app.kubernetes.io/component=ruby-helloworld-sample[0m
+      [36m		app.kubernetes.io/instance=ruby-helloworld-sample[0m
+      [36m		name=ruby20-sample-build[0m
+      [36m		template=application-template-dockerbuild[0m
+      [36mAnnotations:	openshift.io/generated-by=OpenShiftNewApp[0m
+      [36mLatest Version:	1[0m
+      [36m[0m
+      [36mStrategy:	Docker[0m
+      [36mURL:		https://github.com/openshift-qe/ruby-hello-world-context-dir[0m
+      [36mContextDir:	test[0m
+      [36mFrom Image:	DockerImage quay.io/pravin_dsilva/ruby-27:multiarch[0m
+      [36mVolumes:	<none>[0m
+      [36mOutput to:	ImageStreamTag origin-ruby20-sample:latest[0m
+      [36m[0m
+      [36mBuild Run Policy:	Serial[0m
+      [36mTriggered by:		Config[0m
+      [36mWebhook GitHub:[0m
+      [36m	URL:	https://api.pravin-ga.redhat.com:6443/apis/build.openshift.io/v1/namespaces/5bsxi/buildconfigs/ruby20-sample-build/webhooks/<secret>/github[0m
+      [36mWebhook Generic:[0m
+      [36m	URL:		https://api.pravin-ga.redhat.com:6443/apis/build.openshift.io/v1/namespaces/5bsxi/buildconfigs/ruby20-sample-build/webhooks/<secret>/generic[0m
+      [36m	AllowEnv:	false[0m
+      [36mBuilds History Limit:[0m
+      [36m	Successful:	5[0m
+      [36m	Failed:		5[0m
+      [36m[0m
+      [36mBuild			Status		Duration	Creation Time[0m
+      [36mruby20-sample-build-1 	complete 	1m23s 		2022-04-04 03:39:57 -0400 EDT[0m
+      [36m[0m
+      [36mEvents:	<none>[0m[0m
+      [36m[33m[07:41:23] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                          # features/step_definitions/common.rb:4[0m[0m
+    [32mAnd [32m[1mthe[0m[0m[32m output should [32m[1mcontain[0m[0m[32m "[32m[1mContextDir:[0m[0m[32m"[90m                           # features/step_definitions/common.rb:113[0m[0m
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+      [36m[33m[07:41:23] INFO> === After Scenario: Docker build with both SourceURI and context dir ===[0m[0m
+      [36m[33m[07:41:23] INFO> cleaning-up user user3 projects[0m[0m
+      [36m[33m[07:41:24] INFO> Shell Commands: oc delete projects --all --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mproject.project.openshift.io "5bsxi" deleted[0m[0m
+      [36m[33m[07:41:30] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:41:30] INFO> waiting up to 30 seconds for user clean-up to take place[0m[0m
+      [36m[33m[07:41:31] INFO> HTTP DELETE https://api.pravin-ga.redhat.com:6443/apis/oauth.openshift.io/v1/oauthaccesstokens/sha256~I7uqztadrM7TvWBqJFbw-K8D2B4ttB93tZj6nc_Vnaw[0m[0m
+      [36m[33m[07:41:31] INFO> HTTP DELETE took 0.129 sec: 200 OK | application/json 764 bytes[0m[0m
+      [36m[33m[07:41:31] INFO> Shell Commands: rm -r -f -- /root/workdir/pravin-ga-bastion-0-rootx[0m[0m
+      [36m[0m[0m
+      [36m[33m[07:41:31] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:41:32] INFO> === End After Scenario: Docker build with both SourceURI and context dir ===[0m[0m
+[90m# @author wzheng@redhat.com[0m
+[90m# @case_id OCP-30854[0m
+[90m# @author dyan@redhat.com[0m
+[90m# @case_id OCP-13083[0m
+[90m# @author dyan@redhat.com[0m
+[90m# @case_id OCP-12855[0m
+[90m# start build with build-arg[0m
+[90m# @author wzheng@redhat.com[0m
+[90m# @case_id OCP-18501[0m
+[90m# @author xiuwang@redhat.com[0m
+[90m# @case_id OCP-42157[0m
+[90m# @author xiuwang@redhat.com[0m
+[90m# @case_id OCP-42158[0m
+[90m# @author xiuwang@redhat.com[0m
+[90m# @case_id OCP-42184[0m
+[90m# @author xiuwang@redhat.com[0m
+[90m# @case_id OCP-42185[0m
+[90m# @author xiuwang@redhat.com[0m
+[90m# @case_id OCP-42529[0m
+
+Feature: configMap
+
+  [36m@smoke[0m [36m@4.11[0m [36m@4.10[0m [36m@4.9[0m [36m@4.8[0m [36m@4.7[0m [36m@4.6[0m [36m@vsphere-ipi[0m [36m@openstack-ipi[0m [36m@gcp-ipi[0m [36m@baremetal-ipi[0m [36m@azure-ipi[0m [36m@aws-ipi[0m [36m@vsphere-upi[0m [36m@openstack-upi[0m [36m@gcp-upi[0m [36m@baremetal-upi[0m [36m@azure-upi[0m [36m@aws-upi[0m [36m@upgrade-sanity[0m [36m@singlenode[0m [36m@disconnected[0m [36m@connected[0m
+  Scenario: Consume ConfigMap in environment variables               [90m# features/cli/configmap.feature:12[0m
+waiting for operation up to 3600 seconds..
+      [36m[33m[07:41:32] INFO> === Before Scenario: Consume ConfigMap in environment variables ===[0m[0m
+      [36m[33m[07:41:32] INFO> Shell Commands: mkdir -v -p '/root/workdir/pravin-ga-bastion-0-rootx'[0m[0m
+      [36mmkdir: created directory '/root/workdir/pravin-ga-bastion-0-rootx'[0m[0m
+      [36m[33m[07:41:33] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:41:33] INFO> === End Before Scenario: Consume ConfigMap in environment variables ===[0m[0m
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+    [32mGiven I have a project[90m                                           # features/step_definitions/project.rb:7[0m[0m
+      [36m[33m[07:41:33] INFO> HTTP GET https://console-openshift-console.apps.pravin-ga.redhat.com[0m[0m
+      [36m[33m[07:41:33] INFO> HTTP GET took 0.042 sec: 200 OK | text/html 3297 bytes[0m[0m
+      [36m[33m[07:41:33] INFO> HTTP GET https://api.pravin-ga.redhat.com:6443/.well-known/oauth-authorization-server[0m[0m
+      [36m[33m[07:41:33] INFO> HTTP GET took 0.018 sec: 200 OK | application/json 600 bytes[0m[0m
+      [36m[33m[07:41:33] INFO> HTTP GET user3@https://oauth-openshift.apps.pravin-ga.redhat.com/oauth/authorize[0m[0m
+      [36m[33m[07:41:33] INFO> HTTP GET took 0.231 sec: 302 Found[0m[0m
+      [36m[33m[07:41:33] INFO> HTTP GET https://api.pravin-ga.redhat.com:6443/apis/user.openshift.io/v1/users/~[0m[0m
+      [36m[33m[07:41:33] INFO> HTTP GET took 0.159 sec: 200 OK | application/json 490 bytes[0m[0m
+      [36m[33m[07:41:33] INFO> cleaning-up user user3 projects[0m[0m
+      [36m[33m[07:41:33] INFO> Shell Commands: rm  -f -- /root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m[0m[0m
+      [36m[33m[07:41:33] INFO> Exit Status: 0[0m[0m
+      [36mLogged into "https://api.pravin-ga.redhat.com:6443" as "user3" using the token provided.[0m
+      [36m[0m
+      [36mYou don't have any projects. You can try to create a new project, by running[0m
+      [36m[0m
+      [36m    oc new-project <projectname>[0m[0m
+      [36m[33m[07:41:35] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:41:37] INFO> Shell Commands: oc new-project caekx --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mNow using project "caekx" on server "https://api.pravin-ga.redhat.com:6443".[0m
+      [36m[0m
+      [36mYou can add applications to this project with the 'new-app' command. For example, try:[0m
+      [36m[0m
+      [36m    oc new-app rails-postgresql-example[0m
+      [36m[0m
+      [36mto build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:[0m
+      [36m[0m
+      [36m    kubectl create deployment hello-node --image=k8s.gcr.io/e2e-test-images/agnhost:2.33 -- /agnhost serve-hostname[0m[0m
+      [36m[33m[07:41:38] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:41:39] INFO> oc get projects caekx --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m[33m[07:41:39] INFO> After 1 iterations and 1 seconds:[0m
+      [36mapiVersion: project.openshift.io/v1[0m
+      [36mkind: Project[0m
+      [36mmetadata:[0m
+      [36m  annotations:[0m
+      [36m    openshift.io/description: ""[0m
+      [36m    openshift.io/display-name: ""[0m
+      [36m    openshift.io/requester: user3[0m
+      [36m    openshift.io/sa.scc.mcs: s0:c27,c14[0m
+      [36m    openshift.io/sa.scc.supplemental-groups: 1000730000/10000[0m
+      [36m    openshift.io/sa.scc.uid-range: 1000730000/10000[0m
+      [36m  creationTimestamp: "2022-04-04T07:41:37Z"[0m
+      [36m  labels:[0m
+      [36m    kubernetes.io/metadata.name: caekx[0m
+      [36m  name: caekx[0m
+      [36m  resourceVersion: "11782938"[0m
+      [36m  uid: c315ee8a-01bb-4d1d-9ccf-2f0d7e73b5c3[0m
+      [36mspec:[0m
+      [36m  finalizers:[0m
+      [36m  - kubernetes[0m
+      [36mstatus:[0m
+      [36m  phase: Active[0m[0m
+cp /root/pravin/verification-tests/testdata/configmap/configmap.yaml configmap.yaml
+    [32mGiven I obtain test data [32m[1mfile[0m[0m[32m "[32m[1mconfigmap/configmap.yaml[0m[0m[32m"[90m         # features/step_definitions/file.rb:1[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mcreate[0m[0m[32m client command with:[90m                      # features/step_definitions/cli.rb:13[0m[0m
+      [32m| f | configmap.yaml |[0m
+      [32m| n | <%= project.name %>                                                                   |[0m
+      [36m[33m[07:41:39] INFO> Shell Commands: oc create -f configmap.yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig -n caekx[0m[0m
+      [36mconfigmap/special-config created[0m[0m
+      [36m[33m[07:41:40] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                     # features/step_definitions/common.rb:4[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mget[0m[0m[32m client command with:[90m                         # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource | configmap |[0m
+      [36m[33m[07:41:40] INFO> Shell Commands: oc get configmap --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mNAME                       DATA   AGE[0m
+      [36mkube-root-ca.crt           1      2s[0m
+      [36mopenshift-service-ca.crt   1      2s[0m
+      [36mspecial-config             2      1s[0m[0m
+      [36m[33m[07:41:41] INFO> Exit Status: 0[0m[0m
+    [32mThen [32m[1mthe[0m[0m[32m output should [32m[1mmatch[0m[0m[32m:[90m                                    # features/step_definitions/common.rb:33[0m[0m
+      [32m| NAME.*DATA        |[0m
+      [32m| special-config.*2 |[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mdescribe[0m[0m[32m client command with:[90m                    # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource | configmap      |[0m
+      [32m| name     | special-config |[0m
+      [36m[33m[07:41:41] INFO> Shell Commands: oc describe configmap special-config --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mName:         special-config[0m
+      [36mNamespace:    caekx[0m
+      [36mLabels:       <none>[0m
+      [36mAnnotations:  <none>[0m
+      [36m[0m
+      [36mData[0m
+      [36m====[0m
+      [36mspecial.type:[0m
+      [36m----[0m
+      [36mcharm[0m
+      [36mspecial.how:[0m
+      [36m----[0m
+      [36mvery[0m
+      [36m[0m
+      [36mBinaryData[0m
+      [36m====[0m
+      [36m[0m
+      [36mEvents:  <none>[0m[0m
+      [36m[33m[07:41:42] INFO> Exit Status: 0[0m[0m
+    [32mThen [32m[1mthe[0m[0m[32m output should [32m[1mmatch[0m[0m[32m:[90m                                    # features/step_definitions/common.rb:33[0m[0m
+      [32m| special.how  |[0m
+      [32m| special.type |[0m
+cp /root/pravin/verification-tests/testdata/configmap/pod-configmap-env.yaml pod-configmap-env.yaml
+    [32mGiven I obtain test data [32m[1mfile[0m[0m[32m "[32m[1mconfigmap/pod-configmap-env.yaml[0m[0m[32m"[90m # features/step_definitions/file.rb:1[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mcreate[0m[0m[32m client command with:[90m                      # features/step_definitions/cli.rb:13[0m[0m
+      [32m| f | pod-configmap-env.yaml |[0m
+      [36m[33m[07:41:42] INFO> Shell Commands: oc create -f pod-configmap-env.yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mpod/dapi-test-pod created[0m[0m
+      [36m[33m[07:41:43] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                     # features/step_definitions/common.rb:4[0m[0m
+waiting for operation up to 900 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+    [32mAnd the pod named "[32m[1mdapi-test-pod[0m[0m[32m" status becomes :[32m[1msucceeded[0m[0m[32m[90m      # features/step_definitions/pod.rb:77[0m[0m
+      [36m[33m[07:41:44] INFO> [0m[0m
+      [36m[33m[07:41:48] INFO> After 3 iterations and 5 seconds:[0m
+      [36mmatched status for pods dapi-test-pod: 'succeeded' while expecting '[:succeeded]'[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mlogs[0m[0m[32m client command with:[90m                        # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource_name | dapi-test-pod |[0m
+      [36m[33m[07:41:48] INFO> Shell Commands: oc logs dapi-test-pod --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mKUBERNETES_SERVICE_PORT=443[0m
+      [36mKUBERNETES_PORT=tcp://172.30.0.1:443[0m
+      [36mHOSTNAME=dapi-test-pod[0m
+      [36mSHLVL=1[0m
+      [36mHOME=/[0m
+      [36mSPECIAL_TYPE_KEY=charm[0m
+      [36mTERM=xterm[0m
+      [36mKUBERNETES_PORT_443_TCP_ADDR=172.30.0.1[0m
+      [36mPATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin[0m
+      [36mKUBERNETES_PORT_443_TCP_PORT=443[0m
+      [36mKUBERNETES_PORT_443_TCP_PROTO=tcp[0m
+      [36mSPECIAL_LEVEL_KEY=very[0m
+      [36mKUBERNETES_PORT_443_TCP=tcp://172.30.0.1:443[0m
+      [36mKUBERNETES_SERVICE_PORT_HTTPS=443[0m
+      [36mKUBERNETES_SERVICE_HOST=172.30.0.1[0m
+      [36mPWD=/[0m
+      [36mNSS_SDB_USE_CACHE=no[0m[0m
+      [36m[33m[07:41:49] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                     # features/step_definitions/common.rb:4[0m[0m
+    [32mAnd [32m[1mthe[0m[0m[32m output should [32m[1mcontain[0m[0m[32m:[90m                                   # features/step_definitions/common.rb:33[0m[0m
+      [32m| SPECIAL_TYPE_KEY=charm |[0m
+      [32m| SPECIAL_LEVEL_KEY=very |[0m
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+      [36m[33m[07:41:49] INFO> === After Scenario: Consume ConfigMap in environment variables ===[0m[0m
+      [36m[33m[07:41:49] INFO> cleaning-up user user3 projects[0m[0m
+      [36m[33m[07:41:50] INFO> Shell Commands: oc delete projects --all --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mproject.project.openshift.io "caekx" deleted[0m[0m
+      [36m[33m[07:41:57] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:41:57] INFO> waiting up to 30 seconds for user clean-up to take place[0m[0m
+      [36m[33m[07:41:58] INFO> HTTP DELETE https://api.pravin-ga.redhat.com:6443/apis/oauth.openshift.io/v1/oauthaccesstokens/sha256~YwLom8FfI0Timp3CYtJSRqk76nYx5zj7GFqi48f2xSc[0m[0m
+      [36m[33m[07:41:59] INFO> HTTP DELETE took 0.133 sec: 200 OK | application/json 764 bytes[0m[0m
+      [36m[33m[07:41:59] INFO> Shell Commands: rm -r -f -- /root/workdir/pravin-ga-bastion-0-rootx[0m[0m
+      [36m[0m[0m
+      [36m[33m[07:42:00] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:42:01] INFO> === End After Scenario: Consume ConfigMap in environment variables ===[0m[0m
+
+  [36m@smoke[0m [36m@4.11[0m [36m@4.10[0m [36m@4.9[0m [36m@4.8[0m [36m@4.7[0m [36m@4.6[0m [36m@vsphere-ipi[0m [36m@openstack-ipi[0m [36m@gcp-ipi[0m [36m@baremetal-ipi[0m [36m@azure-ipi[0m [36m@aws-ipi[0m [36m@vsphere-upi[0m [36m@openstack-upi[0m [36m@gcp-upi[0m [36m@baremetal-upi[0m [36m@azure-upi[0m [36m@aws-upi[0m [36m@upgrade-sanity[0m [36m@singlenode[0m [36m@disconnected[0m [36m@connected[0m
+  Scenario: Consume ConfigMap via volume plugin                          [90m# features/cli/configmap.feature:51[0m
+waiting for operation up to 3600 seconds..
+      [36m[33m[07:42:01] INFO> === Before Scenario: Consume ConfigMap via volume plugin ===[0m[0m
+      [36m[33m[07:42:01] INFO> Shell Commands: mkdir -v -p '/root/workdir/pravin-ga-bastion-0-rootx'[0m[0m
+      [36mmkdir: created directory '/root/workdir/pravin-ga-bastion-0-rootx'[0m[0m
+      [36m[33m[07:42:02] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:42:02] INFO> === End Before Scenario: Consume ConfigMap via volume plugin ===[0m[0m
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+    [32mGiven I have a project[90m                                               # features/step_definitions/project.rb:7[0m[0m
+      [36m[33m[07:42:02] INFO> HTTP GET https://console-openshift-console.apps.pravin-ga.redhat.com[0m[0m
+      [36m[33m[07:42:02] INFO> HTTP GET took 0.082 sec: 200 OK | text/html 3297 bytes[0m[0m
+      [36m[33m[07:42:02] INFO> HTTP GET https://api.pravin-ga.redhat.com:6443/.well-known/oauth-authorization-server[0m[0m
+      [36m[33m[07:42:02] INFO> HTTP GET took 0.023 sec: 200 OK | application/json 600 bytes[0m[0m
+      [36m[33m[07:42:02] INFO> HTTP GET user3@https://oauth-openshift.apps.pravin-ga.redhat.com/oauth/authorize[0m[0m
+      [36m[33m[07:42:02] INFO> HTTP GET took 0.185 sec: 302 Found[0m[0m
+      [36m[33m[07:42:02] INFO> HTTP GET https://api.pravin-ga.redhat.com:6443/apis/user.openshift.io/v1/users/~[0m[0m
+      [36m[33m[07:42:02] INFO> HTTP GET took 0.105 sec: 200 OK | application/json 490 bytes[0m[0m
+      [36m[33m[07:42:02] INFO> cleaning-up user user3 projects[0m[0m
+      [36m[33m[07:42:02] INFO> Shell Commands: rm  -f -- /root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m[0m[0m
+      [36m[33m[07:42:03] INFO> Exit Status: 0[0m[0m
+      [36mLogged into "https://api.pravin-ga.redhat.com:6443" as "user3" using the token provided.[0m
+      [36m[0m
+      [36mYou don't have any projects. You can try to create a new project, by running[0m
+      [36m[0m
+      [36m    oc new-project <projectname>[0m[0m
+      [36m[33m[07:42:04] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:42:06] INFO> Shell Commands: oc new-project 5t090 --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mNow using project "5t090" on server "https://api.pravin-ga.redhat.com:6443".[0m
+      [36m[0m
+      [36mYou can add applications to this project with the 'new-app' command. For example, try:[0m
+      [36m[0m
+      [36m    oc new-app rails-postgresql-example[0m
+      [36m[0m
+      [36mto build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:[0m
+      [36m[0m
+      [36m    kubectl create deployment hello-node --image=k8s.gcr.io/e2e-test-images/agnhost:2.33 -- /agnhost serve-hostname[0m[0m
+      [36m[33m[07:42:07] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:42:08] INFO> oc get projects 5t090 --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m[33m[07:42:08] INFO> After 1 iterations and 1 seconds:[0m
+      [36mapiVersion: project.openshift.io/v1[0m
+      [36mkind: Project[0m
+      [36mmetadata:[0m
+      [36m  annotations:[0m
+      [36m    openshift.io/description: ""[0m
+      [36m    openshift.io/display-name: ""[0m
+      [36m    openshift.io/requester: user3[0m
+      [36m    openshift.io/sa.scc.mcs: s0:c27,c19[0m
+      [36m    openshift.io/sa.scc.supplemental-groups: 1000740000/10000[0m
+      [36m    openshift.io/sa.scc.uid-range: 1000740000/10000[0m
+      [36m  creationTimestamp: "2022-04-04T07:42:06Z"[0m
+      [36m  labels:[0m
+      [36m    kubernetes.io/metadata.name: 5t090[0m
+      [36m  name: 5t090[0m
+      [36m  resourceVersion: "11783247"[0m
+      [36m  uid: fb5120f5-8043-41f7-bd12-c5f14804dfe2[0m
+      [36mspec:[0m
+      [36m  finalizers:[0m
+      [36m  - kubernetes[0m
+      [36mstatus:[0m
+      [36m  phase: Active[0m[0m
+cp /root/pravin/verification-tests/testdata/configmap/configmap.yaml configmap.yaml
+    [32mGiven I obtain test data [32m[1mfile[0m[0m[32m "[32m[1mconfigmap/configmap.yaml[0m[0m[32m"[90m             # features/step_definitions/file.rb:1[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mcreate[0m[0m[32m client command with:[90m                          # features/step_definitions/cli.rb:13[0m[0m
+      [32m| f | configmap.yaml |[0m
+      [32m| n | <%= project.name %>                                                                   |[0m
+      [36m[33m[07:42:08] INFO> Shell Commands: oc create -f configmap.yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig -n 5t090[0m[0m
+      [36mconfigmap/special-config created[0m[0m
+      [36m[33m[07:42:09] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                         # features/step_definitions/common.rb:4[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mget[0m[0m[32m client command with:[90m                             # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource | configmap |[0m
+      [36m[33m[07:42:09] INFO> Shell Commands: oc get configmap --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mNAME                       DATA   AGE[0m
+      [36mkube-root-ca.crt           1      3s[0m
+      [36mopenshift-service-ca.crt   1      3s[0m
+      [36mspecial-config             2      1s[0m[0m
+      [36m[33m[07:42:10] INFO> Exit Status: 0[0m[0m
+    [32mThen [32m[1mthe[0m[0m[32m output should [32m[1mmatch[0m[0m[32m:[90m                                        # features/step_definitions/common.rb:33[0m[0m
+      [32m| NAME.*DATA        |[0m
+      [32m| special-config.*2 |[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mdescribe[0m[0m[32m client command with:[90m                        # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource | configmap      |[0m
+      [32m| name     | special-config |[0m
+      [36m[33m[07:42:10] INFO> Shell Commands: oc describe configmap special-config --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mName:         special-config[0m
+      [36mNamespace:    5t090[0m
+      [36mLabels:       <none>[0m
+      [36mAnnotations:  <none>[0m
+      [36m[0m
+      [36mData[0m
+      [36m====[0m
+      [36mspecial.how:[0m
+      [36m----[0m
+      [36mvery[0m
+      [36mspecial.type:[0m
+      [36m----[0m
+      [36mcharm[0m
+      [36m[0m
+      [36mBinaryData[0m
+      [36m====[0m
+      [36m[0m
+      [36mEvents:  <none>[0m[0m
+      [36m[33m[07:42:11] INFO> Exit Status: 0[0m[0m
+    [32mThen [32m[1mthe[0m[0m[32m output should [32m[1mmatch[0m[0m[32m:[90m                                        # features/step_definitions/common.rb:33[0m[0m
+      [32m| special.how  |[0m
+      [32m| special.type |[0m
+cp /root/pravin/verification-tests/testdata/configmap/pod-configmap-volume1.yaml pod-configmap-volume1.yaml
+    [32mGiven I obtain test data [32m[1mfile[0m[0m[32m "[32m[1mconfigmap/pod-configmap-volume1.yaml[0m[0m[32m"[90m # features/step_definitions/file.rb:1[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mcreate[0m[0m[32m client command with:[90m                          # features/step_definitions/cli.rb:13[0m[0m
+      [32m| f | pod-configmap-volume1.yaml |[0m
+      [36m[33m[07:42:11] INFO> Shell Commands: oc create -f pod-configmap-volume1.yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mpod/dapi-test-pod-1 created[0m[0m
+      [36m[33m[07:42:12] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                         # features/step_definitions/common.rb:4[0m[0m
+waiting for operation up to 900 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+    [32mAnd the pod named "[32m[1mdapi-test-pod-1[0m[0m[32m" status becomes :[32m[1msucceeded[0m[0m[32m[90m        # features/step_definitions/pod.rb:77[0m[0m
+      [36m[33m[07:42:13] INFO> [0m[0m
+      [36m[33m[07:42:17] INFO> After 3 iterations and 5 seconds:[0m
+      [36mmatched status for pods dapi-test-pod-1: 'succeeded' while expecting '[:succeeded]'[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mlogs[0m[0m[32m client command with:[90m                            # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource_name | dapi-test-pod-1 |[0m
+      [36m[33m[07:42:17] INFO> Shell Commands: oc logs dapi-test-pod-1 --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mvery[0m[0m
+      [36m[33m[07:42:18] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                         # features/step_definitions/common.rb:4[0m[0m
+    [32mAnd [32m[1mthe[0m[0m[32m output should [32m[1mcontain[0m[0m[32m:[90m                                       # features/step_definitions/common.rb:33[0m[0m
+      [32m| very |[0m
+cp /root/pravin/verification-tests/testdata/configmap/pod-configmap-volume2.yaml pod-configmap-volume2.yaml
+    [32mGiven I obtain test data [32m[1mfile[0m[0m[32m "[32m[1mconfigmap/pod-configmap-volume2.yaml[0m[0m[32m"[90m # features/step_definitions/file.rb:1[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mcreate[0m[0m[32m client command with:[90m                          # features/step_definitions/cli.rb:13[0m[0m
+      [32m| f | pod-configmap-volume2.yaml |[0m
+      [36m[33m[07:42:18] INFO> Shell Commands: oc create -f pod-configmap-volume2.yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mpod/dapi-test-pod-2 created[0m[0m
+      [36m[33m[07:42:19] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                         # features/step_definitions/common.rb:4[0m[0m
+waiting for operation up to 900 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+    [32mAnd the pod named "[32m[1mdapi-test-pod-2[0m[0m[32m" status becomes :[32m[1msucceeded[0m[0m[32m[90m        # features/step_definitions/pod.rb:77[0m[0m
+      [36m[33m[07:42:20] INFO> [0m[0m
+      [36m[33m[07:42:24] INFO> After 3 iterations and 5 seconds:[0m
+      [36mmatched status for pods dapi-test-pod-2: 'succeeded' while expecting '[:succeeded]'[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mlogs[0m[0m[32m client command with:[90m                            # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource_name | dapi-test-pod-2 |[0m
+      [36m[33m[07:42:24] INFO> Shell Commands: oc logs dapi-test-pod-2 --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mcharm[0m[0m
+      [36m[33m[07:42:25] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                         # features/step_definitions/common.rb:4[0m[0m
+    [32mAnd [32m[1mthe[0m[0m[32m output should [32m[1mcontain[0m[0m[32m:[90m                                       # features/step_definitions/common.rb:33[0m[0m
+      [32m| charm |[0m
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+      [36m[33m[07:42:25] INFO> === After Scenario: Consume ConfigMap via volume plugin ===[0m[0m
+      [36m[33m[07:42:25] INFO> cleaning-up user user3 projects[0m[0m
+      [36m[33m[07:42:26] INFO> Shell Commands: oc delete projects --all --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mproject.project.openshift.io "5t090" deleted[0m[0m
+      [36m[33m[07:42:32] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:42:32] INFO> waiting up to 30 seconds for user clean-up to take place[0m[0m
+      [36m[33m[07:42:33] INFO> HTTP DELETE https://api.pravin-ga.redhat.com:6443/apis/oauth.openshift.io/v1/oauthaccesstokens/sha256~lnOaJgCF5xICETLCa4Hv_3r6Tn94zy-guyJiLm8aL8Y[0m[0m
+      [36m[33m[07:42:33] INFO> HTTP DELETE took 0.110 sec: 200 OK | application/json 764 bytes[0m[0m
+      [36m[33m[07:42:33] INFO> Shell Commands: rm -r -f -- /root/workdir/pravin-ga-bastion-0-rootx[0m[0m
+      [36m[0m[0m
+      [36m[33m[07:42:33] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:42:33] INFO> === End After Scenario: Consume ConfigMap via volume plugin ===[0m[0m
+
+  [36m@smoke[0m [36m@inactive[0m
+  Scenario: Set command-line arguments with ConfigMap                    [90m# features/cli/configmap.feature:140[0m
+waiting for operation up to 3600 seconds..
+      [36m[33m[07:42:33] INFO> === Before Scenario: Set command-line arguments with ConfigMap ===[0m[0m
+      [36m[33m[07:42:33] INFO> Shell Commands: mkdir -v -p '/root/workdir/pravin-ga-bastion-0-rootx'[0m[0m
+      [36mmkdir: created directory '/root/workdir/pravin-ga-bastion-0-rootx'[0m[0m
+      [36m[33m[07:42:34] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:42:34] INFO> === End Before Scenario: Set command-line arguments with ConfigMap ===[0m[0m
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+    [32mGiven I have a project[90m                                               # features/step_definitions/project.rb:7[0m[0m
+      [36m[33m[07:42:34] INFO> HTTP GET https://console-openshift-console.apps.pravin-ga.redhat.com[0m[0m
+      [36m[33m[07:42:34] INFO> HTTP GET took 0.058 sec: 200 OK | text/html 3297 bytes[0m[0m
+      [36m[33m[07:42:34] INFO> HTTP GET https://api.pravin-ga.redhat.com:6443/.well-known/oauth-authorization-server[0m[0m
+      [36m[33m[07:42:35] INFO> HTTP GET took 0.028 sec: 200 OK | application/json 600 bytes[0m[0m
+      [36m[33m[07:42:35] INFO> HTTP GET user3@https://oauth-openshift.apps.pravin-ga.redhat.com/oauth/authorize[0m[0m
+      [36m[33m[07:42:35] INFO> HTTP GET took 0.174 sec: 302 Found[0m[0m
+      [36m[33m[07:42:35] INFO> HTTP GET https://api.pravin-ga.redhat.com:6443/apis/user.openshift.io/v1/users/~[0m[0m
+      [36m[33m[07:42:35] INFO> HTTP GET took 0.112 sec: 200 OK | application/json 490 bytes[0m[0m
+      [36m[33m[07:42:35] INFO> cleaning-up user user3 projects[0m[0m
+      [36m[33m[07:42:35] INFO> Shell Commands: rm  -f -- /root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m[0m[0m
+      [36m[33m[07:42:36] INFO> Exit Status: 0[0m[0m
+      [36mLogged into "https://api.pravin-ga.redhat.com:6443" as "user3" using the token provided.[0m
+      [36m[0m
+      [36mYou don't have any projects. You can try to create a new project, by running[0m
+      [36m[0m
+      [36m    oc new-project <projectname>[0m[0m
+      [36m[33m[07:42:37] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:42:39] INFO> Shell Commands: oc new-project m4j67 --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mNow using project "m4j67" on server "https://api.pravin-ga.redhat.com:6443".[0m
+      [36m[0m
+      [36mYou can add applications to this project with the 'new-app' command. For example, try:[0m
+      [36m[0m
+      [36m    oc new-app rails-postgresql-example[0m
+      [36m[0m
+      [36mto build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:[0m
+      [36m[0m
+      [36m    kubectl create deployment hello-node --image=k8s.gcr.io/e2e-test-images/agnhost:2.33 -- /agnhost serve-hostname[0m[0m
+      [36m[33m[07:42:40] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:42:41] INFO> oc get projects m4j67 --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m[33m[07:42:41] INFO> After 1 iterations and 1 seconds:[0m
+      [36mapiVersion: project.openshift.io/v1[0m
+      [36mkind: Project[0m
+      [36mmetadata:[0m
+      [36m  annotations:[0m
+      [36m    openshift.io/description: ""[0m
+      [36m    openshift.io/display-name: ""[0m
+      [36m    openshift.io/requester: user3[0m
+      [36m    openshift.io/sa.scc.mcs: s0:c28,c2[0m
+      [36m    openshift.io/sa.scc.supplemental-groups: 1000760000/10000[0m
+      [36m    openshift.io/sa.scc.uid-range: 1000760000/10000[0m
+      [36m  creationTimestamp: "2022-04-04T07:42:39Z"[0m
+      [36m  labels:[0m
+      [36m    kubernetes.io/metadata.name: m4j67[0m
+      [36m  name: m4j67[0m
+      [36m  resourceVersion: "11783621"[0m
+      [36m  uid: bb492d53-8ecf-41ae-83dd-89723a7fcca4[0m
+      [36mspec:[0m
+      [36m  finalizers:[0m
+      [36m  - kubernetes[0m
+      [36mstatus:[0m
+      [36m  phase: Active[0m[0m
+cp /root/pravin/verification-tests/testdata/configmap/configmap.yaml configmap.yaml
+    [32mGiven I obtain test data [32m[1mfile[0m[0m[32m "[32m[1mconfigmap/configmap.yaml[0m[0m[32m"[90m             # features/step_definitions/file.rb:1[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mcreate[0m[0m[32m client command with:[90m                          # features/step_definitions/cli.rb:13[0m[0m
+      [32m| f | configmap.yaml |[0m
+      [32m| n | <%= project.name %>                                                                   |[0m
+      [36m[33m[07:42:41] INFO> Shell Commands: oc create -f configmap.yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig -n m4j67[0m[0m
+      [36mconfigmap/special-config created[0m[0m
+      [36m[33m[07:42:42] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                         # features/step_definitions/common.rb:4[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mget[0m[0m[32m client command with:[90m                             # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource | configmap |[0m
+      [36m[33m[07:42:42] INFO> Shell Commands: oc get configmap --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mNAME                       DATA   AGE[0m
+      [36mkube-root-ca.crt           1      3s[0m
+      [36mopenshift-service-ca.crt   1      3s[0m
+      [36mspecial-config             2      1s[0m[0m
+      [36m[33m[07:42:43] INFO> Exit Status: 0[0m[0m
+    [32mThen [32m[1mthe[0m[0m[32m output should [32m[1mmatch[0m[0m[32m:[90m                                        # features/step_definitions/common.rb:33[0m[0m
+      [32m| NAME.*DATA        |[0m
+      [32m| special-config.*2 |[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mdescribe[0m[0m[32m client command with:[90m                        # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource | configmap      |[0m
+      [32m| name     | special-config |[0m
+      [36m[33m[07:42:43] INFO> Shell Commands: oc describe configmap special-config --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mName:         special-config[0m
+      [36mNamespace:    m4j67[0m
+      [36mLabels:       <none>[0m
+      [36mAnnotations:  <none>[0m
+      [36m[0m
+      [36mData[0m
+      [36m====[0m
+      [36mspecial.how:[0m
+      [36m----[0m
+      [36mvery[0m
+      [36mspecial.type:[0m
+      [36m----[0m
+      [36mcharm[0m
+      [36m[0m
+      [36mBinaryData[0m
+      [36m====[0m
+      [36m[0m
+      [36mEvents:  <none>[0m[0m
+      [36m[33m[07:42:44] INFO> Exit Status: 0[0m[0m
+    [32mThen [32m[1mthe[0m[0m[32m output should [32m[1mmatch[0m[0m[32m:[90m                                        # features/step_definitions/common.rb:33[0m[0m
+      [32m| special.how  |[0m
+      [32m| special.type |[0m
+cp /root/pravin/verification-tests/testdata/configmap/pod-configmap-command.yaml pod-configmap-command.yaml
+    [32mGiven I obtain test data [32m[1mfile[0m[0m[32m "[32m[1mconfigmap/pod-configmap-command.yaml[0m[0m[32m"[90m # features/step_definitions/file.rb:1[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mcreate[0m[0m[32m client command with:[90m                          # features/step_definitions/cli.rb:13[0m[0m
+      [32m| f | pod-configmap-command.yaml |[0m
+      [36m[33m[07:42:44] INFO> Shell Commands: oc create -f pod-configmap-command.yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mpod/dapi-test-pod created[0m[0m
+      [36m[33m[07:42:45] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                         # features/step_definitions/common.rb:4[0m[0m
+waiting for operation up to 900 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+    [32mAnd the pod named "[32m[1mdapi-test-pod[0m[0m[32m" status becomes :[32m[1msucceeded[0m[0m[32m[90m          # features/step_definitions/pod.rb:77[0m[0m
+      [36m[33m[07:42:46] INFO> [0m[0m
+      [36m[33m[07:42:50] INFO> After 3 iterations and 5 seconds:[0m
+      [36mmatched status for pods dapi-test-pod: 'succeeded' while expecting '[:succeeded]'[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mlogs[0m[0m[32m client command with:[90m                            # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource_name | dapi-test-pod |[0m
+      [36m[33m[07:42:50] INFO> Shell Commands: oc logs dapi-test-pod --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mvery charm[0m[0m
+      [36m[33m[07:42:51] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                         # features/step_definitions/common.rb:4[0m[0m
+    [32mAnd [32m[1mthe[0m[0m[32m output should [32m[1mcontain[0m[0m[32m:[90m                                       # features/step_definitions/common.rb:33[0m[0m
+      [32m| very charm |[0m
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+      [36m[33m[07:42:51] INFO> === After Scenario: Set command-line arguments with ConfigMap ===[0m[0m
+      [36m[33m[07:42:51] INFO> cleaning-up user user3 projects[0m[0m
+      [36m[33m[07:42:52] INFO> Shell Commands: oc delete projects --all --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mproject.project.openshift.io "m4j67" deleted[0m[0m
+      [36m[33m[07:42:59] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:42:59] INFO> waiting up to 30 seconds for user clean-up to take place[0m[0m
+      [36m[33m[07:43:00] INFO> HTTP DELETE https://api.pravin-ga.redhat.com:6443/apis/oauth.openshift.io/v1/oauthaccesstokens/sha256~ePF3zL3w8uXYSZ1XQ755jYWqwduYL_zG7Cd8qxZQya8[0m[0m
+      [36m[33m[07:43:00] INFO> HTTP DELETE took 0.075 sec: 200 OK | application/json 764 bytes[0m[0m
+      [36m[33m[07:43:00] INFO> Shell Commands: rm -r -f -- /root/workdir/pravin-ga-bastion-0-rootx[0m[0m
+      [36m[0m[0m
+      [36m[33m[07:43:01] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:43:01] INFO> === End After Scenario: Set command-line arguments with ConfigMap ===[0m[0m
+
+  [36m@smoke[0m [36m@inactive[0m
+  Scenario: Create ConfigMap from file                                                 [90m# features/cli/configmap.feature:209[0m
+waiting for operation up to 3600 seconds..
+      [36m[33m[07:43:01] INFO> === Before Scenario: Create ConfigMap from file ===[0m[0m
+      [36m[33m[07:43:01] INFO> Shell Commands: mkdir -v -p '/root/workdir/pravin-ga-bastion-0-rootx'[0m[0m
+      [36mmkdir: created directory '/root/workdir/pravin-ga-bastion-0-rootx'[0m[0m
+      [36m[33m[07:43:02] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:43:02] INFO> === End Before Scenario: Create ConfigMap from file ===[0m[0m
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+    [32mGiven I have a project[90m                                                             # features/step_definitions/project.rb:7[0m[0m
+      [36m[33m[07:43:02] INFO> HTTP GET https://console-openshift-console.apps.pravin-ga.redhat.com[0m[0m
+      [36m[33m[07:43:02] INFO> HTTP GET took 0.056 sec: 200 OK | text/html 3297 bytes[0m[0m
+      [36m[33m[07:43:02] INFO> HTTP GET https://api.pravin-ga.redhat.com:6443/.well-known/oauth-authorization-server[0m[0m
+      [36m[33m[07:43:02] INFO> HTTP GET took 0.032 sec: 200 OK | application/json 600 bytes[0m[0m
+      [36m[33m[07:43:02] INFO> HTTP GET user3@https://oauth-openshift.apps.pravin-ga.redhat.com/oauth/authorize[0m[0m
+      [36m[33m[07:43:02] INFO> HTTP GET took 0.184 sec: 302 Found[0m[0m
+      [36m[33m[07:43:02] INFO> HTTP GET https://api.pravin-ga.redhat.com:6443/apis/user.openshift.io/v1/users/~[0m[0m
+      [36m[33m[07:43:02] INFO> HTTP GET took 0.073 sec: 200 OK | application/json 490 bytes[0m[0m
+      [36m[33m[07:43:02] INFO> cleaning-up user user3 projects[0m[0m
+      [36m[33m[07:43:02] INFO> Shell Commands: rm  -f -- /root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m[0m[0m
+      [36m[33m[07:43:03] INFO> Exit Status: 0[0m[0m
+      [36mLogged into "https://api.pravin-ga.redhat.com:6443" as "user3" using the token provided.[0m
+      [36m[0m
+      [36mYou don't have any projects. You can try to create a new project, by running[0m
+      [36m[0m
+      [36m    oc new-project <projectname>[0m[0m
+      [36m[33m[07:43:04] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:43:06] INFO> Shell Commands: oc new-project ei1o0 --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mNow using project "ei1o0" on server "https://api.pravin-ga.redhat.com:6443".[0m
+      [36m[0m
+      [36mYou can add applications to this project with the 'new-app' command. For example, try:[0m
+      [36m[0m
+      [36m    oc new-app rails-postgresql-example[0m
+      [36m[0m
+      [36mto build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:[0m
+      [36m[0m
+      [36m    kubectl create deployment hello-node --image=k8s.gcr.io/e2e-test-images/agnhost:2.33 -- /agnhost serve-hostname[0m[0m
+      [36m[33m[07:43:07] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:43:09] INFO> oc get projects ei1o0 --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m[33m[07:43:09] INFO> After 1 iterations and 1 seconds:[0m
+      [36mapiVersion: project.openshift.io/v1[0m
+      [36mkind: Project[0m
+      [36mmetadata:[0m
+      [36m  annotations:[0m
+      [36m    openshift.io/description: ""[0m
+      [36m    openshift.io/display-name: ""[0m
+      [36m    openshift.io/requester: user3[0m
+      [36m    openshift.io/sa.scc.mcs: s0:c28,c12[0m
+      [36m    openshift.io/sa.scc.supplemental-groups: 1000780000/10000[0m
+      [36m    openshift.io/sa.scc.uid-range: 1000780000/10000[0m
+      [36m  creationTimestamp: "2022-04-04T07:43:07Z"[0m
+      [36m  labels:[0m
+      [36m    kubernetes.io/metadata.name: ei1o0[0m
+      [36m  name: ei1o0[0m
+      [36m  resourceVersion: "11783899"[0m
+      [36m  uid: 8bffa4bf-ddde-4ce3-9eeb-91cd470be43d[0m
+      [36mspec:[0m
+      [36m  finalizers:[0m
+      [36m  - kubernetes[0m
+      [36mstatus:[0m
+      [36m  phase: Active[0m[0m
+    [32mGiven I create the "[32m[1mconfigmap-test[0m[0m[32m" directory[90m                                      # features/step_definitions/file.rb:190[0m[0m
+    [32mGiven a "[32m[1mconfigmap-test/game.properties[0m[0m[32m" file is [32m[1mcreated[0m[0m[32m with the following lines:[90m # features/step_definitions/file.rb:175[0m[0m
+[32m      """[0m
+[32m      enemies=aliens[0m
+[32m      lives=3[0m
+[32m      enemies.cheat=true[0m
+[32m      enemies.cheat.level=noGoodRotten[0m
+[32m      secret.code.passphrase=UUDDLRLRBABAS[0m
+[32m      secret.code.allowed=true[0m
+[32m      secret.code.lives=30[0m
+[32m      """[0m
+    [32mGiven a "[32m[1mconfigmap-test/ui.properties[0m[0m[32m" file is [32m[1mcreated[0m[0m[32m with the following lines:[90m   # features/step_definitions/file.rb:175[0m[0m
+[32m      """[0m
+[32m      color.good=purple[0m
+[32m      color.bad=yellow[0m
+[32m      allow.textmode=true[0m
+[32m      how.nice.to.look=fairlyNice[0m
+[32m      """[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mcreate_configmap[0m[0m[32m client command with:[90m                              # features/step_definitions/cli.rb:13[0m[0m
+      [32m| name      | game-config-1                  |[0m
+      [32m| from_file | configmap-test/game.properties |[0m
+      [36m[33m[07:43:09] INFO> Shell Commands: oc create configmap game-config-1 --from-file=configmap-test/game.properties --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mconfigmap/game-config-1 created[0m[0m
+      [36m[33m[07:43:10] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                                       # features/step_definitions/common.rb:4[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mdescribe[0m[0m[32m client command with:[90m                                      # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource  | configmap     |[0m
+      [32m| name      | game-config-1 |[0m
+      [36m[33m[07:43:10] INFO> Shell Commands: oc describe configmap game-config-1 --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mName:         game-config-1[0m
+      [36mNamespace:    ei1o0[0m
+      [36mLabels:       <none>[0m
+      [36mAnnotations:  <none>[0m
+      [36m[0m
+      [36mData[0m
+      [36m====[0m
+      [36mgame.properties:[0m
+      [36m----[0m
+      [36menemies=aliens[0m
+      [36mlives=3[0m
+      [36menemies.cheat=true[0m
+      [36menemies.cheat.level=noGoodRotten[0m
+      [36msecret.code.passphrase=UUDDLRLRBABAS[0m
+      [36msecret.code.allowed=true[0m
+      [36msecret.code.lives=30[0m
+      [36m[0m
+      [36mBinaryData[0m
+      [36m====[0m
+      [36m[0m
+      [36mEvents:  <none>[0m[0m
+      [36m[33m[07:43:11] INFO> Exit Status: 0[0m[0m
+    [32mThen [32m[1mthe[0m[0m[32m output should [32m[1mmatch[0m[0m[32m:[90m                                                      # features/step_definitions/common.rb:33[0m[0m
+      [32m| Name.*game-config-1 |[0m
+      [32m| game.properties     |[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I get project [32m[1mconfigmap[0m[0m[32m named "[32m[1mgame-config-1[0m[0m[32m" as [32m[1mYAML[0m[0m[32m[90m                         # features/step_definitions/project.rb:255[0m[0m
+      [36m[33m[07:43:11] INFO> Shell Commands: oc get configmaps game-config-1 --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig --namespace=ei1o0[0m[0m
+      [36mapiVersion: v1[0m
+      [36mdata:[0m
+      [36m  game.properties: |-[0m
+      [36m    enemies=aliens[0m
+      [36m    lives=3[0m
+      [36m    enemies.cheat=true[0m
+      [36m    enemies.cheat.level=noGoodRotten[0m
+      [36m    secret.code.passphrase=UUDDLRLRBABAS[0m
+      [36m    secret.code.allowed=true[0m
+      [36m    secret.code.lives=30[0m
+      [36mkind: ConfigMap[0m
+      [36mmetadata:[0m
+      [36m  creationTimestamp: "2022-04-04T07:43:09Z"[0m
+      [36m  name: game-config-1[0m
+      [36m  namespace: ei1o0[0m
+      [36m  resourceVersion: "11783933"[0m
+      [36m  uid: 6c6dca01-5044-47e9-b4ae-0861ec5fbdf0[0m[0m
+      [36m[33m[07:43:12] INFO> Exit Status: 0[0m[0m
+    [32mThen [32m[1mthe[0m[0m[32m output[32m[1m by order[0m[0m[32m should [32m[1mmatch[0m[0m[32m:[90m                                             # features/step_definitions/common.rb:33[0m[0m
+      [32m| game.properties: \|                  |[0m
+      [32m| enemies=aliens                       |[0m
+      [32m| lives=3                              |[0m
+      [32m| enemies.cheat=true                   |[0m
+      [32m| enemies.cheat.level=noGoodRotten     |[0m
+      [32m| secret.code.passphrase=UUDDLRLRBABAS |[0m
+      [32m| secret.code.allowed=true             |[0m
+      [32m| secret.code.lives=30                 |[0m
+      [32m| name: game-config-1                  |[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mcreate_configmap[0m[0m[32m client command with:[90m                              # features/step_definitions/cli.rb:13[0m[0m
+      [32m| name      | game-config-2                  |[0m
+      [32m| from_file | configmap-test/game.properties |[0m
+      [32m| from_file | configmap-test/ui.properties   |[0m
+      [36m[33m[07:43:12] INFO> Shell Commands: oc create configmap game-config-2 --from-file=configmap-test/game.properties --from-file=configmap-test/ui.properties --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mconfigmap/game-config-2 created[0m[0m
+      [36m[33m[07:43:13] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                                       # features/step_definitions/common.rb:4[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mdescribe[0m[0m[32m client command with:[90m                                      # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource  | configmap     |[0m
+      [32m| name      | game-config-2 |[0m
+      [36m[33m[07:43:13] INFO> Shell Commands: oc describe configmap game-config-2 --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mName:         game-config-2[0m
+      [36mNamespace:    ei1o0[0m
+      [36mLabels:       <none>[0m
+      [36mAnnotations:  <none>[0m
+      [36m[0m
+      [36mData[0m
+      [36m====[0m
+      [36mgame.properties:[0m
+      [36m----[0m
+      [36menemies=aliens[0m
+      [36mlives=3[0m
+      [36menemies.cheat=true[0m
+      [36menemies.cheat.level=noGoodRotten[0m
+      [36msecret.code.passphrase=UUDDLRLRBABAS[0m
+      [36msecret.code.allowed=true[0m
+      [36msecret.code.lives=30[0m
+      [36mui.properties:[0m
+      [36m----[0m
+      [36mcolor.good=purple[0m
+      [36mcolor.bad=yellow[0m
+      [36mallow.textmode=true[0m
+      [36mhow.nice.to.look=fairlyNice[0m
+      [36m[0m
+      [36mBinaryData[0m
+      [36m====[0m
+      [36m[0m
+      [36mEvents:  <none>[0m[0m
+      [36m[33m[07:43:14] INFO> Exit Status: 0[0m[0m
+    [32mThen [32m[1mthe[0m[0m[32m output should [32m[1mmatch[0m[0m[32m:[90m                                                      # features/step_definitions/common.rb:33[0m[0m
+      [32m| Name.*game-config-2 |[0m
+      [32m| game.properties     |[0m
+      [32m| ui.properties       |[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I get project [32m[1mconfigmap[0m[0m[32m named "[32m[1mgame-config-2[0m[0m[32m" as [32m[1mYAML[0m[0m[32m[90m                         # features/step_definitions/project.rb:255[0m[0m
+      [36m[33m[07:43:14] INFO> Shell Commands: oc get configmaps game-config-2 --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig --namespace=ei1o0[0m[0m
+      [36mapiVersion: v1[0m
+      [36mdata:[0m
+      [36m  game.properties: |-[0m
+      [36m    enemies=aliens[0m
+      [36m    lives=3[0m
+      [36m    enemies.cheat=true[0m
+      [36m    enemies.cheat.level=noGoodRotten[0m
+      [36m    secret.code.passphrase=UUDDLRLRBABAS[0m
+      [36m    secret.code.allowed=true[0m
+      [36m    secret.code.lives=30[0m
+      [36m  ui.properties: |-[0m
+      [36m    color.good=purple[0m
+      [36m    color.bad=yellow[0m
+      [36m    allow.textmode=true[0m
+      [36m    how.nice.to.look=fairlyNice[0m
+      [36mkind: ConfigMap[0m
+      [36mmetadata:[0m
+      [36m  creationTimestamp: "2022-04-04T07:43:12Z"[0m
+      [36m  name: game-config-2[0m
+      [36m  namespace: ei1o0[0m
+      [36m  resourceVersion: "11783949"[0m
+      [36m  uid: 3a845e4b-9b16-42e4-b3c9-31f0d8ea714a[0m[0m
+      [36m[33m[07:43:15] INFO> Exit Status: 0[0m[0m
+    [32mThen [32m[1mthe[0m[0m[32m output[32m[1m by order[0m[0m[32m should [32m[1mmatch[0m[0m[32m:[90m                                             # features/step_definitions/common.rb:33[0m[0m
+      [32m| game.properties: \|                  |[0m
+      [32m| enemies=aliens                       |[0m
+      [32m| lives=3                              |[0m
+      [32m| enemies.cheat=true                   |[0m
+      [32m| enemies.cheat.level=noGoodRotten     |[0m
+      [32m| secret.code.passphrase=UUDDLRLRBABAS |[0m
+      [32m| secret.code.allowed=true             |[0m
+      [32m| secret.code.lives=30                 |[0m
+      [32m| ui.properties: \|                    |[0m
+      [32m| color.good=purple                    |[0m
+      [32m| color.bad=yellow                     |[0m
+      [32m| allow.textmode=true                  |[0m
+      [32m| how.nice.to.look=fairlyNice          |[0m
+      [32m| name: game-config-2                  |[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mcreate_configmap[0m[0m[32m client command with:[90m                              # features/step_definitions/cli.rb:13[0m[0m
+      [32m| name      | game-config-3                                   |[0m
+      [32m| from_file | game-special-key=configmap-test/game.properties |[0m
+      [36m[33m[07:43:15] INFO> Shell Commands: oc create configmap game-config-3 --from-file=game-special-key\=configmap-test/game.properties --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mconfigmap/game-config-3 created[0m[0m
+      [36m[33m[07:43:16] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                                       # features/step_definitions/common.rb:4[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I get project [32m[1mconfigmap[0m[0m[32m named "[32m[1mgame-config-3[0m[0m[32m" as [32m[1mYAML[0m[0m[32m[90m                         # features/step_definitions/project.rb:255[0m[0m
+      [36m[33m[07:43:16] INFO> Shell Commands: oc get configmaps game-config-3 --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig --namespace=ei1o0[0m[0m
+      [36mapiVersion: v1[0m
+      [36mdata:[0m
+      [36m  game-special-key: |-[0m
+      [36m    enemies=aliens[0m
+      [36m    lives=3[0m
+      [36m    enemies.cheat=true[0m
+      [36m    enemies.cheat.level=noGoodRotten[0m
+      [36m    secret.code.passphrase=UUDDLRLRBABAS[0m
+      [36m    secret.code.allowed=true[0m
+      [36m    secret.code.lives=30[0m
+      [36mkind: ConfigMap[0m
+      [36mmetadata:[0m
+      [36m  creationTimestamp: "2022-04-04T07:43:15Z"[0m
+      [36m  name: game-config-3[0m
+      [36m  namespace: ei1o0[0m
+      [36m  resourceVersion: "11783970"[0m
+      [36m  uid: 738b7dc0-2bcd-4e84-9bdd-08f97c63c41c[0m[0m
+      [36m[33m[07:43:17] INFO> Exit Status: 0[0m[0m
+    [32mThen [32m[1mthe[0m[0m[32m output[32m[1m by order[0m[0m[32m should [32m[1mmatch[0m[0m[32m:[90m                                             # features/step_definitions/common.rb:33[0m[0m
+      [32m| game-special-key: \|                 |[0m
+      [32m| enemies=aliens                       |[0m
+      [32m| lives=3                              |[0m
+      [32m| enemies.cheat=true                   |[0m
+      [32m| enemies.cheat.level=noGoodRotten     |[0m
+      [32m| secret.code.passphrase=UUDDLRLRBABAS |[0m
+      [32m| secret.code.allowed=true             |[0m
+      [32m| secret.code.lives=30                 |[0m
+      [32m| name: game-config-3                  |[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mdelete[0m[0m[32m client command with:[90m                                        # features/step_definitions/cli.rb:13[0m[0m
+      [32m| object_type       | configmap     |[0m
+      [32m| object_name_or_id | game-config-1 |[0m
+      [32m| object_name_or_id | game-config-2 |[0m
+      [32m| object_name_or_id | game-config-3 |[0m
+      [36m[33m[07:43:17] INFO> Shell Commands: oc delete configmap game-config-1 game-config-2 game-config-3 --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mconfigmap "game-config-1" deleted[0m
+      [36mconfigmap "game-config-2" deleted[0m
+      [36mconfigmap "game-config-3" deleted[0m[0m
+      [36m[33m[07:43:18] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                                       # features/step_definitions/common.rb:4[0m[0m
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+      [36m[33m[07:43:18] INFO> === After Scenario: Create ConfigMap from file ===[0m[0m
+      [36m[33m[07:43:18] INFO> cleaning-up user user3 projects[0m[0m
+      [36m[33m[07:43:19] INFO> Shell Commands: oc delete projects --all --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mproject.project.openshift.io "ei1o0" deleted[0m[0m
+      [36m[33m[07:43:25] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:43:25] INFO> waiting up to 30 seconds for user clean-up to take place[0m[0m
+      [36m[33m[07:43:26] INFO> HTTP DELETE https://api.pravin-ga.redhat.com:6443/apis/oauth.openshift.io/v1/oauthaccesstokens/sha256~TzLpoO-pPTvl0an88c9LlS_Jwti8f1_uipzBvwvJwPQ[0m[0m
+      [36m[33m[07:43:26] INFO> HTTP DELETE took 0.094 sec: 200 OK | application/json 764 bytes[0m[0m
+      [36m[33m[07:43:26] INFO> Shell Commands: rm -r -f -- /root/workdir/pravin-ga-bastion-0-rootx[0m[0m
+      [36m[0m[0m
+      [36m[33m[07:43:27] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:43:27] INFO> === End After Scenario: Create ConfigMap from file ===[0m[0m
+
+Feature: deployment related features
+
+  [36m@smoke[0m [36m@4.11[0m [36m@4.10[0m [36m@4.9[0m [36m@4.8[0m [36m@4.7[0m [36m@4.6[0m [36m@vsphere-ipi[0m [36m@openstack-ipi[0m [36m@gcp-ipi[0m [36m@baremetal-ipi[0m [36m@azure-ipi[0m [36m@aws-ipi[0m [36m@vsphere-upi[0m [36m@openstack-upi[0m [36m@gcp-upi[0m [36m@baremetal-upi[0m [36m@azure-upi[0m [36m@aws-upi[0m [36m@upgrade-sanity[0m [36m@singlenode[0m [36m@connected[0m
+  Scenario: Manually make deployment                                     [90m# features/cli/deploy.feature:48[0m
+waiting for operation up to 3600 seconds..
+      [36m[33m[07:43:27] INFO> === Before Scenario: Manually make deployment ===[0m[0m
+      [36m[33m[07:43:27] INFO> Shell Commands: mkdir -v -p '/root/workdir/pravin-ga-bastion-0-rootx'[0m[0m
+      [36mmkdir: created directory '/root/workdir/pravin-ga-bastion-0-rootx'[0m[0m
+      [36m[33m[07:43:28] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:43:28] INFO> === End Before Scenario: Manually make deployment ===[0m[0m
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+    [32mGiven I have a project[90m                                               # features/step_definitions/project.rb:7[0m[0m
+      [36m[33m[07:43:28] INFO> HTTP GET https://console-openshift-console.apps.pravin-ga.redhat.com[0m[0m
+      [36m[33m[07:43:28] INFO> HTTP GET took 0.049 sec: 200 OK | text/html 3297 bytes[0m[0m
+      [36m[33m[07:43:28] INFO> HTTP GET https://api.pravin-ga.redhat.com:6443/.well-known/oauth-authorization-server[0m[0m
+      [36m[33m[07:43:28] INFO> HTTP GET took 0.021 sec: 200 OK | application/json 600 bytes[0m[0m
+      [36m[33m[07:43:28] INFO> HTTP GET user3@https://oauth-openshift.apps.pravin-ga.redhat.com/oauth/authorize[0m[0m
+      [36m[33m[07:43:28] INFO> HTTP GET took 0.232 sec: 302 Found[0m[0m
+      [36m[33m[07:43:28] INFO> HTTP GET https://api.pravin-ga.redhat.com:6443/apis/user.openshift.io/v1/users/~[0m[0m
+      [36m[33m[07:43:28] INFO> HTTP GET took 0.101 sec: 200 OK | application/json 490 bytes[0m[0m
+      [36m[33m[07:43:28] INFO> cleaning-up user user3 projects[0m[0m
+      [36m[33m[07:43:28] INFO> Shell Commands: rm  -f -- /root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m[0m[0m
+      [36m[33m[07:43:28] INFO> Exit Status: 0[0m[0m
+      [36mLogged into "https://api.pravin-ga.redhat.com:6443" as "user3" using the token provided.[0m
+      [36m[0m
+      [36mYou don't have any projects. You can try to create a new project, by running[0m
+      [36m[0m
+      [36m    oc new-project <projectname>[0m[0m
+      [36m[33m[07:43:30] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:43:32] INFO> Shell Commands: oc new-project 0ipi3 --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mNow using project "0ipi3" on server "https://api.pravin-ga.redhat.com:6443".[0m
+      [36m[0m
+      [36mYou can add applications to this project with the 'new-app' command. For example, try:[0m
+      [36m[0m
+      [36m    oc new-app rails-postgresql-example[0m
+      [36m[0m
+      [36mto build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:[0m
+      [36m[0m
+      [36m    kubectl create deployment hello-node --image=k8s.gcr.io/e2e-test-images/agnhost:2.33 -- /agnhost serve-hostname[0m[0m
+      [36m[33m[07:43:33] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:43:34] INFO> oc get projects 0ipi3 --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m[33m[07:43:34] INFO> After 1 iterations and 1 seconds:[0m
+      [36mapiVersion: project.openshift.io/v1[0m
+      [36mkind: Project[0m
+      [36mmetadata:[0m
+      [36m  annotations:[0m
+      [36m    openshift.io/description: ""[0m
+      [36m    openshift.io/display-name: ""[0m
+      [36m    openshift.io/requester: user3[0m
+      [36m    openshift.io/sa.scc.mcs: s0:c28,c22[0m
+      [36m    openshift.io/sa.scc.supplemental-groups: 1000800000/10000[0m
+      [36m    openshift.io/sa.scc.uid-range: 1000800000/10000[0m
+      [36m  creationTimestamp: "2022-04-04T07:43:32Z"[0m
+      [36m  labels:[0m
+      [36m    kubernetes.io/metadata.name: 0ipi3[0m
+      [36m  name: 0ipi3[0m
+      [36m  resourceVersion: "11784154"[0m
+      [36m  uid: 65a34ed1-fec9-4f8e-93ee-a6dd16f28fd2[0m
+      [36mspec:[0m
+      [36m  finalizers:[0m
+      [36m  - kubernetes[0m
+      [36mstatus:[0m
+      [36m  phase: Active[0m[0m
+cp /root/pravin/verification-tests/testdata/deployment/manual.json manual.json
+    [32mGiven I obtain test data [32m[1mfile[0m[0m[32m "[32m[1mdeployment/manual.json[0m[0m[32m"[90m               # features/step_definitions/file.rb:1[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mcreate[0m[0m[32m client command with:[90m                          # features/step_definitions/cli.rb:13[0m[0m
+      [32m| f | manual.json |[0m
+      [36m[33m[07:43:34] INFO> Shell Commands: oc create -f manual.json --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mdeploymentconfig.apps.openshift.io/hooks created[0m
+      [36m[0m
+      [36mSTDERR:[0m
+      [36mW0404 03:43:34.861206  920448 shim_kubectl.go:58] Using non-groupfied API resources is deprecated and will be removed in a future release, update apiVersion to "apps.openshift.io/v1" for your resource[0m[0m
+      [36m[33m[07:43:35] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                         # features/step_definitions/common.rb:4[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mrollout_status[0m[0m[32m client command with:[90m                  # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource | deploymentConfig |[0m
+      [32m| name     | hooks            |[0m
+      [36m[33m[07:43:35] INFO> Shell Commands: oc rollout status deploymentConfig hooks --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m[0m
+      [36mSTDERR:[0m
+      [36merror: Deployment config "hooks" waiting on manual update (use 'oc rollout latest hooks')[0m[0m
+      [36m[33m[07:43:36] INFO> Exit Status: 1[0m[0m
+    [32mThen [32m[1mthe[0m[0m[32m output should [32m[1mmatch[0m[0m[32m "[32m[1mwaiting on manual update[0m[0m[32m"[90m              # features/step_definitions/common.rb:113[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mAnd [32m[1mI[0m[0m[32m check that the "[32m[1mhooks[0m[0m[32m" [32m[1mdeployment_config[0m[0m[32m exists in the project[90m # features/step_definitions/resources.rb:66[0m[0m
+      [36m[33m[07:43:36] INFO> Shell Commands: oc get deploymentconfigs hooks --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig --namespace=0ipi3[0m[0m
+      [36mapiVersion: apps.openshift.io/v1[0m
+      [36mkind: DeploymentConfig[0m
+      [36mmetadata:[0m
+      [36m  creationTimestamp: "2022-04-04T07:43:34Z"[0m
+      [36m  generation: 1[0m
+      [36m  labels:[0m
+      [36m    name: hello-openshift[0m
+      [36m  name: hooks[0m
+      [36m  namespace: 0ipi3[0m
+      [36m  resourceVersion: "11784187"[0m
+      [36m  uid: 21d32701-575c-46fd-9360-2738e105dbd9[0m
+      [36mspec:[0m
+      [36m  replicas: 1[0m
+      [36m  revisionHistoryLimit: 10[0m
+      [36m  selector:[0m
+      [36m    name: hello-openshift[0m
+      [36m  strategy:[0m
+      [36m    activeDeadlineSeconds: 21600[0m
+      [36m    recreateParams:[0m
+      [36m      timeoutSeconds: 600[0m
+      [36m    resources: {}[0m
+      [36m    type: Recreate[0m
+      [36m  template:[0m
+      [36m    metadata:[0m
+      [36m      creationTimestamp: null[0m
+      [36m      labels:[0m
+      [36m        name: hello-openshift[0m
+      [36m    spec:[0m
+      [36m      containers:[0m
+      [36m      - env:[0m
+      [36m        - name: MYSQL_USER[0m
+      [36m          value: user8Y2[0m
+      [36m        - name: MYSQL_PASSWORD[0m
+      [36m          value: Plqe5Wev[0m
+      [36m        - name: MYSQL_DATABASE[0m
+      [36m          value: root[0m
+      [36m        image: ' quay.io/pravin_dsilva/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2'[0m
+      [36m        imagePullPolicy: Always[0m
+      [36m        name: hello-openshift[0m
+      [36m        ports:[0m
+      [36m        - containerPort: 8080[0m
+      [36m          protocol: TCP[0m
+      [36m        resources: {}[0m
+      [36m        securityContext:[0m
+      [36m          capabilities: {}[0m
+      [36m          privileged: false[0m
+      [36m        terminationMessagePath: /dev/termination-log[0m
+      [36m        terminationMessagePolicy: File[0m
+      [36m        volumeMounts:[0m
+      [36m        - mountPath: /var/lib/etcd[0m
+      [36m          name: dataem[0m
+      [36m      dnsPolicy: ClusterFirst[0m
+      [36m      restartPolicy: Always[0m
+      [36m      schedulerName: default-scheduler[0m
+      [36m      securityContext: {}[0m
+      [36m      terminationGracePeriodSeconds: 30[0m
+      [36m      volumes:[0m
+      [36m      - emptyDir: {}[0m
+      [36m        name: dataem[0m
+      [36m  test: false[0m
+      [36m  triggers: [][0m
+      [36mstatus:[0m
+      [36m  availableReplicas: 0[0m
+      [36m  conditions:[0m
+      [36m  - lastTransitionTime: "2022-04-04T07:43:34Z"[0m
+      [36m    lastUpdateTime: "2022-04-04T07:43:34Z"[0m
+      [36m    message: Deployment config does not have minimum availability.[0m
+      [36m    status: "False"[0m
+      [36m    type: Available[0m
+      [36m  latestVersion: 0[0m
+      [36m  observedGeneration: 1[0m
+      [36m  replicas: 0[0m
+      [36m  unavailableReplicas: 0[0m
+      [36m  updatedReplicas: 0[0m[0m
+      [36m[33m[07:43:37] INFO> Exit Status: 0[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mrollout_latest[0m[0m[32m client command with:[90m                  # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource | hooks |[0m
+      [36m[33m[07:43:37] INFO> Shell Commands: oc rollout latest hooks --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mdeploymentconfig.apps.openshift.io/hooks rolled out[0m[0m
+      [36m[33m[07:43:38] INFO> Exit Status: 0[0m[0m
+    [32mThen [32m[1mthe[0m[0m[32m output should [32m[1mcontain[0m[0m[32m "[32m[1mrolled out[0m[0m[32m"[90m                          # features/step_definitions/common.rb:113[0m[0m
+waiting for operation up to 900 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+    [32mAnd the pod named "[32m[1mhooks-1-deploy[0m[0m[32m" becomes ready[90m                     # features/step_definitions/pod.rb:18[0m[0m
+      [36m[33m[07:43:39] INFO> oc get pods hooks-1-deploy --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig --namespace=0ipi3[0m[0m
+      [36m[33m[07:43:43] INFO> After 3 iterations and 5 seconds:[0m
+      [36mapiVersion: v1[0m
+      [36mkind: Pod[0m
+      [36mmetadata:[0m
+      [36m  annotations:[0m
+      [36m    k8s.v1.cni.cncf.io/network-status: |-[0m
+      [36m      [{[0m
+      [36m          "name": "openshift-sdn",[0m
+      [36m          "interface": "eth0",[0m
+      [36m          "ips": [[0m
+      [36m              "10.128.3.242"[0m
+      [36m          ],[0m
+      [36m          "default": true,[0m
+      [36m          "dns": {}[0m
+      [36m      }][0m
+      [36m    k8s.v1.cni.cncf.io/networks-status: |-[0m
+      [36m      [{[0m
+      [36m          "name": "openshift-sdn",[0m
+      [36m          "interface": "eth0",[0m
+      [36m          "ips": [[0m
+      [36m              "10.128.3.242"[0m
+      [36m          ],[0m
+      [36m          "default": true,[0m
+      [36m          "dns": {}[0m
+      [36m      }][0m
+      [36m    openshift.io/deployment-config.name: hooks[0m
+      [36m    openshift.io/deployment.name: hooks-1[0m
+      [36m    openshift.io/scc: restricted[0m
+      [36m  creationTimestamp: "2022-04-04T07:43:38Z"[0m
+      [36m  labels:[0m
+      [36m    openshift.io/deployer-pod-for.name: hooks-1[0m
+      [36m  name: hooks-1-deploy[0m
+      [36m  namespace: 0ipi3[0m
+      [36m  ownerReferences:[0m
+      [36m  - apiVersion: v1[0m
+      [36m    kind: ReplicationController[0m
+      [36m    name: hooks-1[0m
+      [36m    uid: c2443d15-424e-46ee-a425-6d0d76307e0d[0m
+      [36m  resourceVersion: "11784238"[0m
+      [36m  uid: 51b5b3db-fbe9-4f2d-a8ad-55bd9f0686a7[0m
+      [36mspec:[0m
+      [36m  activeDeadlineSeconds: 21600[0m
+      [36m  containers:[0m
+      [36m  - env:[0m
+      [36m    - name: OPENSHIFT_DEPLOYMENT_NAME[0m
+      [36m      value: hooks-1[0m
+      [36m    - name: OPENSHIFT_DEPLOYMENT_NAMESPACE[0m
+      [36m      value: 0ipi3[0m
+      [36m    image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:1e68d0985dc5d099211712e1618392bdae21d81f724c2e06decb35d6097b08cf[0m
+      [36m    imagePullPolicy: IfNotPresent[0m
+      [36m    name: deployment[0m
+      [36m    resources: {}[0m
+      [36m    securityContext:[0m
+      [36m      capabilities:[0m
+      [36m        drop:[0m
+      [36m        - KILL[0m
+      [36m        - MKNOD[0m
+      [36m        - SETGID[0m
+      [36m        - SETUID[0m
+      [36m      runAsUser: 1000800000[0m
+      [36m    terminationMessagePath: /dev/termination-log[0m
+      [36m    terminationMessagePolicy: File[0m
+      [36m    volumeMounts:[0m
+      [36m    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount[0m
+      [36m      name: kube-api-access-7bf9h[0m
+      [36m      readOnly: true[0m
+      [36m  dnsPolicy: ClusterFirst[0m
+      [36m  enableServiceLinks: true[0m
+      [36m  imagePullSecrets:[0m
+      [36m  - name: deployer-dockercfg-xjz76[0m
+      [36m  nodeName: worker-0[0m
+      [36m  preemptionPolicy: PreemptLowerPriority[0m
+      [36m  priority: 0[0m
+      [36m  restartPolicy: Never[0m
+      [36m  schedulerName: default-scheduler[0m
+      [36m  securityContext:[0m
+      [36m    fsGroup: 1000800000[0m
+      [36m    seLinuxOptions:[0m
+      [36m      level: s0:c28,c22[0m
+      [36m  serviceAccount: deployer[0m
+      [36m  serviceAccountName: deployer[0m
+      [36m  shareProcessNamespace: false[0m
+      [36m  terminationGracePeriodSeconds: 10[0m
+      [36m  tolerations:[0m
+      [36m  - effect: NoExecute[0m
+      [36m    key: node.kubernetes.io/not-ready[0m
+      [36m    operator: Exists[0m
+      [36m    tolerationSeconds: 300[0m
+      [36m  - effect: NoExecute[0m
+      [36m    key: node.kubernetes.io/unreachable[0m
+      [36m    operator: Exists[0m
+      [36m    tolerationSeconds: 300[0m
+      [36m  volumes:[0m
+      [36m  - name: kube-api-access-7bf9h[0m
+      [36m    projected:[0m
+      [36m      defaultMode: 420[0m
+      [36m      sources:[0m
+      [36m      - serviceAccountToken:[0m
+      [36m          expirationSeconds: 3607[0m
+      [36m          path: token[0m
+      [36m      - configMap:[0m
+      [36m          items:[0m
+      [36m          - key: ca.crt[0m
+      [36m            path: ca.crt[0m
+      [36m          name: kube-root-ca.crt[0m
+      [36m      - downwardAPI:[0m
+      [36m          items:[0m
+      [36m          - fieldRef:[0m
+      [36m              apiVersion: v1[0m
+      [36m              fieldPath: metadata.namespace[0m
+      [36m            path: namespace[0m
+      [36m      - configMap:[0m
+      [36m          items:[0m
+      [36m          - key: service-ca.crt[0m
+      [36m            path: service-ca.crt[0m
+      [36m          name: openshift-service-ca.crt[0m
+      [36mstatus:[0m
+      [36m  conditions:[0m
+      [36m  - lastProbeTime: null[0m
+      [36m    lastTransitionTime: "2022-04-04T07:43:38Z"[0m
+      [36m    status: "True"[0m
+      [36m    type: Initialized[0m
+      [36m  - lastProbeTime: null[0m
+      [36m    lastTransitionTime: "2022-04-04T07:43:41Z"[0m
+      [36m    status: "True"[0m
+      [36m    type: Ready[0m
+      [36m  - lastProbeTime: null[0m
+      [36m    lastTransitionTime: "2022-04-04T07:43:41Z"[0m
+      [36m    status: "True"[0m
+      [36m    type: ContainersReady[0m
+      [36m  - lastProbeTime: null[0m
+      [36m    lastTransitionTime: "2022-04-04T07:43:38Z"[0m
+      [36m    status: "True"[0m
+      [36m    type: PodScheduled[0m
+      [36m  containerStatuses:[0m
+      [36m  - containerID: cri-o://fbcf05faeb77c0f4da0482affc44dab7b73f1cce1533f14f38b9da4b0124f3bc[0m
+      [36m    image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:1e68d0985dc5d099211712e1618392bdae21d81f724c2e06decb35d6097b08cf[0m
+      [36m    imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:1e68d0985dc5d099211712e1618392bdae21d81f724c2e06decb35d6097b08cf[0m
+      [36m    lastState: {}[0m
+      [36m    name: deployment[0m
+      [36m    ready: true[0m
+      [36m    restartCount: 0[0m
+      [36m    started: true[0m
+      [36m    state:[0m
+      [36m      running:[0m
+      [36m        startedAt: "2022-04-04T07:43:40Z"[0m
+      [36m  hostIP: 9.114.98.81[0m
+      [36m  phase: Running[0m
+      [36m  podIP: 10.128.3.242[0m
+      [36m  podIPs:[0m
+      [36m  - ip: 10.128.3.242[0m
+      [36m  qosClass: BestEffort[0m
+      [36m  startTime: "2022-04-04T07:43:38Z"[0m[0m
+waiting for operation up to 900 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 900 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+    [32mGiven I wait for the pod named "[32m[1mhooks-1-deploy[0m[0m[32m" to die[90m               # features/step_definitions/pod.rb:166[0m[0m
+      [36m[33m[07:43:44] INFO> oc get pods hooks-1-deploy --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig --namespace=0ipi3[0m[0m
+      [36m[33m[07:43:44] INFO> After 1 iterations and 1 seconds:[0m
+      [36mapiVersion: v1[0m
+      [36mkind: Pod[0m
+      [36mmetadata:[0m
+      [36m  annotations:[0m
+      [36m    k8s.v1.cni.cncf.io/network-status: |-[0m
+      [36m      [{[0m
+      [36m          "name": "openshift-sdn",[0m
+      [36m          "interface": "eth0",[0m
+      [36m          "ips": [[0m
+      [36m              "10.128.3.242"[0m
+      [36m          ],[0m
+      [36m          "default": true,[0m
+      [36m          "dns": {}[0m
+      [36m      }][0m
+      [36m    k8s.v1.cni.cncf.io/networks-status: |-[0m
+      [36m      [{[0m
+      [36m          "name": "openshift-sdn",[0m
+      [36m          "interface": "eth0",[0m
+      [36m          "ips": [[0m
+      [36m              "10.128.3.242"[0m
+      [36m          ],[0m
+      [36m          "default": true,[0m
+      [36m          "dns": {}[0m
+      [36m      }][0m
+      [36m    openshift.io/deployment-config.name: hooks[0m
+      [36m    openshift.io/deployment.name: hooks-1[0m
+      [36m    openshift.io/scc: restricted[0m
+      [36m  creationTimestamp: "2022-04-04T07:43:38Z"[0m
+      [36m  labels:[0m
+      [36m    openshift.io/deployer-pod-for.name: hooks-1[0m
+      [36m  name: hooks-1-deploy[0m
+      [36m  namespace: 0ipi3[0m
+      [36m  ownerReferences:[0m
+      [36m  - apiVersion: v1[0m
+      [36m    kind: ReplicationController[0m
+      [36m    name: hooks-1[0m
+      [36m    uid: c2443d15-424e-46ee-a425-6d0d76307e0d[0m
+      [36m  resourceVersion: "11784238"[0m
+      [36m  uid: 51b5b3db-fbe9-4f2d-a8ad-55bd9f0686a7[0m
+      [36mspec:[0m
+      [36m  activeDeadlineSeconds: 21600[0m
+      [36m  containers:[0m
+      [36m  - env:[0m
+      [36m    - name: OPENSHIFT_DEPLOYMENT_NAME[0m
+      [36m      value: hooks-1[0m
+      [36m    - name: OPENSHIFT_DEPLOYMENT_NAMESPACE[0m
+      [36m      value: 0ipi3[0m
+      [36m    image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:1e68d0985dc5d099211712e1618392bdae21d81f724c2e06decb35d6097b08cf[0m
+      [36m    imagePullPolicy: IfNotPresent[0m
+      [36m    name: deployment[0m
+      [36m    resources: {}[0m
+      [36m    securityContext:[0m
+      [36m      capabilities:[0m
+      [36m        drop:[0m
+      [36m        - KILL[0m
+      [36m        - MKNOD[0m
+      [36m        - SETGID[0m
+      [36m        - SETUID[0m
+      [36m      runAsUser: 1000800000[0m
+      [36m    terminationMessagePath: /dev/termination-log[0m
+      [36m    terminationMessagePolicy: File[0m
+      [36m    volumeMounts:[0m
+      [36m    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount[0m
+      [36m      name: kube-api-access-7bf9h[0m
+      [36m      readOnly: true[0m
+      [36m  dnsPolicy: ClusterFirst[0m
+      [36m  enableServiceLinks: true[0m
+      [36m  imagePullSecrets:[0m
+      [36m  - name: deployer-dockercfg-xjz76[0m
+      [36m  nodeName: worker-0[0m
+      [36m  preemptionPolicy: PreemptLowerPriority[0m
+      [36m  priority: 0[0m
+      [36m  restartPolicy: Never[0m
+      [36m  schedulerName: default-scheduler[0m
+      [36m  securityContext:[0m
+      [36m    fsGroup: 1000800000[0m
+      [36m    seLinuxOptions:[0m
+      [36m      level: s0:c28,c22[0m
+      [36m  serviceAccount: deployer[0m
+      [36m  serviceAccountName: deployer[0m
+      [36m  shareProcessNamespace: false[0m
+      [36m  terminationGracePeriodSeconds: 10[0m
+      [36m  tolerations:[0m
+      [36m  - effect: NoExecute[0m
+      [36m    key: node.kubernetes.io/not-ready[0m
+      [36m    operator: Exists[0m
+      [36m    tolerationSeconds: 300[0m
+      [36m  - effect: NoExecute[0m
+      [36m    key: node.kubernetes.io/unreachable[0m
+      [36m    operator: Exists[0m
+      [36m    tolerationSeconds: 300[0m
+      [36m  volumes:[0m
+      [36m  - name: kube-api-access-7bf9h[0m
+      [36m    projected:[0m
+      [36m      defaultMode: 420[0m
+      [36m      sources:[0m
+      [36m      - serviceAccountToken:[0m
+      [36m          expirationSeconds: 3607[0m
+      [36m          path: token[0m
+      [36m      - configMap:[0m
+      [36m          items:[0m
+      [36m          - key: ca.crt[0m
+      [36m            path: ca.crt[0m
+      [36m          name: kube-root-ca.crt[0m
+      [36m      - downwardAPI:[0m
+      [36m          items:[0m
+      [36m          - fieldRef:[0m
+      [36m              apiVersion: v1[0m
+      [36m              fieldPath: metadata.namespace[0m
+      [36m            path: namespace[0m
+      [36m      - configMap:[0m
+      [36m          items:[0m
+      [36m          - key: service-ca.crt[0m
+      [36m            path: service-ca.crt[0m
+      [36m          name: openshift-service-ca.crt[0m
+      [36mstatus:[0m
+      [36m  conditions:[0m
+      [36m  - lastProbeTime: null[0m
+      [36m    lastTransitionTime: "2022-04-04T07:43:38Z"[0m
+      [36m    status: "True"[0m
+      [36m    type: Initialized[0m
+      [36m  - lastProbeTime: null[0m
+      [36m    lastTransitionTime: "2022-04-04T07:43:41Z"[0m
+      [36m    status: "True"[0m
+      [36m    type: Ready[0m
+      [36m  - lastProbeTime: null[0m
+      [36m    lastTransitionTime: "2022-04-04T07:43:41Z"[0m
+      [36m    status: "True"[0m
+      [36m    type: ContainersReady[0m
+      [36m  - lastProbeTime: null[0m
+      [36m    lastTransitionTime: "2022-04-04T07:43:38Z"[0m
+      [36m    status: "True"[0m
+      [36m    type: PodScheduled[0m
+      [36m  containerStatuses:[0m
+      [36m  - containerID: cri-o://fbcf05faeb77c0f4da0482affc44dab7b73f1cce1533f14f38b9da4b0124f3bc[0m
+      [36m    image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:1e68d0985dc5d099211712e1618392bdae21d81f724c2e06decb35d6097b08cf[0m
+      [36m    imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:1e68d0985dc5d099211712e1618392bdae21d81f724c2e06decb35d6097b08cf[0m
+      [36m    lastState: {}[0m
+      [36m    name: deployment[0m
+      [36m    ready: true[0m
+      [36m    restartCount: 0[0m
+      [36m    started: true[0m
+      [36m    state:[0m
+      [36m      running:[0m
+      [36m        startedAt: "2022-04-04T07:43:40Z"[0m
+      [36m  hostIP: 9.114.98.81[0m
+      [36m  phase: Running[0m
+      [36m  podIP: 10.128.3.242[0m
+      [36m  podIPs:[0m
+      [36m  - ip: 10.128.3.242[0m
+      [36m  qosClass: BestEffort[0m
+      [36m  startTime: "2022-04-04T07:43:38Z"[0m[0m
+      [36m[33m[07:43:45] INFO> oc get pods hooks-1-deploy --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig --namespace=0ipi3[0m[0m
+      [36m[33m[07:43:49] INFO> After 3 iterations and 5 seconds:[0m
+      [36mapiVersion: v1[0m
+      [36mkind: Pod[0m
+      [36mmetadata:[0m
+      [36m  annotations:[0m
+      [36m    k8s.v1.cni.cncf.io/network-status: |-[0m
+      [36m      [{[0m
+      [36m          "name": "openshift-sdn",[0m
+      [36m          "interface": "eth0",[0m
+      [36m          "ips": [[0m
+      [36m              "10.128.3.242"[0m
+      [36m          ],[0m
+      [36m          "default": true,[0m
+      [36m          "dns": {}[0m
+      [36m      }][0m
+      [36m    k8s.v1.cni.cncf.io/networks-status: |-[0m
+      [36m      [{[0m
+      [36m          "name": "openshift-sdn",[0m
+      [36m          "interface": "eth0",[0m
+      [36m          "ips": [[0m
+      [36m              "10.128.3.242"[0m
+      [36m          ],[0m
+      [36m          "default": true,[0m
+      [36m          "dns": {}[0m
+      [36m      }][0m
+      [36m    openshift.io/deployment-config.name: hooks[0m
+      [36m    openshift.io/deployment.name: hooks-1[0m
+      [36m    openshift.io/scc: restricted[0m
+      [36m  creationTimestamp: "2022-04-04T07:43:38Z"[0m
+      [36m  labels:[0m
+      [36m    openshift.io/deployer-pod-for.name: hooks-1[0m
+      [36m  name: hooks-1-deploy[0m
+      [36m  namespace: 0ipi3[0m
+      [36m  ownerReferences:[0m
+      [36m  - apiVersion: v1[0m
+      [36m    kind: ReplicationController[0m
+      [36m    name: hooks-1[0m
+      [36m    uid: c2443d15-424e-46ee-a425-6d0d76307e0d[0m
+      [36m  resourceVersion: "11784300"[0m
+      [36m  uid: 51b5b3db-fbe9-4f2d-a8ad-55bd9f0686a7[0m
+      [36mspec:[0m
+      [36m  activeDeadlineSeconds: 21600[0m
+      [36m  containers:[0m
+      [36m  - env:[0m
+      [36m    - name: OPENSHIFT_DEPLOYMENT_NAME[0m
+      [36m      value: hooks-1[0m
+      [36m    - name: OPENSHIFT_DEPLOYMENT_NAMESPACE[0m
+      [36m      value: 0ipi3[0m
+      [36m    image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:1e68d0985dc5d099211712e1618392bdae21d81f724c2e06decb35d6097b08cf[0m
+      [36m    imagePullPolicy: IfNotPresent[0m
+      [36m    name: deployment[0m
+      [36m    resources: {}[0m
+      [36m    securityContext:[0m
+      [36m      capabilities:[0m
+      [36m        drop:[0m
+      [36m        - KILL[0m
+      [36m        - MKNOD[0m
+      [36m        - SETGID[0m
+      [36m        - SETUID[0m
+      [36m      runAsUser: 1000800000[0m
+      [36m    terminationMessagePath: /dev/termination-log[0m
+      [36m    terminationMessagePolicy: File[0m
+      [36m    volumeMounts:[0m
+      [36m    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount[0m
+      [36m      name: kube-api-access-7bf9h[0m
+      [36m      readOnly: true[0m
+      [36m  dnsPolicy: ClusterFirst[0m
+      [36m  enableServiceLinks: true[0m
+      [36m  imagePullSecrets:[0m
+      [36m  - name: deployer-dockercfg-xjz76[0m
+      [36m  nodeName: worker-0[0m
+      [36m  preemptionPolicy: PreemptLowerPriority[0m
+      [36m  priority: 0[0m
+      [36m  restartPolicy: Never[0m
+      [36m  schedulerName: default-scheduler[0m
+      [36m  securityContext:[0m
+      [36m    fsGroup: 1000800000[0m
+      [36m    seLinuxOptions:[0m
+      [36m      level: s0:c28,c22[0m
+      [36m  serviceAccount: deployer[0m
+      [36m  serviceAccountName: deployer[0m
+      [36m  shareProcessNamespace: false[0m
+      [36m  terminationGracePeriodSeconds: 10[0m
+      [36m  tolerations:[0m
+      [36m  - effect: NoExecute[0m
+      [36m    key: node.kubernetes.io/not-ready[0m
+      [36m    operator: Exists[0m
+      [36m    tolerationSeconds: 300[0m
+      [36m  - effect: NoExecute[0m
+      [36m    key: node.kubernetes.io/unreachable[0m
+      [36m    operator: Exists[0m
+      [36m    tolerationSeconds: 300[0m
+      [36m  volumes:[0m
+      [36m  - name: kube-api-access-7bf9h[0m
+      [36m    projected:[0m
+      [36m      defaultMode: 420[0m
+      [36m      sources:[0m
+      [36m      - serviceAccountToken:[0m
+      [36m          expirationSeconds: 3607[0m
+      [36m          path: token[0m
+      [36m      - configMap:[0m
+      [36m          items:[0m
+      [36m          - key: ca.crt[0m
+      [36m            path: ca.crt[0m
+      [36m          name: kube-root-ca.crt[0m
+      [36m      - downwardAPI:[0m
+      [36m          items:[0m
+      [36m          - fieldRef:[0m
+      [36m              apiVersion: v1[0m
+      [36m              fieldPath: metadata.namespace[0m
+      [36m            path: namespace[0m
+      [36m      - configMap:[0m
+      [36m          items:[0m
+      [36m          - key: service-ca.crt[0m
+      [36m            path: service-ca.crt[0m
+      [36m          name: openshift-service-ca.crt[0m
+      [36mstatus:[0m
+      [36m  conditions:[0m
+      [36m  - lastProbeTime: null[0m
+      [36m    lastTransitionTime: "2022-04-04T07:43:38Z"[0m
+      [36m    reason: PodCompleted[0m
+      [36m    status: "True"[0m
+      [36m    type: Initialized[0m
+      [36m  - lastProbeTime: null[0m
+      [36m    lastTransitionTime: "2022-04-04T07:43:47Z"[0m
+      [36m    reason: PodCompleted[0m
+      [36m    status: "False"[0m
+      [36m    type: Ready[0m
+      [36m  - lastProbeTime: null[0m
+      [36m    lastTransitionTime: "2022-04-04T07:43:47Z"[0m
+      [36m    reason: PodCompleted[0m
+      [36m    status: "False"[0m
+      [36m    type: ContainersReady[0m
+      [36m  - lastProbeTime: null[0m
+      [36m    lastTransitionTime: "2022-04-04T07:43:38Z"[0m
+      [36m    status: "True"[0m
+      [36m    type: PodScheduled[0m
+      [36m  containerStatuses:[0m
+      [36m  - containerID: cri-o://fbcf05faeb77c0f4da0482affc44dab7b73f1cce1533f14f38b9da4b0124f3bc[0m
+      [36m    image: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:1e68d0985dc5d099211712e1618392bdae21d81f724c2e06decb35d6097b08cf[0m
+      [36m    imageID: quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:1e68d0985dc5d099211712e1618392bdae21d81f724c2e06decb35d6097b08cf[0m
+      [36m    lastState: {}[0m
+      [36m    name: deployment[0m
+      [36m    ready: false[0m
+      [36m    restartCount: 0[0m
+      [36m    started: false[0m
+      [36m    state:[0m
+      [36m      terminated:[0m
+      [36m        containerID: cri-o://fbcf05faeb77c0f4da0482affc44dab7b73f1cce1533f14f38b9da4b0124f3bc[0m
+      [36m        exitCode: 0[0m
+      [36m        finishedAt: "2022-04-04T07:43:46Z"[0m
+      [36m        reason: Completed[0m
+      [36m        startedAt: "2022-04-04T07:43:40Z"[0m
+      [36m  hostIP: 9.114.98.81[0m
+      [36m  phase: Succeeded[0m
+      [36m  podIP: 10.128.3.242[0m
+      [36m  podIPs:[0m
+      [36m  - ip: 10.128.3.242[0m
+      [36m  qosClass: BestEffort[0m
+      [36m  startTime: "2022-04-04T07:43:38Z"[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mrollout_status[0m[0m[32m client command with:[90m                  # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource | deploymentConfig |[0m
+      [32m| name     | hooks            |[0m
+      [36m[33m[07:43:49] INFO> Shell Commands: oc rollout status deploymentConfig hooks --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mreplication controller "hooks-1" successfully rolled out[0m[0m
+      [36m[33m[07:43:50] INFO> Exit Status: 0[0m[0m
+    [32mThen [32m[1mthe[0m[0m[32m output should [32m[1mmatch[0m[0m[32m "[32m[1msuccessfully rolled out[0m[0m[32m"[90m               # features/step_definitions/common.rb:113[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mAnd [32m[1mI[0m[0m[32m check that the "[32m[1mhooks[0m[0m[32m" [32m[1mdeployment_config[0m[0m[32m exists in the project[90m # features/step_definitions/resources.rb:66[0m[0m
+      [36m[33m[07:43:50] INFO> Shell Commands: oc get deploymentconfigs hooks --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig --namespace=0ipi3[0m[0m
+      [36mapiVersion: apps.openshift.io/v1[0m
+      [36mkind: DeploymentConfig[0m
+      [36mmetadata:[0m
+      [36m  creationTimestamp: "2022-04-04T07:43:34Z"[0m
+      [36m  generation: 2[0m
+      [36m  labels:[0m
+      [36m    name: hello-openshift[0m
+      [36m  name: hooks[0m
+      [36m  namespace: 0ipi3[0m
+      [36m  resourceVersion: "11784302"[0m
+      [36m  uid: 21d32701-575c-46fd-9360-2738e105dbd9[0m
+      [36mspec:[0m
+      [36m  replicas: 1[0m
+      [36m  revisionHistoryLimit: 10[0m
+      [36m  selector:[0m
+      [36m    name: hello-openshift[0m
+      [36m  strategy:[0m
+      [36m    activeDeadlineSeconds: 21600[0m
+      [36m    recreateParams:[0m
+      [36m      timeoutSeconds: 600[0m
+      [36m    resources: {}[0m
+      [36m    type: Recreate[0m
+      [36m  template:[0m
+      [36m    metadata:[0m
+      [36m      creationTimestamp: null[0m
+      [36m      labels:[0m
+      [36m        name: hello-openshift[0m
+      [36m    spec:[0m
+      [36m      containers:[0m
+      [36m      - env:[0m
+      [36m        - name: MYSQL_USER[0m
+      [36m          value: user8Y2[0m
+      [36m        - name: MYSQL_PASSWORD[0m
+      [36m          value: Plqe5Wev[0m
+      [36m        - name: MYSQL_DATABASE[0m
+      [36m          value: root[0m
+      [36m        image: ' quay.io/pravin_dsilva/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2'[0m
+      [36m        imagePullPolicy: Always[0m
+      [36m        name: hello-openshift[0m
+      [36m        ports:[0m
+      [36m        - containerPort: 8080[0m
+      [36m          protocol: TCP[0m
+      [36m        resources: {}[0m
+      [36m        securityContext:[0m
+      [36m          capabilities: {}[0m
+      [36m          privileged: false[0m
+      [36m        terminationMessagePath: /dev/termination-log[0m
+      [36m        terminationMessagePolicy: File[0m
+      [36m        volumeMounts:[0m
+      [36m        - mountPath: /var/lib/etcd[0m
+      [36m          name: dataem[0m
+      [36m      dnsPolicy: ClusterFirst[0m
+      [36m      restartPolicy: Always[0m
+      [36m      schedulerName: default-scheduler[0m
+      [36m      securityContext: {}[0m
+      [36m      terminationGracePeriodSeconds: 30[0m
+      [36m      volumes:[0m
+      [36m      - emptyDir: {}[0m
+      [36m        name: dataem[0m
+      [36m  test: false[0m
+      [36m  triggers: [][0m
+      [36mstatus:[0m
+      [36m  availableReplicas: 1[0m
+      [36m  conditions:[0m
+      [36m  - lastTransitionTime: "2022-04-04T07:43:46Z"[0m
+      [36m    lastUpdateTime: "2022-04-04T07:43:46Z"[0m
+      [36m    message: Deployment config has minimum availability.[0m
+      [36m    status: "True"[0m
+      [36m    type: Available[0m
+      [36m  - lastTransitionTime: "2022-04-04T07:43:42Z"[0m
+      [36m    lastUpdateTime: "2022-04-04T07:43:47Z"[0m
+      [36m    message: replication controller "hooks-1" successfully rolled out[0m
+      [36m    reason: NewReplicationControllerAvailable[0m
+      [36m    status: "True"[0m
+      [36m    type: Progressing[0m
+      [36m  details:[0m
+      [36m    causes:[0m
+      [36m    - type: Manual[0m
+      [36m    message: manual change[0m
+      [36m  latestVersion: 1[0m
+      [36m  observedGeneration: 2[0m
+      [36m  readyReplicas: 1[0m
+      [36m  replicas: 1[0m
+      [36m  unavailableReplicas: 0[0m
+      [36m  updatedReplicas: 1[0m[0m
+      [36m[33m[07:43:51] INFO> Exit Status: 0[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I get project [32m[1mdc[0m[0m[32m named "[32m[1mhooks[0m[0m[32m" as [32m[1mJSON[0m[0m[32m[90m                          # features/step_definitions/project.rb:255[0m[0m
+      [36m[33m[07:43:51] INFO> Shell Commands: oc get deploymentconfigs hooks --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig --namespace=0ipi3[0m[0m
+      [36mapiVersion: apps.openshift.io/v1[0m
+      [36mkind: DeploymentConfig[0m
+      [36mmetadata:[0m
+      [36m  creationTimestamp: "2022-04-04T07:43:34Z"[0m
+      [36m  generation: 2[0m
+      [36m  labels:[0m
+      [36m    name: hello-openshift[0m
+      [36m  name: hooks[0m
+      [36m  namespace: 0ipi3[0m
+      [36m  resourceVersion: "11784302"[0m
+      [36m  uid: 21d32701-575c-46fd-9360-2738e105dbd9[0m
+      [36mspec:[0m
+      [36m  replicas: 1[0m
+      [36m  revisionHistoryLimit: 10[0m
+      [36m  selector:[0m
+      [36m    name: hello-openshift[0m
+      [36m  strategy:[0m
+      [36m    activeDeadlineSeconds: 21600[0m
+      [36m    recreateParams:[0m
+      [36m      timeoutSeconds: 600[0m
+      [36m    resources: {}[0m
+      [36m    type: Recreate[0m
+      [36m  template:[0m
+      [36m    metadata:[0m
+      [36m      creationTimestamp: null[0m
+      [36m      labels:[0m
+      [36m        name: hello-openshift[0m
+      [36m    spec:[0m
+      [36m      containers:[0m
+      [36m      - env:[0m
+      [36m        - name: MYSQL_USER[0m
+      [36m          value: user8Y2[0m
+      [36m        - name: MYSQL_PASSWORD[0m
+      [36m          value: Plqe5Wev[0m
+      [36m        - name: MYSQL_DATABASE[0m
+      [36m          value: root[0m
+      [36m        image: ' quay.io/pravin_dsilva/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2'[0m
+      [36m        imagePullPolicy: Always[0m
+      [36m        name: hello-openshift[0m
+      [36m        ports:[0m
+      [36m        - containerPort: 8080[0m
+      [36m          protocol: TCP[0m
+      [36m        resources: {}[0m
+      [36m        securityContext:[0m
+      [36m          capabilities: {}[0m
+      [36m          privileged: false[0m
+      [36m        terminationMessagePath: /dev/termination-log[0m
+      [36m        terminationMessagePolicy: File[0m
+      [36m        volumeMounts:[0m
+      [36m        - mountPath: /var/lib/etcd[0m
+      [36m          name: dataem[0m
+      [36m      dnsPolicy: ClusterFirst[0m
+      [36m      restartPolicy: Always[0m
+      [36m      schedulerName: default-scheduler[0m
+      [36m      securityContext: {}[0m
+      [36m      terminationGracePeriodSeconds: 30[0m
+      [36m      volumes:[0m
+      [36m      - emptyDir: {}[0m
+      [36m        name: dataem[0m
+      [36m  test: false[0m
+      [36m  triggers: [][0m
+      [36mstatus:[0m
+      [36m  availableReplicas: 1[0m
+      [36m  conditions:[0m
+      [36m  - lastTransitionTime: "2022-04-04T07:43:46Z"[0m
+      [36m    lastUpdateTime: "2022-04-04T07:43:46Z"[0m
+      [36m    message: Deployment config has minimum availability.[0m
+      [36m    status: "True"[0m
+      [36m    type: Available[0m
+      [36m  - lastTransitionTime: "2022-04-04T07:43:42Z"[0m
+      [36m    lastUpdateTime: "2022-04-04T07:43:47Z"[0m
+      [36m    message: replication controller "hooks-1" successfully rolled out[0m
+      [36m    reason: NewReplicationControllerAvailable[0m
+      [36m    status: "True"[0m
+      [36m    type: Progressing[0m
+      [36m  details:[0m
+      [36m    causes:[0m
+      [36m    - type: Manual[0m
+      [36m    message: manual change[0m
+      [36m  latestVersion: 1[0m
+      [36m  observedGeneration: 2[0m
+      [36m  readyReplicas: 1[0m
+      [36m  replicas: 1[0m
+      [36m  unavailableReplicas: 0[0m
+      [36m  updatedReplicas: 1[0m[0m
+      [36m[33m[07:43:52] INFO> Exit Status: 0[0m[0m
+    [32mAnd I save the [32m[1moutput[0m[0m[32m to file>[32m[1m hooks.json[0m[0m[32m[90m                            # features/step_definitions/file.rb:30[0m[0m
+    [32mAnd I replace [32m[1mlines[0m[0m[32m in "[32m[1mhooks.json[0m[0m[32m":[90m                                 # features/step_definitions/file.rb:84[0m[0m
+      [32m| Recreate | Rolling |[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mreplace[0m[0m[32m client command with:[90m                         # features/step_definitions/cli.rb:13[0m[0m
+      [32m| f | hooks.json |[0m
+      [36m[33m[07:43:52] INFO> Shell Commands: oc replace -f hooks.json --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mdeploymentconfig.apps.openshift.io/hooks replaced[0m[0m
+      [36m[33m[07:43:53] INFO> Exit Status: 0[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mrollout_latest[0m[0m[32m client command with:[90m                  # features/step_definitions/cli.rb:13[0m[0m
+      [32m| resource | hooks |[0m
+      [36m[33m[07:43:53] INFO> Shell Commands: oc rollout latest hooks --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mdeploymentconfig.apps.openshift.io/hooks rolled out[0m[0m
+      [36m[33m[07:43:54] INFO> Exit Status: 0[0m[0m
+    [32mThen [32m[1mthe[0m[0m[32m output should [32m[1mcontain[0m[0m[32m "[32m[1mrolled out[0m[0m[32m"[90m                          # features/step_definitions/common.rb:113[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I get project [32m[1mdc[0m[0m[32m named "[32m[1mhooks[0m[0m[32m" as [32m[1mYAML[0m[0m[32m[90m                          # features/step_definitions/project.rb:255[0m[0m
+      [36m[33m[07:43:54] INFO> Shell Commands: oc get deploymentconfigs hooks --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig --namespace=0ipi3[0m[0m
+      [36mapiVersion: apps.openshift.io/v1[0m
+      [36mkind: DeploymentConfig[0m
+      [36mmetadata:[0m
+      [36m  creationTimestamp: "2022-04-04T07:43:34Z"[0m
+      [36m  generation: 4[0m
+      [36m  labels:[0m
+      [36m    name: hello-openshift[0m
+      [36m  name: hooks[0m
+      [36m  namespace: 0ipi3[0m
+      [36m  resourceVersion: "11784398"[0m
+      [36m  uid: 21d32701-575c-46fd-9360-2738e105dbd9[0m
+      [36mspec:[0m
+      [36m  replicas: 1[0m
+      [36m  revisionHistoryLimit: 10[0m
+      [36m  selector:[0m
+      [36m    name: hello-openshift[0m
+      [36m  strategy:[0m
+      [36m    activeDeadlineSeconds: 21600[0m
+      [36m    recreateParams:[0m
+      [36m      timeoutSeconds: 600[0m
+      [36m    resources: {}[0m
+      [36m    rollingParams:[0m
+      [36m      intervalSeconds: 1[0m
+      [36m      maxSurge: 25%[0m
+      [36m      maxUnavailable: 25%[0m
+      [36m      timeoutSeconds: 600[0m
+      [36m      updatePeriodSeconds: 1[0m
+      [36m    type: Rolling[0m
+      [36m  template:[0m
+      [36m    metadata:[0m
+      [36m      creationTimestamp: null[0m
+      [36m      labels:[0m
+      [36m        name: hello-openshift[0m
+      [36m    spec:[0m
+      [36m      containers:[0m
+      [36m      - env:[0m
+      [36m        - name: MYSQL_USER[0m
+      [36m          value: user8Y2[0m
+      [36m        - name: MYSQL_PASSWORD[0m
+      [36m          value: Plqe5Wev[0m
+      [36m        - name: MYSQL_DATABASE[0m
+      [36m          value: root[0m
+      [36m        image: ' quay.io/pravin_dsilva/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2'[0m
+      [36m        imagePullPolicy: Always[0m
+      [36m        name: hello-openshift[0m
+      [36m        ports:[0m
+      [36m        - containerPort: 8080[0m
+      [36m          protocol: TCP[0m
+      [36m        resources: {}[0m
+      [36m        securityContext:[0m
+      [36m          capabilities: {}[0m
+      [36m          privileged: false[0m
+      [36m        terminationMessagePath: /dev/termination-log[0m
+      [36m        terminationMessagePolicy: File[0m
+      [36m        volumeMounts:[0m
+      [36m        - mountPath: /var/lib/etcd[0m
+      [36m          name: dataem[0m
+      [36m      dnsPolicy: ClusterFirst[0m
+      [36m      restartPolicy: Always[0m
+      [36m      schedulerName: default-scheduler[0m
+      [36m      securityContext: {}[0m
+      [36m      terminationGracePeriodSeconds: 30[0m
+      [36m      volumes:[0m
+      [36m      - emptyDir: {}[0m
+      [36m        name: dataem[0m
+      [36m  test: false[0m
+      [36m  triggers: [][0m
+      [36mstatus:[0m
+      [36m  availableReplicas: 1[0m
+      [36m  conditions:[0m
+      [36m  - lastTransitionTime: "2022-04-04T07:43:46Z"[0m
+      [36m    lastUpdateTime: "2022-04-04T07:43:46Z"[0m
+      [36m    message: Deployment config has minimum availability.[0m
+      [36m    status: "True"[0m
+      [36m    type: Available[0m
+      [36m  - lastTransitionTime: "2022-04-04T07:43:54Z"[0m
+      [36m    lastUpdateTime: "2022-04-04T07:43:54Z"[0m
+      [36m    message: replication controller "hooks-2" is waiting for pod "hooks-2-deploy"[0m
+      [36m      to run[0m
+      [36m    status: Unknown[0m
+      [36m    type: Progressing[0m
+      [36m  details:[0m
+      [36m    causes:[0m
+      [36m    - type: Manual[0m
+      [36m    message: manual change[0m
+      [36m  latestVersion: 2[0m
+      [36m  observedGeneration: 4[0m
+      [36m  readyReplicas: 1[0m
+      [36m  replicas: 1[0m
+      [36m  unavailableReplicas: 0[0m
+      [36m  updatedReplicas: 0[0m[0m
+      [36m[33m[07:43:55] INFO> Exit Status: 0[0m[0m
+    [32mThen [32m[1mthe[0m[0m[32m output should [32m[1mcontain[0m[0m[32m:[90m                                      # features/step_definitions/common.rb:33[0m[0m
+      [32m| type: Rolling |[0m
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+      [36m[33m[07:43:55] INFO> === After Scenario: Manually make deployment ===[0m[0m
+      [36m[33m[07:43:55] INFO> cleaning-up user user3 projects[0m[0m
+      [36m[33m[07:43:57] INFO> Shell Commands: oc delete projects --all --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mproject.project.openshift.io "0ipi3" deleted[0m[0m
+      [36m[33m[07:44:03] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:44:03] INFO> waiting up to 30 seconds for user clean-up to take place[0m[0m
+      [36m[33m[07:44:04] INFO> HTTP DELETE https://api.pravin-ga.redhat.com:6443/apis/oauth.openshift.io/v1/oauthaccesstokens/sha256~RwBL727DNfHaVa0jtNGWSbJNr1NbpM-GlZJujK7uC3w[0m[0m
+      [36m[33m[07:44:04] INFO> HTTP DELETE took 0.074 sec: 200 OK | application/json 764 bytes[0m[0m
+      [36m[33m[07:44:04] INFO> Shell Commands: rm -r -f -- /root/workdir/pravin-ga-bastion-0-rootx[0m[0m
+      [36m[0m[0m
+      [36m[33m[07:44:05] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:44:05] INFO> === End After Scenario: Manually make deployment ===[0m[0m
+
+  [90m# otherwise later deployment will always fail[0m
+  [90m# Deployment #3[0m
+  [90m# @author pruan@redhat.com[0m
+  [90m# @case_id OCP-12528[0m
+  [90m# Given I wait for the pod named "hooks-2-deploy" to die[0m
+  [90m# @author xiaocwan@redhat.com[0m
+  [90m# @case_id OCP-10717[0m
+  [90m# check deploy log when deploying[0m
+  [90m# check for non-existent dc[0m
+  [90m# @author yinzhou@redhat.com[0m
+  [90m# @case_id OCP-9563[0m
+  [90m# @author yinzhou@redhat.com[0m
+  [90m# @case_id OCP-9566[0m
+  [90m#When I expose the "bluegreen-example-old" service[0m
+  [90m#And I wait for a web server to become available via the route[0m
+  [90m# @author pruan@redhat.com[0m
+  [90m# @case_id OCP-12532[0m
+  [90m# @author yinzhou@redhat.com[0m
+  [90m# @case_id OCP-12468[0m
+  [90m# @author yinzhou@redhat.com[0m
+  [90m# @case_id OCP-10724[0m
+  [90m# @author yadu@redhat.com[0m
+  [90m# @case_id OCP-9567[0m
+  [36m@smoke[0m [36m@inactive[0m
+  Scenario: Recreate deployment strategy                                             [90m# features/cli/deploy.feature:542[0m
+waiting for operation up to 3600 seconds..
+      [36m[33m[07:44:05] INFO> === Before Scenario: Recreate deployment strategy ===[0m[0m
+      [36m[33m[07:44:05] INFO> Shell Commands: mkdir -v -p '/root/workdir/pravin-ga-bastion-0-rootx'[0m[0m
+      [36mmkdir: created directory '/root/workdir/pravin-ga-bastion-0-rootx'[0m[0m
+      [36m[33m[07:44:06] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:44:06] INFO> === End Before Scenario: Recreate deployment strategy ===[0m[0m
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+    [32mGiven I have a project[90m                                                           # features/step_definitions/project.rb:7[0m[0m
+      [36m[33m[07:44:06] INFO> HTTP GET https://console-openshift-console.apps.pravin-ga.redhat.com[0m[0m
+      [36m[33m[07:44:06] INFO> HTTP GET took 0.038 sec: 200 OK | text/html 3297 bytes[0m[0m
+      [36m[33m[07:44:06] INFO> HTTP GET https://api.pravin-ga.redhat.com:6443/.well-known/oauth-authorization-server[0m[0m
+      [36m[33m[07:44:06] INFO> HTTP GET took 0.021 sec: 200 OK | application/json 600 bytes[0m[0m
+      [36m[33m[07:44:06] INFO> HTTP GET user3@https://oauth-openshift.apps.pravin-ga.redhat.com/oauth/authorize[0m[0m
+      [36m[33m[07:44:06] INFO> HTTP GET took 0.199 sec: 302 Found[0m[0m
+      [36m[33m[07:44:06] INFO> HTTP GET https://api.pravin-ga.redhat.com:6443/apis/user.openshift.io/v1/users/~[0m[0m
+      [36m[33m[07:44:06] INFO> HTTP GET took 0.080 sec: 200 OK | application/json 490 bytes[0m[0m
+      [36m[33m[07:44:06] INFO> cleaning-up user user3 projects[0m[0m
+      [36m[33m[07:44:06] INFO> Shell Commands: rm  -f -- /root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m[0m[0m
+      [36m[33m[07:44:06] INFO> Exit Status: 0[0m[0m
+      [36mLogged into "https://api.pravin-ga.redhat.com:6443" as "user3" using the token provided.[0m
+      [36m[0m
+      [36mYou don't have any projects. You can try to create a new project, by running[0m
+      [36m[0m
+      [36m    oc new-project <projectname>[0m[0m
+      [36m[33m[07:44:07] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:44:09] INFO> Shell Commands: oc new-project 2avcz --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mNow using project "2avcz" on server "https://api.pravin-ga.redhat.com:6443".[0m
+      [36m[0m
+      [36mYou can add applications to this project with the 'new-app' command. For example, try:[0m
+      [36m[0m
+      [36m    oc new-app rails-postgresql-example[0m
+      [36m[0m
+      [36mto build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:[0m
+      [36m[0m
+      [36m    kubectl create deployment hello-node --image=k8s.gcr.io/e2e-test-images/agnhost:2.33 -- /agnhost serve-hostname[0m[0m
+      [36m[33m[07:44:10] INFO> Exit Status: 0[0m[0m
+      [36m[33m[07:44:11] INFO> oc get projects 2avcz --output=yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m[33m[07:44:11] INFO> After 1 iterations and 1 seconds:[0m
+      [36mapiVersion: project.openshift.io/v1[0m
+      [36mkind: Project[0m
+      [36mmetadata:[0m
+      [36m  annotations:[0m
+      [36m    openshift.io/description: ""[0m
+      [36m    openshift.io/display-name: ""[0m
+      [36m    openshift.io/requester: user3[0m
+      [36m    openshift.io/sa.scc.mcs: s0:c28,c27[0m
+      [36m    openshift.io/sa.scc.supplemental-groups: 1000810000/10000[0m
+      [36m    openshift.io/sa.scc.uid-range: 1000810000/10000[0m
+      [36m  creationTimestamp: "2022-04-04T07:44:09Z"[0m
+      [36m  labels:[0m
+      [36m    kubernetes.io/metadata.name: 2avcz[0m
+      [36m  name: 2avcz[0m
+      [36m  resourceVersion: "11784584"[0m
+      [36m  uid: f71fa02d-e52f-4c00-9e69-44739e45b50a[0m
+      [36mspec:[0m
+      [36m  finalizers:[0m
+      [36m  - kubernetes[0m
+      [36mstatus:[0m
+      [36m  phase: Active[0m[0m
+waiting for operation up to 3600 seconds..
+    [32mWhen I run the :[32m[1mcreate[0m[0m[32m client command with:[90m                                      # features/step_definitions/cli.rb:13[0m[0m
+      [32m| f | https://raw.githubusercontent.com/openshift/origin/master/examples/deployment/recreate-example.yaml |[0m
+      [36m[33m[07:44:11] INFO> Shell Commands: oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/deployment/recreate-example.yaml --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36mservice/recreate-example created[0m
+      [36mdeploymentconfig.apps.openshift.io/recreate-example created[0m
+      [36mimagestream.image.openshift.io/recreate-example created[0m
+      [36mroute.route.openshift.io/recreate-example created[0m
+      [36m[0m
+      [36mSTDERR:[0m
+      [36mW0404 03:44:11.896585  920737 shim_kubectl.go:58] Using non-groupfied API resources is deprecated and will be removed in a future release, update apiVersion to "apps.openshift.io/v1" for your resource[0m
+      [36mW0404 03:44:11.933962  920737 shim_kubectl.go:58] Using non-groupfied API resources is deprecated and will be removed in a future release, update apiVersion to "image.openshift.io/v1" for your resource[0m
+      [36mW0404 03:44:11.953976  920737 shim_kubectl.go:58] Using non-groupfied API resources is deprecated and will be removed in a future release, update apiVersion to "route.openshift.io/v1" for your resource[0m[0m
+      [36m[33m[07:44:12] INFO> Exit Status: 0[0m[0m
+    [32mThen the step should [32m[1msucceed[0m[0m[32m[90m                                                     # features/step_definitions/common.rb:4[0m[0m
+waiting for operation up to 600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+waiting for operation up to 3600 seconds..
+    [31mAnd I wait until the status of deployment "[31m[1mrecreate-example[0m[0m[31m" becomes :[31m[1mcomplete[0m[0m[31m[90m   # features/step_definitions/dc.rb:5[0m[0m
+      [36m[33m[07:44:13] INFO> oc describe deploymentconfigs recreate-example --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig -n 2avcz[0m[0m
+      [36m[33m[07:54:13] INFO> After 299 iterations and 601 seconds:[0m
+      [36mName:		recreate-example[0m
+      [36mNamespace:	2avcz[0m
+      [36mCreated:	10 minutes ago[0m
+      [36mLabels:		<none>[0m
+      [36mAnnotations:	<none>[0m
+      [36mLatest Version:	1[0m
+      [36mSelector:	deploymentconfig=recreate-example[0m
+      [36mReplicas:	2[0m
+      [36mTriggers:	Config, Image(recreate-example@latest, auto=true)[0m
+      [36mStrategy:	Recreate[0m
+      [36mTemplate:[0m
+      [36mPod Template:[0m
+      [36m  Labels:	deploymentconfig=recreate-example[0m
+      [36m  Containers:[0m
+      [36m   deployment-example:[0m
+      [36m    Image:		openshift/deployment-example@sha256:ea9135488f323060cb18ab3ec06286cd49e4b3a611fce1a6a442651ecf421f99[0m
+      [36m    Port:		8080/TCP[0m
+      [36m    Host Port:		0/TCP[0m
+      [36m    Environment:	<none>[0m
+      [36m    Mounts:		<none>[0m
+      [36m  Volumes:		<none>[0m
+      [36m[0m
+      [36mDeployment #1 (latest):[0m
+      [36m	Name:		recreate-example-1[0m
+      [36m	Created:	9 minutes ago[0m
+      [36m	Status:		Running[0m
+      [36m	Replicas:	2 current / 2 desired[0m
+      [36m	Selector:	deployment=recreate-example-1,deploymentconfig=recreate-example[0m
+      [36m	Labels:		openshift.io/deployment-config.name=recreate-example[0m
+      [36m	Pods Status:	2 Running / 0 Waiting / 0 Succeeded / 0 Failed[0m
+      [36m[0m
+      [36mEvents:[0m
+      [36m  Type		Reason			Age	From				Message[0m
+      [36m  ----		------			----	----				-------[0m
+      [36m  Normal	DeploymentCreated	9m59s	deploymentconfig-controller	Created new replication controller "recreate-example-1" for version 1[0m[0m
+      [36m[33m[07:54:13] INFO> Shell Commands: oc logs dc/recreate-example --kubeconfig=/root/workdir/pravin-ga-bastion-0-rootx/ocp4_user3.kubeconfig[0m[0m
+      [36m--> Scaling recreate-example-1 to 2[0m[0m
+      [36m[33m[07:54:14] INFO> Exit Status: 0[0m[0m
+[31m      dc recreate-example never became complete (RuntimeError)[0m
+[31m      /root/pravin/verification-tests/features/step_definitions/dc.rb:10:in `/^I wait until the status of deployment "(.+)" becomes :(.+)$/'[0m
+[31m      features/cli/deploy.feature:547:in `I wait until the status of deployment "recreate-example" becomes :complete'[0m
+    [36mWhen I use the "[36m[1mrecreate-example[0m[0m[36m" service[90m                                        # features/step_definitions/service.rb:1[0m[0m
+    [36mAnd I wait for a web server to become available via the "[36m[1mrecreate-example[0m[0m[36m" route[90m # features/step_definitions/net.rb:37[0m[0m
+    [36mThen [36m[1mthe[0m[0m[36m output should [36m[1mcontain[0m[0m[36m:[90m                                                  # features/step_definitions/common.rb:33[0m[0m
+      [36m| v1 |[0m
+    [36mWhen I run the :[36m[1mtag[0m[0m[36m client command with:[90m                                         # features/step_definitions/cli.rb:13[0m[0m
+      [36m| source | recreate-example:v2     |[0m
+      [36m| dest   | recreate-example:latest |[0m
+    [36mThen the step should [36m[1msucceed[0m[0m[36m[90m                                                     # features/step_definitions/common.rb:4[0m[0m
+    [36mAnd I wait until the status of deployment "[36m[1mrecreate-example[0m[0m[36m" becomes :[36m[1mcomplete[0m[0m[36m[90m   # features/step_definitions/dc.rb:5[0m[0m
+    [36mWhen I use the "[36m[1mrecreate-example[0m[0m[36m" service[90m                                        # features/step_definitions/service.rb:1[0m[0m
+    [36mAnd I wait for a web server to become available via the "[36m[1mrecreate-example[0m[0m[36m" route[90m # features/step_definitions/net.rb:37[0m[0m
+    [36mThen [36m[1mthe[0m[0m[36m output should [36m[1mcontain[0m[0m[36m:[90m                                                  # features/step_definitions/common.rb:33[0m[0m
+      [36m| v2 |[0m
+
+[1mFrom:[0m /root/pravin/verification-tests/lib/world.rb:48 BushSlicer::DefaultWorld#debug_in_after_hook:
+
+    [1;34m45[0m: [32mdef[0m [1;34mdebug_in_after_hook[0m
+    [1;34m46[0m:   [32mif[0m debug_in_after_hook?
+    [1;34m47[0m:     require [31m[1;31m'[0m[31mpry[1;31m'[0m[31m[0m
+ => [1;34m48[0m:     binding.pry
+    [1;34m49[0m:     fix_require_lock [1;34m# see method in Common::Hacks[0m
+    [1;34m50[0m:   [32mend[0m
+    [1;34m51[0m: [32mend[0m
+
+[0G[1] pry(#<BushSlicer::DefaultWorld>)> 

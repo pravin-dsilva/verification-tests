@@ -37,7 +37,7 @@ metadata:
     }]'
 spec:
   containers:
-    - image: " quay.io/pdsilva1/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2"
+    - image: "quay.io/pdsilva1/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2"
       imagePullPolicy: IfNotPresent
       name: hello-pod
       ports:
@@ -57,7 +57,7 @@ spec:
       volumeMounts:
         - mountPath: /tmp
           name: tmp
-    - image: " quay.io/pdsilva1/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2"
+    - image: "quay.io/pdsilva1/hello-openshift@sha256:1c3ddda53bff4c1221e879fd392990d4b7445748f0f95ee56bcef99da6177ae2"
       imagePullPolicy: IfNotPresent
       name: hello-pod-1
       env:

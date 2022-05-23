@@ -29,12 +29,6 @@ gem 'aws-sdk', '~> 3'
 gem 'google-api-client', '~>0.9.2'
 gem 'rbvmomi'
 
-gem 'azure-storage', '~> 0.15.0.preview'
-gem 'azure_mgmt_storage', '~>0.17.0'
-gem 'azure_mgmt_compute', '~>0.18.0'
-gem 'azure_mgmt_resources', '~>0.17.0'
-gem 'azure_mgmt_network', '~>0.17.0'
-
 # gem 'timers'
 ## Logging
 gem 'term-ansicolor'
