@@ -39,7 +39,7 @@ Feature: Testing imagestream
     And evaluation of `@result[:response]` is stored in the :digest1 clipboard
     When I run the :tag client command with:
       | source_type  | docker                    |
-      | source       | openshift/hello-openshift |
+      | source       | quay.io/pdsilva1/hello-openshift@sha256:27d884a06ee89d49387a5514b7b4694c85b21fec2ad41df05033b2b33fbc02bb |
       | dest         | myis13895:latest          |
     Then the step should succeed
     When I execute on the pod:

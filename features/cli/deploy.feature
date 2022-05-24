@@ -378,7 +378,7 @@ Feature: deployment related features
     Given I have a project
     When I run the :run client command with:
       |  name  | hooks                                                     |
-      | image  | <%= project_docker_repo %>openshift/hello-openshift:latest|
+      | image  | <%= project_docker_repo %>quay.io/pdsilva1/hello-openshift@sha256:27d884a06ee89d49387a5514b7b4694c85b21fec2ad41df05033b2b33fbc02bb:latest|
     Then the step should succeed
     When I run the :logs client command with:
       | resource_name | dc/hooks |

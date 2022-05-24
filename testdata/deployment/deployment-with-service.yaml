@@ -12,10 +12,10 @@ items:
   spec:
     tags:
     - annotations:
-        openshift.io/imported-from: openshift/hello-openshift
+        openshift.io/imported-from: quay.io/pdsilva1/hello-openshift@sha256:27d884a06ee89d49387a5514b7b4694c85b21fec2ad41df05033b2b33fbc02bb
       from:
         kind: DockerImage
-        name: openshift/hello-openshift
+        name: quay.io/pdsilva1/hello-openshift@sha256:27d884a06ee89d49387a5514b7b4694c85b21fec2ad41df05033b2b33fbc02bb
       generation: null
       importPolicy: {}
       name: latest
