@@ -37,7 +37,9 @@ Feature: stibuild.feature
     @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
     @upgrade-sanity
     @singlenode
-    @connected
+    @proxy @noproxy @connected
+    @network-ovnkubernetes @network-openshiftsdn
+    @arm64 @amd64
     Examples:
       | template          |
       | ocp12041-s2i.json | # @case_id OCP-12041
@@ -45,11 +47,13 @@ Feature: stibuild.feature
   # @author wzheng@redhat.com
   # @case_id OCP-30858
   @proxy
-  @4.11 @4.10 @4.9 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @singlenode
-  @connected
+  @noproxy @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: STI build with dockerImage with specified tag
     Given I have a project
     When I run the :new_app client command with:
@@ -85,11 +89,13 @@ Feature: stibuild.feature
   # @author wzheng@redhat.com
   # @case_id OCP-22596
   @proxy
-  @4.11 @4.10 @4.9 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @singlenode
   @noproxy @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: Create app with template eap73-basic-s2i with jbosseap rhel7 image
     Given I have a project
     When I run the :new_app client command with:
@@ -112,6 +118,8 @@ Feature: stibuild.feature
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @upgrade-sanity
   @singlenode
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: Test s2i build in disconnect cluster
     Given I have a project
     When I have an http-git service in the project
@@ -141,7 +149,9 @@ Feature: stibuild.feature
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @upgrade-sanity
   @singlenode
-  @connected
+  @proxy @noproxy @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: Mount source secret and configmap to builder container- sourcestrategy
     Given I have a project
     When I run the :create_secret client command with:

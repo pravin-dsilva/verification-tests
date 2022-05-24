@@ -1,10 +1,18 @@
 Feature: scheduler with custom policy upgrade check
+
   # @author knarra@redhat.com
   @upgrade-prepare
   @admin
   @destructive
+  @flaky
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @singlenode
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
+  @upgrade
+  @network-ovnkubernetes @network-openshiftsdn
+  @proxy @noproxy @disconnected @connected
+  @arm64 @amd64
   Scenario: Upgrading cluster when using a custom policy for kube-scheduler should work fine - prepare
     Given the "kube-scheduler" operator version matches the current cluster version
     Given the expression should be true> cluster_operator('kube-scheduler').condition(type: 'Progressing')['status'] == "False"
@@ -46,10 +54,15 @@ Feature: scheduler with custom policy upgrade check
   @upgrade-check
   @admin
   @destructive
+  @flaky
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @singlenode
-  @4.11 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
+  @upgrade
+  @network-ovnkubernetes @network-openshiftsdn
+  @proxy @noproxy @disconnected @connected
+  @arm64 @amd64
   Scenario: Upgrading cluster when using a custom policy for kube-scheduler should work fine
     Given the "kube-scheduler" operator version matches the current cluster version
     Given the expression should be true> cluster_operator('kube-scheduler').condition(type: 'Progressing')['status'] == "False"

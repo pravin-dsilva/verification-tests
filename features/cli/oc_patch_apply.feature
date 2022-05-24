@@ -8,7 +8,9 @@ Feature: oc patch/apply related scenarios
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @upgrade-sanity
   @singlenode
-  @connected
+  @proxy @noproxy @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: oc patch can update one or more fields of rescource
     Given I have a project
     And I run the :create_deploymentconfig client command with:

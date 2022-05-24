@@ -70,6 +70,10 @@ Feature: jenkins.feature
       | <%= project.name %>/nodejs-010-rhel7     |
       | <%= project.name %>/origin-nodejs-sample |
       | prod                                     |
+    @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
+    @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+    @network-ovnkubernetes @network-openshiftsdn
+    @proxy @noproxy
     Examples:
       | ver |
       | 2   | # @case_id OCP-11369
@@ -97,6 +101,8 @@ Feature: jenkins.feature
     @upgrade-sanity
     @singlenode
     @noproxy @connected
+    @network-ovnkubernetes @network-openshiftsdn
+    @amd64
     Examples:
       | version |
       | 2       | # @case_id OCP-10980
@@ -108,7 +114,9 @@ Feature: jenkins.feature
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @upgrade-sanity
   @singlenode
-  @connected
+  @proxy @noproxy @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: new-app/new-build support for pipeline buildconfigs
     Given I have a project
     When I run the :new_app client command with:
@@ -298,7 +306,9 @@ Feature: jenkins.feature
     @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
     @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
     @upgrade-sanity
-    @connected
+    @proxy @noproxy @connected
+    @network-ovnkubernetes @network-openshiftsdn
+    @amd64
     Examples:
       | version |
       | 1       |
@@ -312,6 +322,8 @@ Feature: jenkins.feature
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @upgrade-sanity
   @noproxy @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @amd64
   Scenario: Jenkins pipeline build with OpenShift Client Plugin Example
     And I have a project
     When I run the :create client command with:
@@ -338,6 +350,7 @@ Feature: jenkins.feature
 
   # @author xiuwang@redhat.com
   # @case_id OCP-25401
+  @inactive
   Scenario: Create jenkins application directly
     Given I have a project
     When I run the :new_app client command with:
@@ -354,11 +367,13 @@ Feature: jenkins.feature
   # @author xiuwang@redhat.com
   # @case_id OCP-35068
   @admin
-  @4.11 @4.10 @4.9 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @singlenode
   @noproxy @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: Oauthaccesstoken should be deleted after loging out from Jenkins webconsole
     Given I have a project
     When I run the :new_app client command with:

@@ -2,7 +2,7 @@ Feature: storageClass related feature
 
   # @author lxia@redhat.com
   @admin
-  @4.11 @4.10 @4.9 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   Scenario Outline: PVC modification after creating storage class
     Given I have a project
     Given I obtain test data file "storage/misc/pvc-without-annotations.json"
@@ -47,7 +47,8 @@ Feature: storageClass related feature
     @azure-ipi
     @azure-upi
     @singlenode
-    @disconnected @connected
+    @proxy @noproxy @disconnected @connected
+    @arm64 @amd64
     Examples:
       | storage-class-name |
       | managed-premium    | # @case_id OCP-13488
@@ -103,7 +104,8 @@ Feature: storageClass related feature
     @aws-upi
     @upgrade-sanity
     @singlenode
-    @disconnected @connected
+    @proxy @noproxy @disconnected @connected
+    @arm64 @amd64
     Examples:
       | provisioner | type        | zone          | is-default | size  |
       | aws-ebs     | gp2         | us-east-1d    | false      | 1Gi   | # @case_id OCP-10160
@@ -177,7 +179,8 @@ Feature: storageClass related feature
     @vsphere-upi
     @upgrade-sanity
     @singlenode
-    @disconnected @connected
+    @proxy @noproxy @disconnected @connected
+    @arm64 @amd64
     Examples:
       | provisioner    |
       | vsphere-volume | # @case_id OCP-24259
@@ -202,7 +205,7 @@ Feature: storageClass related feature
 
   # @author chaoyang@redhat.com
   @admin
-  @4.11 @4.10 @4.9 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   Scenario Outline: PVC with storage class will provision pv with io1 type and 100/20000 iops ebs volume
     Given I have a project
     Given I obtain test data file "storage/ebs/dynamic-provisioning/storageclass-io1.yaml"
@@ -243,7 +246,8 @@ Feature: storageClass related feature
     @aws-ipi
     @aws-upi
     @singlenode
-    @connected
+    @proxy @noproxy @connected
+    @arm64 @amd64
     Examples:
       | size  |
       | 4Gi   | # @case_id OCP-10158
@@ -251,7 +255,7 @@ Feature: storageClass related feature
 
   # @author chaoyang@redhat.com
   @admin
-  @4.11 @4.10 @4.9 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   Scenario Outline: PVC with storage class will not provision pv with st1/sc1 type ebs volume if request size is wrong
     Given I have a project
     Given I obtain test data file "storage/ebs/dynamic-provisioning/storageclass.yaml"
@@ -281,7 +285,8 @@ Feature: storageClass related feature
     @aws-ipi
     @aws-upi
     @singlenode
-    @disconnected @connected
+    @proxy @noproxy @disconnected @connected
+    @arm64 @amd64
     Examples:
       | type | size | errorMessage                  |
       | sc1  | 5Gi  | at least 125 GiB              | # @case_id OCP-10164
@@ -290,11 +295,12 @@ Feature: storageClass related feature
   # @author chaoyang@redhat.com
   # @case_id OCP-10159
   @admin
-  @4.11 @4.10 @4.9 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   @aws-ipi
   @aws-upi
   @singlenode
-  @disconnected @connected
+  @proxy @noproxy @disconnected @connected
+  @arm64 @amd64
   Scenario: PVC with storage class won't provisioned pv if no storage class or wrong storage class object
     Given I have a project
     # No sc exists
@@ -322,7 +328,8 @@ Feature: storageClass related feature
   @aws-upi
   @upgrade-sanity
   @singlenode
-  @disconnected @connected
+  @proxy @noproxy @disconnected @connected
+  @arm64 @amd64
   Scenario: AWS ebs volume is dynamic provisioned with default storageclass
     Given I have a project
     Given I obtain test data file "storage/ebs/pvc-retain.json"

@@ -68,7 +68,7 @@ Feature: buildconfig.feature
 
   # @author haowang@redhat.com
   @proxy
-  @4.11 @4.10 @4.9 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   Scenario Outline: Build with images pulled from private repositories
     Given I have a project
     When I run the :create_secret client command with:
@@ -88,6 +88,8 @@ Feature: buildconfig.feature
     @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
     @singlenode
     @noproxy @connected
+    @network-ovnkubernetes @network-openshiftsdn
+    @arm64 @amd64
     Examples:
       | template                  |
       | test-buildconfig-s2i.json | # @case_id OCP-11474
@@ -101,6 +103,8 @@ Feature: buildconfig.feature
   @upgrade-sanity
   @singlenode
   @noproxy @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: Using secret to pull a docker image which be used as source input
     Given I have a project
     When I run the :create_secret client command with:

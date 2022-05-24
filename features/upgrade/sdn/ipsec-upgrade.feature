@@ -4,9 +4,13 @@ Feature: IPsec upgrade scenarios
   @admin
   @upgrade-prepare
   @network-ovnkubernetes @ipsec
-  @4.10 @4.9 @4.8
+  @4.11 @4.10 @4.9 @4.8 @4.7
   @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @network-ovnkubernetes @network-networkpolicy @ipsec
+  @upgrade
+  @proxy @noproxy @disconnected @connected
+  @arm64 @amd64
   Scenario: Confirm node-node and pod-pod packets are ESP enrypted on IPsec clusters post upgrade - prepare
     Given the env is using "OVNKubernetes" networkType
     And the IPsec is enabled on the cluster
@@ -68,11 +72,15 @@ Feature: IPsec upgrade scenarios
   # @case_id OCP-44834
   @admin
   @upgrade-check
-  @network-ovnkubernetes @ipsec
-  @4.11 @4.10 @4.9 @4.8
+  @network-ovnkubernetes @network-networkpolicy @ipsec
+  @4.11 @4.10 @4.9 @4.8 @4.7
   @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @upgrade
+  @proxy @noproxy @disconnected @connected
+  @arm64 @amd64
   Scenario: Confirm node-node and pod-pod packets are ESP enrypted on IPsec clusters post upgrade
+    Given the IPsec is enabled on the cluster
     Given evaluation of `50` is stored in the :protocol clipboard
     Given I switch to cluster admin pseudo user
     And the default interface on nodes is stored in the :default_interface clipboard
@@ -118,6 +126,6 @@ Feature: IPsec upgrade scenarios
        | name=network-pod0 |
     #Following will confirm node-node encryption
     When admin executes on the "<%= cb.hostnw_pod_worker1 %>" pod:
-       | sh | -c | timeout  --preserve-status 60 tcpdump -c 2 -i br-ex "esp and less 40" |
+       | sh | -c | timeout  --preserve-status 60 tcpdump -c 2 -i br-ex "esp and less 1500" |
     Then the step should succeed
     And the output should not contain "0 packets captured"

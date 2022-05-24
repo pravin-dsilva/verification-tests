@@ -7,8 +7,11 @@ Feature: cluster log forwarder features
   @destructive
   @commonlogging
   @singlenode
-  @disconnected @connected
-  @4.6
+  @proxy @noproxy @disconnected @connected
+  @4.7 @4.6
+  @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
+  @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @network-ovnkubernetes @network-openshiftsdn
   Scenario: ClusterLogForwarder `default` behavior testing
     Given the master version >= "4.6"
     # create project to generate logs
@@ -135,7 +138,11 @@ Feature: cluster log forwarder features
   @admin
   @destructive
   @singlenode
-  @4.6
+  @4.7 @4.6
+  @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
+  @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @network-ovnkubernetes @network-openshiftsdn
+  @proxy @noproxy @disconnected @connected
   Scenario: ClusterLogForwarder: Forward logs to fluentd as insecure
     Given I switch to the first user
     And I have a project
@@ -180,6 +187,7 @@ Feature: cluster log forwarder features
   # @author qitang@redhat.com
   @admin
   @destructive
+  @4.7 @4.6
   Scenario Outline: ClusterLogForwarder: Forward logs to fluentd as secure
     Given I switch to the first user
     And I have a project
@@ -221,9 +229,11 @@ Feature: cluster log forwarder features
       | infra-container.log |
     """
     @upgrade-sanity
-  @4.7 @4.6
     @singlenode
-    @connected
+    @proxy @noproxy @connected
+    @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
+    @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+    @network-ovnkubernetes @network-openshiftsdn
     Examples:
       | auth_type         |
       | mTLS_share        | # @case_id OCP-29844
@@ -234,6 +244,7 @@ Feature: cluster log forwarder features
   # @author qitang@redhat.com
   @admin
   @destructive
+  @4.7 @4.6
   Scenario Outline: Forward logs with tags
     Given I switch to the first user
     And I create a project with non-leading digit name
@@ -284,8 +295,10 @@ Feature: cluster log forwarder features
     """
 
     @singlenode
-    @disconnected @connected
-    @4.6
+    @proxy @noproxy @disconnected @connected
+    @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
+    @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+    @network-ovnkubernetes @network-openshiftsdn
     Examples:
       | file                                 | app_pipeline_name     | infra_pipeline_name   | audit_pipeline_name   |
       | clf-forward-with-same-tag.yaml       | forward-to-default-es | forward-to-default-es | forward-to-default-es | # @case_id OCP-33750
@@ -296,8 +309,11 @@ Feature: cluster log forwarder features
   @admin
   @destructive
   @singlenode
-  @disconnected @connected
-  @4.6
+  @proxy @noproxy @disconnected @connected
+  @4.7 @4.6
+  @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
+  @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @network-ovnkubernetes @network-openshiftsdn
   Scenario: Forward logs to remote-syslog - config error
     Given the master version >= "4.6"
     Given I switch to cluster admin pseudo user
@@ -313,6 +329,7 @@ Feature: cluster log forwarder features
   # @author gkarager@redhat.com
   @admin
   @destructive
+  @4.7 @4.6
   Scenario Outline: Forward logs to remote-syslog
     Given the master version >= "4.6"
     Given I switch to the first user
@@ -355,9 +372,11 @@ Feature: cluster log forwarder features
     """
 
     @upgrade-sanity
-  @4.7 @4.6
     @singlenode
-    @disconnected @connected
+    @proxy @noproxy @disconnected @connected
+    @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
+    @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+    @network-ovnkubernetes @network-openshiftsdn
     Examples:
       | file                  | protocol |
       | rsys_clf_RFC3164.yaml | tls      | # @case_id OCP-32643
@@ -370,7 +389,10 @@ Feature: cluster log forwarder features
   @destructive
   @4.10 @4.9 @4.8 @4.7 @4.6
   @singlenode
-  @connected
+  @proxy @noproxy @connected
+  @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
+  @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @network-ovnkubernetes @network-openshiftsdn
   Scenario: Forward logs to different kafka topics
     Given I switch to the first user
     And I create a project with non-leading digit name
@@ -415,8 +437,11 @@ Feature: cluster log forwarder features
   @admin
   @destructive
   @singlenode
-  @connected
-  @4.6
+  @proxy @noproxy @connected
+  @4.7 @4.6
+  @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
+  @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @network-ovnkubernetes @network-openshiftsdn
   Scenario: Fluentd continues to ship logs even when one of multiple destination is down
     # create project to generate logs
     Given I switch to the first user
@@ -524,11 +549,13 @@ Feature: cluster log forwarder features
   # @case_id OCP-39786
   @admin
   @destructive
-  @4.11 @4.10 @4.9
+  @4.11 @4.10 @4.9 @4.8 @4.7
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @singlenode
-  @connected
+  @proxy @noproxy @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: Send logs to both external fluentd and internalES
     #Creating secure fluentd receiver
     Given I switch to cluster admin pseudo user

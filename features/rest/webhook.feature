@@ -2,7 +2,7 @@ Feature: Webhook REST Related Tests
 
   # @author cryan@redhat.com
   @proxy
-  @4.11 @4.10 @4.9 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   Scenario Outline: Trigger build with webhook
     Given I have a project
     Given I obtain test data file "build/ruby20rhel7-template-sti.json"
@@ -49,6 +49,8 @@ Feature: Webhook REST Related Tests
     @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
     @singlenode
     @noproxy @connected
+    @network-ovnkubernetes @network-openshiftsdn
+    @arm64 @amd64
     Examples:
       | type    | negative1 | negative2   | negative3 | path              | file              | header1        | header2 |
       | generic | GitHub    | ImageChange | github    | generic/testdata/ | push-generic.json |                |         | # @case_id OCP-11693

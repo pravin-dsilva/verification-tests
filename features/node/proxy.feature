@@ -4,7 +4,7 @@ Feature: Node proxy configuration tests
   @admin
   @flaky
   @proxy
-  @4.11 @4.10 @4.9 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   Scenario Outline: Proxy config should be applied to kubelet and crio
     Given I use the "default" project
     Given I switch to cluster admin pseudo user
@@ -29,6 +29,8 @@ Feature: Node proxy configuration tests
 
     @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
     @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+    @network-ovnkubernetes @network-openshiftsdn
+    @arm64 @amd64
     Examples:
       | file                                                      |
       | /etc/systemd/system/kubelet.service.d/10-default-env.conf | # @case_id OCP-24429

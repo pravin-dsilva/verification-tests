@@ -7,7 +7,9 @@ Feature: ServiceAccount and Policy Managerment
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @upgrade-sanity
   @singlenode
-  @connected
+  @proxy @noproxy @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: Could grant admin permission for the service account username to access to its own project
     Given I have a project
     When I create a new application with:
@@ -43,10 +45,16 @@ Feature: ServiceAccount and Policy Managerment
   @upgrade-sanity
   @singlenode
   @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: Could grant admin permission for the service account group to access to its own project
     Given I have a project
     When I run the :new_app client command with:
+<<<<<<< HEAD
       | docker_image | quay.io/pdsilva1/hello-openshift:multiarch |
+=======
+      | app_repo | quay.io/openshifttest/hello-openshift:multiarch |
+>>>>>>> 8ed261093ff41eaa87e2e654be709fc7ded7da73
     Then the step should succeed
     When I run the :policy_add_role_to_group client command with:
       | role       | admin                                     |
@@ -58,9 +66,10 @@ Feature: ServiceAccount and Policy Managerment
     When I get project services
     Then the output should contain:
       | hello-openshift |
-    ## this template is to create an application without any build
-    Given I obtain test data file "deployment/deployments_nobc_cpulimit.json"
-    When I process and create "deployments_nobc_cpulimit.json"
+    # Verify the permission of various operations
+    When I run the :new_app client command with:
+      | app_repo | quay.io/openshifttest/hello-openshift:multiarch |
+      | name     | app2                                            |
     Then the step should succeed
     When I run the :delete client command with:
       | object_type       | svc             |
@@ -82,6 +91,9 @@ Feature: ServiceAccount and Policy Managerment
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @upgrade-sanity
   @singlenode
+  @network-ovnkubernetes @network-openshiftsdn
+  @proxy @noproxy
+  @arm64 @amd64
   Scenario: User can get the serviceaccount token via client
     Given I have a project
     When I run the :serviceaccounts_get_token client command with:

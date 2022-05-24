@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 # source 'https://gems.ruby-china.com/'
-
 gem 'json'
 # temp workaround for OCPQE-4052 in which Psych 4.x is not compatible with
 # cucumber 5.x
@@ -29,6 +28,12 @@ gem 'aws-sdk', '~> 3'
 gem 'google-api-client', '~>0.9.2'
 gem 'rbvmomi'
 
+gem 'azure-storage', '~> 0.15.0.preview'
+gem 'azure_mgmt_storage', '~>0.17.0'
+gem 'azure_mgmt_compute', '~>0.18.0'
+gem 'azure_mgmt_resources', '~>0.17.0'
+gem 'azure_mgmt_network', '~>0.17.0'
+
 # gem 'timers'
 ## Logging
 gem 'term-ansicolor'
@@ -45,7 +50,7 @@ gem 'reportportal'
 ## Debugging
 gem 'pry'
 # https://github.com/deivid-rodriguez/pry-byebug/issues/71
-# gem 'pry-byebug', :require => false
+#gem 'pry-byebug', :require => false
 gem 'byebug'
 gem 'jira-ruby'
 ### XXX 0.1.7 is breaking things need to investigate further, patch this for now

@@ -1,11 +1,17 @@
 Feature: Storage upgrade tests
+
   # @author wduan@redhat.com
   @upgrade-prepare
   @users=upuser1,upuser2
   @admin
-  @4.10 @4.9 @4.8 @4.7
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   @vsphere-ipi @openstack-ipi @gcp-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @azure-upi @aws-upi
+  @singlenode
+  @disconnected @connected
+  @proxy @noproxy @disconnected @connected
+  @upgrade
+  @arm64 @amd64
   Scenario: Cluster operator storage should be in correct status and dynamic provisioning should work well after upgrade - prepare
     Given I switch to cluster admin pseudo user
     # Check cluster operator storage should be in correct status
@@ -77,7 +83,9 @@ Feature: Storage upgrade tests
   @vsphere-ipi @openstack-ipi @gcp-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @azure-upi @aws-upi
   @singlenode
-  @disconnected @connected
+  @proxy @noproxy @disconnected @connected
+  @upgrade
+  @arm64 @amd64
   Scenario: Cluster operator storage should be in correct status and dynamic provisioning should work well after upgrade
     Given I switch to cluster admin pseudo user
     # Check storage operator version after upgraded
@@ -158,9 +166,14 @@ Feature: Storage upgrade tests
   @upgrade-prepare
   @users=upuser1,upuser2
   @admin
-  @4.10 @4.9 @4.8 @4.7
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   @baremetal-ipi
   @baremetal-upi
+  @singlenode
+  @disconnected @connected
+  @proxy @noproxy @disconnected @connected
+  @upgrade
+  @arm64 @amd64
   Scenario: Cluster operator storage should be in correct status after upgrade - prepare
     Given I switch to cluster admin pseudo user
     # Check cluster operator storage should be in correct status
@@ -178,7 +191,9 @@ Feature: Storage upgrade tests
   @baremetal-ipi
   @baremetal-upi
   @singlenode
-  @disconnected @connected
+  @proxy @noproxy @disconnected @connected
+  @upgrade
+  @arm64 @amd64
   Scenario: Cluster operator storage should be in correct status after upgrade
     Given I switch to cluster admin pseudo user
     # Check storage operator version after upgraded
@@ -194,9 +209,13 @@ Feature: Storage upgrade tests
   @upgrade-prepare
   @users=upuser1,upuser2
   @admin
-  @4.8
+  @4.8 @4.7 @4.6
   @aws-ipi
   @aws-upi
+  @singlenode
+  @connected
+  @inactive
+  @upgrade
   Scenario: Snapshot operator should be in available status after upgrade and can created pod with snapshot - prepare
     Given the master version >= "4.4"
 
@@ -309,11 +328,13 @@ Feature: Storage upgrade tests
   # @case_id OCP-28630
   @upgrade-check
   @admin
-  @4.8 @4.6
+  @4.8 @4.7 @4.6
   @aws-ipi
   @aws-upi
   @singlenode
   @connected
+  @upgrade
+  @inactive
   Scenario: Snapshot operator should be in available status after upgrade and can created pod with snapshot
     Given I switch to cluster admin pseudo user
 
@@ -371,10 +392,14 @@ Feature: Storage upgrade tests
   @upgrade-prepare
   @users=upuser1,upuser2
   @admin
-  @4.10 @4.9 @4.8
+  @4.11 @4.10 @4.9 @4.8 @4.7
   @aws-ipi
   @aws-upi
-  Scenario: [AWS-EBS-CSI] [Snapshot operator] should work well before and after upgrade of a cluster - prepare
+  @singlenode
+  @proxy @noproxy @disconnected @connected
+  @upgrade
+  @network-ovnkubernetes @network-openshiftsdn
+  Scenario: AWS-EBS-CSI Snapshot operator should work well before and after upgrade of a cluster - prepare
     Given I switch to cluster admin pseudo user
     Given the master version >= "4.7"
 
@@ -466,12 +491,14 @@ Feature: Storage upgrade tests
   @upgrade-check
   @users=upuser1,upuser2
   @admin
-  @4.11 @4.10 @4.9 @4.8
+  @4.11 @4.10 @4.9 @4.8 @4.7
   @aws-ipi
   @aws-upi
   @singlenode
-  @connected
-  Scenario: [AWS-EBS-CSI] [Snapshot operator] should work well before and after upgrade of a cluster
+  @proxy @noproxy @disconnected @connected
+  @upgrade
+  @network-ovnkubernetes @network-openshiftsdn
+  Scenario: AWS-EBS-CSI Snapshot operator should work well before and after upgrade of a cluster
     Given I switch to cluster admin pseudo user
     Given the master version >= "4.7"
 

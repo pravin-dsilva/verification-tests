@@ -9,7 +9,9 @@ Feature: oc_volume.feature
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @upgrade-sanity
   @singlenode
-  @connected
+  @proxy @noproxy @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: Create a pod that consumes the secret in a volume
     Given I have a project
     Given I obtain test data file "pods/allinone-volume/secret.yaml"
@@ -21,7 +23,7 @@ Feature: oc_volume.feature
       | sa_name     | default     |
     Then the step should succeed
     When I run the :new_app_as_dc client command with:
-      | docker_image | quay.io/openshifttest/hello-openshift@sha256:b1aabe8c8272f750ce757b6c4263a2712796297511e0c6df79144ee188933623 |
+      | docker_image | quay.io/pdsilva1/hello-openshift@sha256:27d884a06ee89d49387a5514b7b4694c85b21fec2ad41df05033b2b33fbc02bb |
       | name         | mydc                                                                                                  |
     Then the step should succeed
     Given a pod becomes ready with labels:
@@ -56,11 +58,12 @@ Feature: oc_volume.feature
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @upgrade-sanity
   @singlenode
-  @connected
+  @proxy @noproxy @connected
+  @arm64 @amd64
   Scenario: Add secret volume to dc and rc
     Given I have a project
     When I run the :new_app_as_dc client command with:
-      | docker_image | quay.io/openshifttest/hello-openshift@sha256:b1aabe8c8272f750ce757b6c4263a2712796297511e0c6df79144ee188933623 |
+      | docker_image | quay.io/pdsilva1/hello-openshift@sha256:27d884a06ee89d49387a5514b7b4694c85b21fec2ad41df05033b2b33fbc02bb |
       | name         | mydc                                                                                                  |
     Then the step should succeed
     When I run the :create_secret client command with:

@@ -20,7 +20,7 @@ metadata:
 spec:
   containers:
     - name: myfrontend
-      image: quay.io/openshifttest/hello-openshift@sha256:b1aabe8c8272f750ce757b6c4263a2712796297511e0c6df79144ee188933623
+      image: quay.io/pdsilva1/hello-openshift@sha256:27d884a06ee89d49387a5514b7b4694c85b21fec2ad41df05033b2b33fbc02bb
       ports:
         - containerPort: 80
           name: "http-server"

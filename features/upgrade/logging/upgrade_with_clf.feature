@@ -5,6 +5,11 @@ Feature: Upgrade Logging with ClusterLogForwarder
   @destructive
   @upgrade-prepare
   @users=upuser1,upuser2
+  @stage-only
+  @singlenode
+  @connected
+  @4.6
+  @proxy @noproxy @connected
   Scenario: Upgrade clusterlogging with mulitple external log store enabled - prepare
     Given the master version >= "4.6"
     And logging operators are installed successfully
@@ -105,7 +110,7 @@ Feature: Upgrade Logging with ClusterLogForwarder
   @users=upuser1,upuser2
   @stage-only
   @singlenode
-  @connected
+  @proxy @noproxy @connected
   @4.6
   Scenario: Upgrade clusterlogging with mulitple external log store enabled
     Given the master version >= "4.6"

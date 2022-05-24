@@ -10,7 +10,7 @@ Feature: Node operations test scenarios
 
     # Create a deployment config
     When I run the :new_app client command with:
-      | docker_image | quay.io/openshifttest/hello-openshift@sha256:b1aabe8c8272f750ce757b6c4263a2712796297511e0c6df79144ee188933623 |
+      | docker_image | quay.io/pdsilva1/hello-openshift@sha256:27d884a06ee89d49387a5514b7b4694c85b21fec2ad41df05033b2b33fbc02bb |
       | labels       | name=jenkins                                                                                          |
     Then the step should succeed
     And a pod becomes ready with labels:
@@ -60,7 +60,8 @@ Feature: Node operations test scenarios
       | cinder         | # @case_id OCP-15276
 
     @upgrade-sanity
-    @disconnected @connected
+    @proxy @noproxy @disconnected @connected
+    @arm64 @amd64
     Examples:
       | cloud_provider |
       | aws-ebs        | # @case_id OCP-15283

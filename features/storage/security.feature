@@ -4,7 +4,7 @@ Feature: storage security check
   # @author piqin@redhat.com
   @admin
   @smoke
-  @4.11 @4.10 @4.9 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   Scenario Outline: [origin_infra_20] volume security testing
     Given I have a project
     Given I obtain test data file "storage/misc/pvc.json"
@@ -22,7 +22,7 @@ Feature: storage security check
     When I run oc create over "privileged-test.json" replacing paths:
       | ["metadata"]["name"]                                        | mypod                                                                                                 |
       | ["spec"]["containers"][0]["volumeMounts"][0]["mountPath"]   | /mnt                                                                                                  |
-      | ["spec"]["containers"][0]["image"]                          | quay.io/openshifttest/hello-openshift@sha256:b1aabe8c8272f750ce757b6c4263a2712796297511e0c6df79144ee188933623 |
+      | ["spec"]["containers"][0]["image"]                          | quay.io/pdsilva1/hello-openshift@sha256:27d884a06ee89d49387a5514b7b4694c85b21fec2ad41df05033b2b33fbc02bb |
       | ["spec"]["securityContext"]["seLinuxOptions"]["level"]      | s0:c13,c2                                                                                             |
       | ["spec"]["securityContext"]["fsGroup"]                      | 24680                                                                                                 |
       | ["spec"]["securityContext"]["runAsUser"]                    | 1000160000                                                                                            |
@@ -66,7 +66,7 @@ Feature: storage security check
     Given I obtain test data file "storage/security/privileged-test.json"
     When I run oc create over "privileged-test.json" replacing paths:
       | ["metadata"]["name"]                                        | mypod2                                                                                                |
-      | ["spec"]["containers"][0]["image"]                          | quay.io/openshifttest/hello-openshift@sha256:b1aabe8c8272f750ce757b6c4263a2712796297511e0c6df79144ee188933623 |
+      | ["spec"]["containers"][0]["image"]                          | quay.io/pdsilva1/hello-openshift@sha256:27d884a06ee89d49387a5514b7b4694c85b21fec2ad41df05033b2b33fbc02bb |
       | ["spec"]["containers"][0]["volumeMounts"][0]["mountPath"]   | /mnt                                                                                                  |
       | ["spec"]["securityContext"]["seLinuxOptions"]["level"]      | s0:c13,c2                                                                                             |
       | ["spec"]["securityContext"]["fsGroup"]                      | 24680                                                                                                 |
@@ -122,7 +122,9 @@ Feature: storage security check
     @openstack-ipi
     @openstack-upi
     @singlenode
-    @disconnected @connected
+    @proxy @noproxy @disconnected @connected
+    @network-ovnkubernetes @network-openshiftsdn
+    @arm64 @amd64
     Examples:
       | storage_type         | volume_name | type   |
       | cinder               | volumeID    | cinder | # @case_id OCP-9721
@@ -136,7 +138,8 @@ Feature: storage security check
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @upgrade-sanity
   @singlenode
-  @disconnected @connected
+  @proxy @noproxy @disconnected @connected
+  @arm64 @amd64
   Scenario: secret volume security check
     Given I have a project
     Given I obtain test data file "storage/secret/secret.yaml"

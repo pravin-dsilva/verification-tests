@@ -153,6 +153,9 @@ Given /^I wait for clusterlogging(?: named "(.+)")? to be functional in the#{OPT
   step %Q/I switch to cluster admin pseudo user/
   step %Q/I use the "#{proj_name}" project/
 
+  # log the clusterlogging and elasticsearch status before checking logging pods' status.
+  raise "Can't find clusterlogging/instance or elasticsearch/elasticsearch, please check if logging stack is deployed or not" unless cluster_logging("instance").exists? && elasticsearch("elasticsearch").exists?
+
   cb.cluster_logging ||= cluster_logging(logging_name)
   cl = cb.cluster_logging
   logger.info("### checking logging subcomponent status")
@@ -719,9 +722,9 @@ Given /^I upgrade the operator with:$/ do | table |
       end
       # wait for the ES cluster to be ready
       success = wait_for(600, interval: 10) {
-        elasticsearch('elasticsearch').cluster_health == "green" &&
-        (elasticsearch('elasticsearch').nodes_status.last["upgradeStatus"].empty? ||
-        elasticsearch('elasticsearch').nodes_status.last["upgradeStatus"]["scheduledUpgrade"].nil?)
+        esPods = BushSlicer::Pod.get_labeled("component=elasticsearch", project: project, user: user, quiet: true).map(&:name)
+        readyPods = (elasticsearch('elasticsearch').es_master_ready_pod_names + elasticsearch('elasticsearch').es_client_ready_pod_names(cached: true) + elasticsearch('elasticsearch').es_data_ready_pod_names(cached:true)).uniq
+        elasticsearch('elasticsearch').cluster_health == "green" && (esPods - readyPods).blank? && (readyPods - esPods).blank?
       }
       raise "ES cluster isn't in a good status" unless success
       # check pvc count
@@ -1288,4 +1291,24 @@ Given /^logging collector name is stored in the#{OPT_SYM} clipboard$/ do | colle
      fluentd_component_label="fluentd"
   end
   cb[collector_name] = fluentd_component_label
+end
+
+Given /^I check if the remaining_resources in woker nodes meet the requirements for logging stack$/ do
+  ensure_admin_tagged
+  linux_nodes = BushSlicer::Node.get_labeled("kubernetes.io/os=linux", user: admin)
+  worker_nodes = linux_nodes.select { |n| n.is_worker? && n.ready? && n.schedulable? }
+  total_remaning_cpu = 0
+  total_remaning_memory = 0
+
+  # calculate node.remaining_resources
+  worker_nodes.each do |n|
+    total_remaning_cpu += n.remaining_resources[:cpu]
+    total_remaning_memory += n.remaining_resources[:memory]
+  end
+  # we need 3 ES pods, memory: (1Gi+256Mi)*3, cpu: 200m*3
+  # for kibana, memory: (256+736)Mi, cpu: 200m
+  # for collector, memory: 736Mi*worker_nodes_count, cpu: 100m*worker_nodes_count
+  if total_remaning_cpu < 800+100*worker_nodes.count || total_remaning_memory < 5066719232+771751936*worker_nodes.count
+    raise "Cluster doesn't have sufficient cpu or memory for logging pods to deploy, skip the logging case"
+  end
 end

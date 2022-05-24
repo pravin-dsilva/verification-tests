@@ -79,7 +79,8 @@ Feature: Dynamic provisioning
     @openstack-upi
     @upgrade-sanity
     @singlenode
-    @disconnected @connected
+    @proxy @noproxy @disconnected @connected
+    @arm64 @amd64
     Examples:
       | cloud_provider |
       | cinder         | # @case_id OCP-9656

@@ -1,7 +1,7 @@
 Feature: CSI Resizing related feature
   # @author chaoyang@redhat.com
   @admin
-  @4.11 @4.10 @4.9 @4.8 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   Scenario Outline: Resize online volume from 1Gi to 2Gi
     Given I have a project
 
@@ -54,13 +54,15 @@ Feature: CSI Resizing related feature
     @openstack-upi
     @upgrade-sanity
     @singlenode
-    @disconnected @connected
+    @proxy @noproxy @disconnected @connected
+    @network-ovnkubernetes @network-openshiftsdn
+    @arm64 @amd64
     Examples:
       | sc_name      |
       | standard-csi | # @case_id OCP-37559
 
   # @author wduan@redhat.com
-  @4.10 @4.9 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   Scenario Outline: Resize negative test
     Given I have a project
     Given I obtain test data file "storage/misc/pvc.json"
@@ -88,7 +90,9 @@ Feature: CSI Resizing related feature
       | Forbidden.*field can not be less than previous value |
 
     @singlenode
-    @disconnected @connected
+    @proxy @noproxy @disconnected @connected
+    @network-ovnkubernetes @network-openshiftsdn
+    @arm64 @amd64
     Examples:
       | sc_name |
       | gp2-csi | # @case_id OCP-25809

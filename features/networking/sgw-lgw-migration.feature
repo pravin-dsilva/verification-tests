@@ -2,13 +2,14 @@ Feature: SGW<->LGW migration related scenarios
   
   # @author anusaxen@redhat.com
   # @case_id OCP-47561
-  @4.11 @4.10
+  @4.11 @4.10 @4.9
   @admin
   @destructive
   @network-ovnkubernetes
   @vsphere-ipi
   @noproxy @connected
   @vsphere-upi
+  @amd64
   Scenario: [SDN-2290] SGW <-> LGW migration scenario	for vsphere platform
     Given the env is using "OVNKubernetes" networkType
 
@@ -121,12 +122,13 @@ Feature: SGW<->LGW migration related scenarios
  
   # @author anusaxen@redhat.com
   # @case_id OCP-47641
-  @4.11 @4.10
+  @4.11 @4.10 @4.9
   @admin
   @destructive
   @network-ovnkubernetes
   @baremetal-upi
-  @disconnected @connected
+  @proxy @noproxy @disconnected @connected
+  @amd64
   Scenario: [SDN-2290] SGW <-> LGW migration scenario	for BM platform
     Given the env is using "OVNKubernetes" networkType
 
@@ -189,6 +191,9 @@ Feature: SGW<->LGW migration related scenarios
   @network-ovnkubernetes
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @singlenode
+  @proxy @noproxy @disconnected @connected
+  @amd64
   Scenario: [SDN-2290] SGW <-> LGW migration scenarios for externalIP	
     Given the env is using "OVNKubernetes" networkType
     ######## Prepare Data Pre Migration ############

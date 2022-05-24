@@ -9,6 +9,8 @@ Feature: route related features via cli
   @upgrade-sanity
   @singlenode
   @noproxy @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: Expose routes from services
     Given I have a project
     When I run the :new_app client command with:
@@ -40,6 +42,8 @@ Feature: route related features via cli
   @upgrade-sanity
   @singlenode
   @noproxy @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: Be unable to add an existed alias name for service
     Given I have a project
     Given I obtain test data file "routing/unsecure/route_unsecure.json"

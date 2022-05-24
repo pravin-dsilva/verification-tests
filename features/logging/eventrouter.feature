@@ -5,6 +5,7 @@ Feature: eventrouter related test
   # @author qitang@redhat.com
   @admin
   @destructive
+  @4.6
   Scenario Outline: The Openshift Events be parsed
     Given I switch to the first user
     Given I create a project with non-leading digit name
@@ -39,8 +40,10 @@ Feature: eventrouter related test
     """
 
     @singlenode
-    @connected
-    @4.6
+    @proxy @noproxy @connected
+    @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
+    @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+    @network-ovnkubernetes @network-openshiftsdn
     Examples:
     | index_name  |
     | .operations | # @case_id OCP-25899

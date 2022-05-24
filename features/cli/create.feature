@@ -11,6 +11,8 @@ Feature: creating 'apps' with CLI
   @upgrade-sanity
   @singlenode
   @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: Process with special FSGroup id can be ran when using RunAsAny as the RunAsGroupStrategy
     Given I have a project
     Given I obtain test data file "pods/pod_with_special_fsGroup.json"
@@ -19,11 +21,9 @@ Feature: creating 'apps' with CLI
     Then the step should fail
     Given I obtain test data file "authorization/scc/scc-runasany.yaml"
     Given the following scc policy is created: scc-runasany.yaml
-    Then the step should succeed
-    Given I obtain test data file "pods/pod_with_special_fsGroup.json"
     When I run the :create admin command with:
       | f | pod_with_special_fsGroup.json |
-      | n | <%= project.name %>                                                                                   |
+      | n | <%= project.name %>           |
     Then the step should succeed
     When the pod named "hello-openshift" becomes ready
     When I get project pod named "hello-openshift" as YAML
@@ -35,6 +35,9 @@ Feature: creating 'apps' with CLI
   # @case_id OCP-12399
   @singlenode
   @noproxy @connected
+  @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
+  @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @network-ovnkubernetes @network-openshiftsdn
   Scenario: Create an application from source code
     Given I have a project
     When I git clone the repo "https://github.com/openshift/ruby-hello-world"
@@ -157,7 +160,8 @@ Feature: creating 'apps' with CLI
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @upgrade-sanity
   @singlenode
-  @connected
+  @proxy @noproxy @connected
+  @arm64 @amd64
   Scenario: 4.x Could not create any context in non-existent project
     Given I create a new application with:
       | docker image | openshift/ruby-20-centos7~https://github.com/openshift/ruby-hello-world |
@@ -196,6 +200,8 @@ Feature: creating 'apps' with CLI
   @upgrade-sanity
   @singlenode
   @noproxy @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: Create an application from source code test
     Given I have a project
     When I git clone the repo "https://github.com/openshift/ruby-hello-world"

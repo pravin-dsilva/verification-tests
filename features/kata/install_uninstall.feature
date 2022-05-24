@@ -4,6 +4,7 @@ Feature: kata related features
   @admin
   @destructive
   @flaky
+  @inactive
   Scenario: kata container operator installation
     Given kata container has been installed successfully in the "openshift-sandboxed-containers-operator" project
     And I verify kata container runtime is installed into a worker node
@@ -17,6 +18,9 @@ Feature: kata related features
   @gcp-ipi @baremetal-ipi @azure-ipi
   @gcp-upi @baremetal-upi @azure-upi
   @upgrade-sanity
+  @network-ovnkubernetes @network-openshiftsdn
+  @proxy @noproxy @disconnected @connected
+  @arm64 @amd64
   Scenario: test delete kata installation
     Given I remove kata operator from the namespace
 
@@ -33,9 +37,12 @@ Feature: kata related features
   @admin
   @destructive
   @flaky
-  @4.11 @4.10 @4.9
+  @4.11 @4.10 @4.9 @4.8 @4.7
   @gcp-ipi @baremetal-ipi @azure-ipi
   @gcp-upi @baremetal-upi @azure-upi
+  @network-ovnkubernetes @network-openshiftsdn
+  @proxy @noproxy @disconnected @connected
+  @arm64 @amd64
   Scenario: Operator can be installed through web console
     Given the kata-operator is installed using OLM GUI
 
@@ -44,6 +51,7 @@ Feature: kata related features
   @admin
   @destructive
   @flaky
+  @inactive
   Scenario: kata operator can be installed via CLI with OLM for OCP>=4.8
     Given the kata-operator is installed using OLM CLI
 
@@ -53,6 +61,10 @@ Feature: kata related features
   @destructive
   @upgrade-sanity
   @4.8
+  @gcp-ipi @baremetal-ipi @azure-ipi
+  @gcp-upi @baremetal-upi @azure-upi
+  @network-ovnkubernetes @network-openshiftsdn
+  @proxy @noproxy @disconnected @connected
   Scenario: install kata, verify pod has kata runtime followed by uninstall kata from cluster
     Given the kata-operator is installed using OLM CLI
     And I verify kata container runtime is installed into a worker node

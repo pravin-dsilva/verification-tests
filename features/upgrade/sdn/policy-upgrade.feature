@@ -3,9 +3,13 @@ Feature: SDN compoment upgrade testing
   # @author huirwang@redhat.com
   @admin
   @upgrade-prepare
-  @4.10 @4.9 @4.8 @4.7
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @upgrade
+  @network-ovnkubernetes @network-openshiftsdn
+  @proxy @noproxy
+  @arm64 @amd64
   Scenario: network operator should be available after upgrade - prepare
   # According to our upgrade workflow, we need an upgrade-prepare and upgrade-check for each scenario.
   # But some of them do not need any prepare steps, which lead to errors "can not find scenarios" in the log.
@@ -19,6 +23,10 @@ Feature: SDN compoment upgrade testing
   @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @upgrade
+  @network-ovnkubernetes @network-openshiftsdn
+  @proxy @noproxy
+  @arm64 @amd64
   Scenario: network operator should be available after upgrade
     Given I switch to cluster admin pseudo user
     When I use the "openshift-network-operator" project
@@ -36,9 +44,14 @@ Feature: SDN compoment upgrade testing
   # @author zzhao@redhat.com
   @admin
   @upgrade-prepare
-  @4.10 @4.9 @4.8
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @disconnected @connected
+  @proxy @noproxy @disconnected @connected
+  @upgrade
+  @network-ovnkubernetes @network-openshiftsdn @network-networkpolicy
+  @arm64 @amd64
   Scenario: Check the networkpolicy works well after upgrade - prepare
     Given I switch to cluster admin pseudo user
     When I run the :new_project client command with:
@@ -76,10 +89,13 @@ Feature: SDN compoment upgrade testing
   # @case_id OCP-22735
   @admin
   @upgrade-check
-  @4.11 @4.10 @4.9 @4.8 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
-  @disconnected @connected
+  @proxy @noproxy @disconnected @connected
+  @upgrade
+  @network-ovnkubernetes @network-openshiftsdn @network-networkpolicy
+  @arm64 @amd64
   Scenario: Check the networkpolicy works well after upgrade
     Given I switch to cluster admin pseudo user
     When I use the "policy-upgrade" project
@@ -95,10 +111,15 @@ Feature: SDN compoment upgrade testing
 
   # @author asood@redhat.com
   @admin
+  @network-ovnkubernetes  
   @upgrade-prepare
-  @4.10 @4.9 @4.8 @4.7
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @upgrade
+  @network-ovnkubernetes @network-openshiftsdn @network-networkpolicy
+  @proxy @noproxy @disconnected @connected
+  @arm64 @amd64
   Scenario: Check the namespace networkpolicy for an application works well after upgrade - prepare
     Given I switch to cluster admin pseudo user
     When I run the :new_project client command with:
@@ -183,10 +204,15 @@ Feature: SDN compoment upgrade testing
   # @author asood@redhat.com
   # @case_id OCP-38751
   @admin
+  @network-ovnkubernetes
   @upgrade-check
   @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @upgrade
+  @network-ovnkubernetes @network-openshiftsdn @network-networkpolicy
+  @proxy @noproxy @disconnected @connected
+  @arm64 @amd64
   Scenario: Check the namespace networkpolicy for an application works well after upgrade
     Given I switch to cluster admin pseudo user
     When I use the "policy-upgrade1" project
@@ -256,9 +282,13 @@ Feature: SDN compoment upgrade testing
   # @author asood@redhat.com
   @admin
   @upgrade-prepare
-  @4.10 @4.9 @4.8
+  @4.11 @4.10 @4.9 @4.8
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @upgrade
+  @network-ovnkubernetes @network-openshiftsdn @network-networkpolicy
+  @proxy @noproxy @disconnected @connected
+  @arm64 @amd64
   Scenario: Check allow from router and allow from hostnetwork policy are functional post upgrade - prepare
     Given I switch to cluster admin pseudo user
     When I run the :new_project client command with:
@@ -347,6 +377,10 @@ Feature: SDN compoment upgrade testing
   @4.11 @4.10 @4.9 @4.8
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @upgrade
+  @network-ovnkubernetes @network-openshiftsdn @network-networkpolicy
+  @proxy @noproxy @disconnected @connected
+  @arm64 @amd64
   Scenario: Check allow from router and allow from hostnetwork policy are functional post upgrade
     Given I switch to cluster admin pseudo user
     When I use the "policy-upgrade3" project
@@ -376,9 +410,13 @@ Feature: SDN compoment upgrade testing
   # @author anusaxen@redhat.com
   @admin
   @upgrade-prepare
-  @4.10 @4.9 @4.8
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   @azure-upi @aws-upi
   @azure-ipi @aws-ipi
+  @upgrade
+  @network-ovnkubernetes @network-openshiftsdn
+  @proxy @noproxy @disconnected @connected
+  @arm64 @amd64
   Scenario: Conntrack rule for UDP traffic should be removed when the pod for NodePort service deleted post upgrade - prepare
     Given I switch to cluster admin pseudo user
     And I store the workers in the :nodes clipboard
@@ -407,9 +445,13 @@ Feature: SDN compoment upgrade testing
   # @case_id OCP-44901
   @admin
   @upgrade-check
-  @4.11 @4.10 @4.9 @4.8 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   @azure-upi @aws-upi
   @azure-ipi @aws-ipi
+  @upgrade
+  @network-ovnkubernetes @network-openshiftsdn
+  @proxy @noproxy @disconnected @connected
+  @arm64 @amd64
   Scenario: Conntrack rule for UDP traffic should be removed when the pod for NodePort service deleted post upgrade
     Given I switch to cluster admin pseudo user
     And I use the "conntrack-upgrade" project
@@ -484,11 +526,14 @@ Feature: SDN compoment upgrade testing
   # @author asood@redhat.com
   @admin
   @upgrade-prepare
-  @4.10 @4.9
+  @4.11 @4.10 @4.9
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
-  @openstack-upi @gcp-upi @aws-upi
+  @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @destructive
   @network-ovnkubernetes
+  @network-ovnkubernetes @network-networkpolicy
+  @upgrade
+  @proxy @noproxy @disconnected @connected
   Scenario: Check network policy ACL logging works post upgrade -prepare
     Given I switch to cluster admin pseudo user
     Given the env is using "OVNKubernetes" networkType
@@ -599,7 +644,9 @@ Feature: SDN compoment upgrade testing
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @destructive
-  @network-ovnkubernetes
+  @network-ovnkubernetes @network-networkpolicy
+  @upgrade
+  @proxy @noproxy @disconnected @connected
   Scenario: Check network policy ACL logging works post upgrade 
     Given I switch to cluster admin pseudo user
     Given the env is using "OVNKubernetes" networkType

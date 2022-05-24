@@ -4,6 +4,10 @@ Feature: Testing imagestream
   # @case_id OCP-13895
   @destructive
   @admin
+  @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
+  @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
+  @network-ovnkubernetes @network-openshiftsdn
+  @proxy @noproxy
   Scenario: Should prune the extenal image correctly
     Given default registry service ip is stored in the :registry_hostname clipboard
     Given I have a project
@@ -90,18 +94,20 @@ Feature: Testing imagestream
   # @case_id OCP-19196
   @destructive
   @admin
-  @4.11 @4.10 @4.9 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @singlenode
   @proxy @noproxy @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: Prune images when DC reference to invalid image
     Given I have a project
     Given I enable image-registry default route
     Given default image registry route is stored in the :registry_hostname clipboard
     Given certification for default image registry is stored to the :reg_crt_name clipboard
     When I run the :new_app_as_dc client command with:
-      | app_repo | ruby~https://github.com/sclorg/ruby-ex.git |
+      | app_repo | quay.io/openshifttest/ruby-27:multiarch~https://github.com/sclorg/ruby-ex.git |
     Then the step should succeed
     And the "ruby-ex-1" build was created
     And the "ruby-ex-1" build completes
@@ -137,11 +143,13 @@ Feature: Testing imagestream
   # @case_id OCP-16495
   @destructive
   @admin
-  @4.11 @4.10 @4.9 @4.6
+  @4.11 @4.10 @4.9 @4.8 @4.7 @4.6
   @vsphere-ipi @openstack-ipi @gcp-ipi @baremetal-ipi @azure-ipi @aws-ipi
   @vsphere-upi @openstack-upi @gcp-upi @baremetal-upi @azure-upi @aws-upi
   @singlenode
   @proxy @noproxy @connected
+  @network-ovnkubernetes @network-openshiftsdn
+  @arm64 @amd64
   Scenario: Do not prune layer of a valid Image due to minimum aging
     Given I have a project
     Given I enable image-registry default route
@@ -162,7 +170,7 @@ Feature: Testing imagestream
 
     Given I create a new project
     When I run the :new_app client command with:
-      | app_repo | ruby~https://github.com/sclorg/ruby-ex.git |
+      | app_repo | quay.io/openshifttest/ruby-27:multiarch~https://github.com/sclorg/ruby-ex.git |
     Then the step should succeed
     And the "ruby-ex-1" build was created
     And the "ruby-ex-1" build completes

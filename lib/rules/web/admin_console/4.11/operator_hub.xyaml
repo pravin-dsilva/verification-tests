@@ -511,10 +511,10 @@ check_fips_mode_infras_value_in_operator_modal:
 filter_by_keyword_on_catalog_page:
   elements:
   - selector:
-      xpath: //input[contains(@class, 'co-catalog-page__input')]
+      xpath: //input[contains(@class, 'pf-c-search-input__text-input')]
     op: send_keys :backspace
   - selector:
-      xpath: //input[contains(@class, 'co-catalog-page__input')]
+      xpath: //input[contains(@class, 'pf-c-search-input__text-input')]
     op: send_keys <keyword>
 open_operator_modal:
   params:
@@ -548,6 +548,11 @@ switch_to_yaml_view:
     selector:
       xpath: //div[contains(@class,'monaco-editor')]
     timeout: 40
+switch_to_form_view:
+  element:
+    selector:
+      id: form
+    op: click
 select_installed_namespace:
   action: click_project_list_dropdown
   action: choose_project_from_dropdown_list
@@ -612,7 +617,7 @@ check_manual_approve_info:
   elements:
   - selector:
       xpath: //h2[contains(., 'Manual approval required')]
-    timeout: 20
+    timeout: 50
 check_installation_failure_message:
   action: goto_csv_detail_page
   elements:
@@ -716,6 +721,11 @@ click_create_mockk8sdropdownresouce:
     button_text: Create MockK8sDropdownResource
   action: click_button
 open_k8sresource_dropdown:
+  action:
+    if_element:
+      selector:
+        id: form
+    ref: switch_to_form_view
   element:
     selector:
       id: root_spec_k8sResourcePrefix
